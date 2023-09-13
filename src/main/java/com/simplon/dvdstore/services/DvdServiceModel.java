@@ -5,11 +5,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
+
 public class DvdServiceModel {
 
         private String name;
 
         private String genre;
 
+        public DvdServiceModel(){
+
+        }
+
+        public DvdServiceModel(String name, String genre) {
+                this.name = name;
+                this.genre = genre;
+        }
+
+
+        @Override
+        public String toString() {
+                return "DvdServiceModel{" +
+                        "name='" + name + '\'' +
+                        ", genre='" + genre + '\'' +
+                        '}';
+        }
 }

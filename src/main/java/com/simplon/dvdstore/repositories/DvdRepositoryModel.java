@@ -1,11 +1,13 @@
 package com.simplon.dvdstore.repositories;
 
 import jakarta.persistence.*;
-import lombok.Value;
+import lombok.*;
 
 
 @Entity
-//@Value
+@Getter
+//@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="dvdstore")
 public class DvdRepositoryModel {
     @Id
@@ -16,8 +18,20 @@ public class DvdRepositoryModel {
     @Column(name="genre")
     private String genre;
 
+    public DvdRepositoryModel(){};
+
     public DvdRepositoryModel(String name, String genre) {
         this.name = name;
         this.genre = genre;
+    }
+
+
+    @Override
+    public String toString() {
+        return "DvdRepositoryModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", genre='" + genre + '\'' +
+                '}';
     }
 }
