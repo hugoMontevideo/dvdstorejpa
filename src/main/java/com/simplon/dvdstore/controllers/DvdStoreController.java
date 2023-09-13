@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 //@Controller
-
-
 @RestController // donnees json ou xml
 @RequestMapping("dvds")
 public class DvdStoreController {
@@ -24,23 +22,39 @@ public class DvdStoreController {
     @PostMapping  //
     public boolean add(@RequestBody DvdStoreDTO dvdStoreDTO )
     {
-        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreDTO.name(), dvdStoreDTO.genre());
+        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreDTO.getName(), dvdStoreDTO.getGenre());
         return dvdStoreService.add(dvdServiceModel);
 
     }
 
     @GetMapping
-    public ArrayList<DvdStoreDTO> getAll(){
+    public ArrayList<DvdStoreGetDTO> findAll(){
 
-        ArrayList<DvdStoreDTO> dvdStoreDTOSs = new ArrayList<>();
+        ArrayList<DvdStoreGetDTO> dvdStoreDTOSs = new ArrayList<>();
 
-        ArrayList<DvdServiceModel> dvdServiceModels = dvdStoreService.getAll() ;
+        ArrayList<DvdServiceModel> dvdServiceModels = dvdStoreService.findAll() ;
 
-        dvdServiceModels.forEach((item)->System.out.println(item.toString()));
+//        dvdServiceModels.forEach((item)->System.out.println(item.toString()));
 
-        dvdServiceModels.forEach((item)->dvdStoreDTOSs.add(new DvdStoreDTO(item.getName(), item.getGenre())) );
+        dvdServiceModels.forEach((item)->dvdStoreDTOSs.add(new DvdStoreGetDTO(item.getId().get(), item.getName(), item.getGenre())) );
 
         return dvdStoreDTOSs;
+    }
+
+    @GetMapping("/{id}")
+    public DvdStoreDTO findById(@PathVariable Long id){
+        DvdStoreDTO dvdStoreDTO = new DvdStoreDTO();
+
+        if ( dvdStoreService.findById(id ) != null ){
+            DvdServiceModel dvdServiceModel =  dvdStoreService.findById(id);
+            dvdStoreDTO.setName(dvdServiceModel.getName()) ;
+            dvdStoreDTO.setGenre(dvdServiceModel.getGenre());
+        }
+
+        return dvdStoreDTO ;
+
+
+
     }
 
 }

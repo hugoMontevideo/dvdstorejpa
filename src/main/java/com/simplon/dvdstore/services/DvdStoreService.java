@@ -8,32 +8,50 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DvdStoreService {
 
     @Autowired
-    DvdStoreRepository dvdModelRepository;
+    DvdStoreRepository dvdStoreRepository;
 
 
     public boolean add(DvdServiceModel dvdServiceModel){
 
         DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel( dvdServiceModel.getName(), dvdServiceModel.getGenre());
-        DvdRepositoryModel dvdRepositoryModelReturned = dvdModelRepository.save( dvdRepositoryModel);
+        DvdRepositoryModel dvdRepositoryModelReturned = dvdStoreRepository.save( dvdRepositoryModel);
 
         return dvdRepositoryModelReturned != null ;
 
     }
 
-    public ArrayList<DvdServiceModel> getAll() {
+    public ArrayList<DvdServiceModel> findAll() {
 
         ArrayList<DvdServiceModel> dvdServiceModels = new ArrayList<>();
 
-        ArrayList<DvdRepositoryModel> dvdRepositoryModels = dvdModelRepository.findAll();
+        ArrayList<DvdRepositoryModel> dvdRepositoryModels = dvdStoreRepository.findAll();
         dvdRepositoryModels.forEach((item)->System.out.println(item.toString()));
-        dvdRepositoryModels.forEach( (item)->dvdServiceModels.add(new DvdServiceModel(item.getName(), item.getGenre())) );
+        dvdRepositoryModels.forEach( (item)->dvdServiceModels.add(new DvdServiceModel( Optional.ofNullable(item.getId()), item.getName(), item.getGenre())) );
 
         return dvdServiceModels;
+    }
+
+    public DvdServiceModel findById(Long id) {
+
+
+        if ( dvdStoreRepository.existsById(id) ){
+            DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel();
+            dvdRepositoryModel = dvdStoreRepository.findById(id).get();
+            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(dvdRepositoryModel.getId()), dvdRepositoryModel.getName(), dvdRepositoryModel.getGenre());
+            return dvdServiceModel;
+        }else{
+           DvdServiceModel dvdServiceModel = new DvdServiceModel();
+           return dvdServiceModel;
+        }
+
+
+
     }
 }
 

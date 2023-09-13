@@ -4,12 +4,14 @@ import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
+import java.util.Optional;
 
+@Data
+@AllArgsConstructor
 public class DvdServiceModel {
 
+        private Optional<Long> id;
         private String name;
-
         private String genre;
 
         public DvdServiceModel(){
