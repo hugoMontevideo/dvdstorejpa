@@ -10,7 +10,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class DvdServiceModel {
 
-        private Optional<Long> id;
+        public Optional<Long> id;
         private String name;
         private String genre;
 

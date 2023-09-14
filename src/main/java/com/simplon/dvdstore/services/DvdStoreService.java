@@ -39,19 +39,52 @@ public class DvdStoreService {
 
     public DvdServiceModel findById(Long id) {
 
+        Optional<DvdRepositoryModel> dvdRepositoryModel = dvdStoreRepository.findById(id);
 
-        if ( dvdStoreRepository.existsById(id) ){
-            DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel();
-            dvdRepositoryModel = dvdStoreRepository.findById(id).get();
-            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(dvdRepositoryModel.getId()), dvdRepositoryModel.getName(), dvdRepositoryModel.getGenre());
-            return dvdServiceModel;
-        }else{
-           DvdServiceModel dvdServiceModel = new DvdServiceModel();
-           return dvdServiceModel;
+        if(dvdRepositoryModel.isEmpty())
+        {
+            return null;
+        } else {
+            return new DvdServiceModel(dvdRepositoryModel.get().getName(),dvdRepositoryModel.get().getGenre());
         }
 
 
+    }
 
+    public boolean update(Long id, DvdServiceModel dvdServiceModel) {
+
+//        Optional<DvdRepositoryModel> dvdRepositoryModel = dvdStoreRepository.findById(id);
+
+        if(!dvdStoreRepository.existsById(id))
+        {
+            return false;
+
+        } else {
+            DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel(id,dvdServiceModel.getName(),dvdServiceModel.getGenre());
+//            dvdRepositoryModel.setId(id);
+//            dvdRepositoryModel.setName(dvdServiceModel.getName());
+//            dvdRepositoryModel.setGenre(dvdServiceModel.getGenre());
+
+
+            DvdRepositoryModel dvdRepositoryModelReturned = dvdStoreRepository.save( dvdRepositoryModel);
+
+            return dvdRepositoryModelReturned != null ;
+
+        }
+
+    }
+
+    public void delete(Long id) {
+        dvdStoreRepository.deleteById(id);
     }
 }
 
+//        if ( dvdStoreRepository.existsById(id) ){
+//            DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel();
+//            dvdRepositoryModel = dvdStoreRepository.findById(id).get();
+//            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(dvdRepositoryModel.getId()), dvdRepositoryModel.getName(), dvdRepositoryModel.getGenre());
+//            return dvdServiceModel;
+//        }else{
+//           DvdServiceModel dvdServiceModel = new DvdServiceModel();
+//           return dvdServiceModel;
+//}
