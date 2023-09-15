@@ -1,9 +1,6 @@
 package com.simplon.dvdstore.controllers;
 
-
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.simplon.dvdstore.exceptions.NotFoundException;
-import com.simplon.dvdstore.repositories.DvdRepositoryModel;
+import com.simplon.dvdstore.exceptions.DvdNotFoundException;
 import com.simplon.dvdstore.services.DvdServiceModel;
 import com.simplon.dvdstore.services.DvdStoreService;
 
@@ -11,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 //@Controller
@@ -28,9 +25,11 @@ public class DvdStoreController {
     public boolean add(@RequestBody DvdStoreDTO dvdStoreDTO )
     {
         DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreDTO.getName(), dvdStoreDTO.getGenre());
+        System.out.println(dvdServiceModel.getGenre());
         return dvdStoreService.add(dvdServiceModel);
 
     }
+
 
     @GetMapping
     public ArrayList<DvdStoreGetDTO> findAll(){
@@ -47,21 +46,38 @@ public class DvdStoreController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DvdStoreDTO> findById(@PathVariable Long id) throws NotFoundException {
+    public ResponseEntity<DvdStoreDTO> findById(@PathVariable Long id){
+
         DvdStoreDTO dvdStoreDTO = new DvdStoreDTO();
 
-        if (dvdStoreService.findById(id ) != null ){
-            DvdServiceModel dvdServiceModel =  dvdStoreService.findById(id);
-            dvdStoreDTO.setName(dvdServiceModel.getName()) ;
-            dvdStoreDTO.setGenre(dvdServiceModel.getGenre());
-        return new ResponseEntity<>(dvdStoreDTO, HttpStatus.OK) ;
-        }else{
-            throw new NotFoundException(id);
-        }
+        try{
+                DvdServiceModel dvdServiceModel =  dvdStoreService.findById(id);
+                dvdStoreDTO.setName(dvdServiceModel.getName()) ;
+                dvdStoreDTO.setGenre(dvdServiceModel.getGenre());
+                return new ResponseEntity<>(dvdStoreDTO, HttpStatus.OK) ;
+
+            }catch(DvdNotFoundException ex){
+
+            System.out.println(ex.getReason());
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, ex.getReason() );
+
+            }
+
     }
 
+        //        if (dvdStoreService.findById(id ) != null ){
+        //            DvdServiceModel dvdServiceModel =  dvdStoreService.findById(id);
+        //            dvdStoreDTO.setName(dvdServiceModel.getName()) ;
+        //            dvdStoreDTO.setGenre(dvdServiceModel.getGenre());
+        //        return new ResponseEntity<>(dvdStoreDTO, HttpStatus.OK) ;
+        //        }else{
+        //        throw new DvdNotFoundException(id);
+        //        }
+
+
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody DvdStoreDTO dvdStoreDTO) throws NotFoundException {
+    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody DvdStoreDTO dvdStoreDTO) throws DvdNotFoundException {
 
         //        DvdStoreDTO dvdStoreDTO = new DvdStoreDTO();
 
@@ -71,25 +87,28 @@ public class DvdStoreController {
 
             return new ResponseEntity<>("Le dvd id : " + id +" a été modifié", HttpStatus.OK) ;
         }else{
-            throw new NotFoundException(id);
+            throw new DvdNotFoundException(HttpStatus.NOT_FOUND, "La ressource n'a pas été trouvé");
         }
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws NotFoundException{
+    public ResponseEntity<String> delete(@PathVariable Long id) throws DvdNotFoundException{
         if(dvdStoreService.findById(id) != null ){
             dvdStoreService.delete(id);
             return new ResponseEntity<>("le dvd id : " + id + " a été supprimé", HttpStatus.OK);
         }else{
-            throw new NotFoundException(id);
+//            throw new NotFoundException(id);
+            return new ResponseEntity<>("le dvd id : " + id + " n'a pas été trouvé", HttpStatus.NOT_FOUND);
         }
     }
 
+    @DeleteMapping
+    public String deleteAll(){
 
+            return dvdStoreService.deleteAll();
 
-
-
+    }
 
 
 }
