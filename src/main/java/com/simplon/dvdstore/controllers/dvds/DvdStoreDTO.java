@@ -1,7 +1,7 @@
-package com.simplon.dvdstore.controllers;
+package com.simplon.dvdstore.controllers.dvds;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
@@ -28,15 +28,12 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class DvdStoreDTO {
 
     private String name;
     private String genre;
+    private int quantite;
 
-
-    public DvdStoreDTO(String name, String genre) {
-        this.name=name;
-        this.genre=genre;
-    }
 
 }

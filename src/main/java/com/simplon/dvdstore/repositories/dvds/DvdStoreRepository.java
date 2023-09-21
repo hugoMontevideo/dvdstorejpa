@@ -1,4 +1,4 @@
-package com.simplon.dvdstore.repositories;
+package com.simplon.dvdstore.repositories.dvds;
 
 import org.springframework.data.repository.CrudRepository;
 import java.util.ArrayList;

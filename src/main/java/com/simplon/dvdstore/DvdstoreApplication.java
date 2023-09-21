@@ -1,6 +1,5 @@
 package com.simplon.dvdstore;
 
-import com.simplon.dvdstore.controllers.DvdStoreDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

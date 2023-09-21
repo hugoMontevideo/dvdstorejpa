@@ -1,8 +1,8 @@
-package com.simplon.dvdstore.controllers;
+package com.simplon.dvdstore.controllers.dvds;
 
 import com.simplon.dvdstore.exceptions.DvdNotFoundException;
-import com.simplon.dvdstore.services.DvdServiceModel;
-import com.simplon.dvdstore.services.DvdStoreService;
+import com.simplon.dvdstore.services.dvds.DvdServiceModel;
+import com.simplon.dvdstore.services.dvds.DvdStoreService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,8 +24,8 @@ public class DvdStoreController {
     @PostMapping  //
     public boolean add(@RequestBody DvdStoreDTO dvdStoreDTO )
     {
-        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreDTO.getName(), dvdStoreDTO.getGenre());
-        System.out.println(dvdServiceModel.getGenre());
+        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite());
+//        System.out.println(dvdServiceModel.getGenre());
         return dvdStoreService.add(dvdServiceModel);
 
     }
@@ -40,7 +40,7 @@ public class DvdStoreController {
 
 //        dvdServiceModels.forEach((item)->System.out.println(item.toString()));
 
-        dvdServiceModels.forEach((item)->dvdStoreDTOSs.add(new DvdStoreGetDTO(item.getId().get(), item.getName(), item.getGenre())) );
+        dvdServiceModels.forEach((item)->dvdStoreDTOSs.add(new DvdStoreGetDTO(item.getId().get(), item.getName(), item.getGenre(), item.getQuantite())) );
 
         return dvdStoreDTOSs;
     }
@@ -82,7 +82,7 @@ public class DvdStoreController {
         //        DvdStoreDTO dvdStoreDTO = new DvdStoreDTO();
 
         if (dvdStoreService.findById(id ) != null ){
-            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(id), dvdStoreDTO.getName(), dvdStoreDTO.getGenre());
+            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(id), dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite());
             dvdStoreService.update(id, dvdServiceModel);
 
             return new ResponseEntity<>("Le dvd id : " + id +" a été modifié", HttpStatus.OK) ;

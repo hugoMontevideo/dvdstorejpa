@@ -1,4 +1,4 @@
-package com.simplon.dvdstore.repositories;
+package com.simplon.dvdstore.repositories.dvds;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,9 +19,10 @@ public class DvdRepositoryModel {
     @Column(name="genre")
     private String genre;
     @Column(name="quantite")
-    private Integer quantite;
+    private int quantite;
 
     public DvdRepositoryModel(){};
+
 
     public DvdRepositoryModel(String name, String genre) {
         this.name = name;
@@ -31,6 +32,11 @@ public class DvdRepositoryModel {
     public DvdRepositoryModel(Long id, String name, String genre) {
     }
 
+    public DvdRepositoryModel(String name, String genre, int quantite) {
+        this.name = name;
+        this.genre = genre;
+        this.quantite = quantite;
+    }
 
     @Override
     public String toString() {

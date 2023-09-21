@@ -1,13 +1,11 @@
-package com.simplon.dvdstore.services;
+package com.simplon.dvdstore.services.dvds;
 
-import com.simplon.dvdstore.controllers.DvdStoreDTO;
-import com.simplon.dvdstore.repositories.DvdRepositoryModel;
-import com.simplon.dvdstore.repositories.DvdStoreRepository;
+import com.simplon.dvdstore.repositories.dvds.DvdRepositoryModel;
+import com.simplon.dvdstore.repositories.dvds.DvdStoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,9 +18,9 @@ public class DvdStoreService {
     public boolean add(DvdServiceModel dvdServiceModel){
 
         DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel( dvdServiceModel.getName(), dvdServiceModel.getGenre());
-        DvdRepositoryModel dvdRepositoryModelReturned = dvdStoreRepository.save( dvdRepositoryModel);
+        DvdRepositoryModel dvdRepositoryModelReturn = dvdStoreRepository.save( dvdRepositoryModel);
 
-        return dvdRepositoryModelReturned != null ;
+        return dvdRepositoryModelReturn != null ;
 
     }
 
@@ -31,8 +29,9 @@ public class DvdStoreService {
         ArrayList<DvdServiceModel> dvdServiceModels = new ArrayList<>();
 
         ArrayList<DvdRepositoryModel> dvdRepositoryModels = dvdStoreRepository.findAll();
-        dvdRepositoryModels.forEach((item)->System.out.println(item.toString()));
-        dvdRepositoryModels.forEach( (item)->dvdServiceModels.add(new DvdServiceModel( Optional.ofNullable(item.getId()), item.getName(), item.getGenre())) );
+
+        //dvdRepositoryModels.forEach((item)->System.out.println(item.toString()));
+        dvdRepositoryModels.forEach( (item)->dvdServiceModels.add(new DvdServiceModel( Optional.ofNullable(item.getId()), item.getName(), item.getGenre(), item.getQuantite())) );
 
         return dvdServiceModels;
     }
@@ -45,12 +44,8 @@ public class DvdStoreService {
         {
             return null;
         } else {
-
-            return new DvdServiceModel(dvdRepositoryModel.get().getName(),dvdRepositoryModel.get().getGenre());
-
+            return new DvdServiceModel(dvdRepositoryModel.get().getName(),dvdRepositoryModel.get().getGenre(), dvdRepositoryModel.get().getQuantite());
         }
-
-
     }
 
     public boolean update(Long id, DvdServiceModel dvdServiceModel) {
