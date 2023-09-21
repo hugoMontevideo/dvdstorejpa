@@ -36,5 +36,18 @@ public class ClientService {
         return clientServiceModels;
     }
 
+    public ClientServiceModel findById(Long id){
+        Optional<ClientRepositoryModel> clientRepositoryModel = clientRepository.findById(id);
+
+        if(clientRepositoryModel.isEmpty())
+        {
+            return null;
+        } else {
+            return new ClientServiceModel(clientRepositoryModel.get().getFirstname(),clientRepositoryModel.get().getName(), clientRepositoryModel.get().getEmail(), clientRepositoryModel.get().getAdresse());
+        }
+
+
+    }
+
 
 }

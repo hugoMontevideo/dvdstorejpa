@@ -2,6 +2,8 @@ package com.simplon.dvdstore.services.vente;
 
 import com.simplon.dvdstore.repositories.client.ClientRepositoryModel;
 import com.simplon.dvdstore.repositories.dvds.DvdRepositoryModel;
+import com.simplon.dvdstore.services.client.ClientServiceModel;
+import com.simplon.dvdstore.services.dvds.DvdServiceModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,18 +18,18 @@ public class VenteServiceModel {
 
     private Optional<Long> id;
     private Long dateDeVente;
-    private Long dvdstore_id;
+    private DvdServiceModel dvdServiceModel;
     private int quantite;
-    private Long client_id;
+    private ClientServiceModel clientServiceModel;
     private Float montant;
 
     public VenteServiceModel(int quantite) {
         this.quantite = quantite;
     }
 
-    public VenteServiceModel(Long dvdstore_id, int quantite, Long client_id) {
-        this.dvdstore_id = dvdstore_id;
+    public VenteServiceModel(DvdServiceModel dvdServiceModel, int quantite, ClientServiceModel clientServiceModel) {
+        this.dvdServiceModel = dvdServiceModel;
         this.quantite = quantite;
-        this.client_id = client_id;
+        this.clientServiceModel = clientServiceModel;
     }
 }

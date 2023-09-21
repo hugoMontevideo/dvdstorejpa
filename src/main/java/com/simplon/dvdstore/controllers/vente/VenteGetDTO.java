@@ -1,5 +1,7 @@
 package com.simplon.dvdstore.controllers.vente;
 
-import com.simplon.dvdstore.repositories.dvds.DvdRepositoryModel;
+import com.simplon.dvdstore.controllers.client.ClientGetDTO;
+import com.simplon.dvdstore.controllers.dvds.DvdStoreGetDTO;
 
-public record VenteGetDTO (Long id, Long dateDeVente, Long dvdstore_id, int quantité, Long client_id, Float montant){}
+
+public record VenteGetDTO (Long id, Long dateDeVente, DvdStoreGetDTO dvdStoreGetDTO, int quantite, ClientGetDTO clientGetDTO, Float montant){}
