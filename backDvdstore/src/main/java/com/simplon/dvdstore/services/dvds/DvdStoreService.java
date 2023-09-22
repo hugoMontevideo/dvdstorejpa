@@ -14,7 +14,6 @@ public class DvdStoreService {
     @Autowired
     DvdStoreRepository dvdStoreRepository;
 
-
     public boolean add(DvdServiceModel dvdServiceModel){
 
         DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel( dvdServiceModel.getName(), dvdServiceModel.getGenre());
@@ -31,7 +30,7 @@ public class DvdStoreService {
         ArrayList<DvdRepositoryModel> dvdRepositoryModels = dvdStoreRepository.findAll();
 
         //dvdRepositoryModels.forEach((item)->System.out.println(item.toString()));
-        dvdRepositoryModels.forEach( (item)->dvdServiceModels.add(new DvdServiceModel( Optional.ofNullable(item.getId()), item.getName(), item.getGenre(), item.getQuantite())) );
+        dvdRepositoryModels.forEach( (item)->dvdServiceModels.add(new DvdServiceModel( Optional.ofNullable(item.getId()), item.getName(), item.getGenre(), item.getQuantite(), item.getPrix())) );
 
         return dvdServiceModels;
     }
@@ -44,7 +43,7 @@ public class DvdStoreService {
         {
             return null;
         } else {
-            return new DvdServiceModel(dvdRepositoryModel.get().getName(),dvdRepositoryModel.get().getGenre(), dvdRepositoryModel.get().getQuantite());
+            return new DvdServiceModel(dvdRepositoryModel.get().getName(),dvdRepositoryModel.get().getGenre(), dvdRepositoryModel.get().getQuantite(), dvdRepositoryModel.get().getPrix());
         }
     }
 
@@ -57,7 +56,7 @@ public class DvdStoreService {
             return false;
 
         } else {
-            DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel(id,dvdServiceModel.getName(),dvdServiceModel.getGenre());
+            DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel(id,dvdServiceModel.getName(),dvdServiceModel.getGenre(),dvdServiceModel.getQuantite(),dvdServiceModel.getPrix());
 
             DvdRepositoryModel dvdRepositoryModelReturned = dvdStoreRepository.save( dvdRepositoryModel);
 

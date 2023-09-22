@@ -18,10 +18,10 @@ public class DvdRepositoryModel {
     private String name;
     @Column(name="genre")
     private String genre;
-    @Column(name="prix")
-    Float prix;
     @Column(name="quantite")
     private int quantite;
+    @Column(name="prix")
+    Float prix;
 
     public DvdRepositoryModel(){};
 

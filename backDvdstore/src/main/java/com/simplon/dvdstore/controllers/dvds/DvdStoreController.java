@@ -24,12 +24,11 @@ public class DvdStoreController {
     @PostMapping  //
     public boolean add(@RequestBody DvdStoreDTO dvdStoreDTO )
     {
-        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite());
-//        System.out.println(dvdServiceModel.getGenre());
+        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite(), dvdStoreDTO.getPrix());
+
         return dvdStoreService.add(dvdServiceModel);
 
     }
-
 
     @GetMapping
     public ArrayList<DvdStoreGetDTO> findAll(){
@@ -40,7 +39,7 @@ public class DvdStoreController {
 
 //        dvdServiceModels.forEach((item)->System.out.println(item.toString()));
 
-        dvdServiceModels.forEach((item)->dvdStoreDTOSs.add(new DvdStoreGetDTO(item.getId().get(), item.getName(), item.getGenre(), item.getQuantite())) );
+        dvdServiceModels.forEach((item)->dvdStoreDTOSs.add(new DvdStoreGetDTO(item.getId().get(), item.getName(), item.getGenre(), item.getQuantite(), item.getPrix())) );
 
         return dvdStoreDTOSs;
     }
@@ -82,14 +81,13 @@ public class DvdStoreController {
         //        DvdStoreDTO dvdStoreDTO = new DvdStoreDTO();
 
         if (dvdStoreService.findById(id ) != null ){
-            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(id), dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite());
+            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(id), dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite(), dvdStoreDTO.getPrix());
             dvdStoreService.update(id, dvdServiceModel);
 
             return new ResponseEntity<>("Le dvd id : " + id +" a été modifié", HttpStatus.OK) ;
         }else{
             throw new DvdNotFoundException(HttpStatus.NOT_FOUND, "La ressource n'a pas été trouvé");
         }
-
     }
 
     @DeleteMapping("/{id}")

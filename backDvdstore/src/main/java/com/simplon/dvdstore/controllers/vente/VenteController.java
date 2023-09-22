@@ -43,7 +43,7 @@ public class VenteController {
 
 //        venteServiceModels.forEach((item)->{
         for ( VenteServiceModel item : venteServiceModels) {
-            DvdStoreGetDTO dvdStoreGetDTO = new DvdStoreGetDTO(item.getDvdServiceModel().getId().get(), item.getDvdServiceModel().getName(), item.getDvdServiceModel().getGenre(), item.getQuantite());
+            DvdStoreGetDTO dvdStoreGetDTO = new DvdStoreGetDTO(item.getDvdServiceModel().getId().get(), item.getDvdServiceModel().getName(), item.getDvdServiceModel().getGenre(), item.getDvdServiceModel().getQuantite(), item.getDvdServiceModel().getPrix());
 
             ClientGetDTO clientGetDTO = new ClientGetDTO(item.getClientServiceModel().getId().get(), item.getClientServiceModel().getName(), item.getClientServiceModel().getFirstname(), item.getClientServiceModel().getEmail(), item.getClientServiceModel().getAdresse());
 
@@ -60,7 +60,7 @@ public class VenteController {
         ArrayList<VenteServiceModel> venteServiceModels = venteService.findAllById(id) ;
         System.out.println("hello world");
         for ( VenteServiceModel item : venteServiceModels) {
-            DvdStoreGetDTO dvdStoreGetDTO = new DvdStoreGetDTO(item.getDvdServiceModel().getId().get(), item.getDvdServiceModel().getName(), item.getDvdServiceModel().getGenre(), item.getQuantite());
+            DvdStoreGetDTO dvdStoreGetDTO = new DvdStoreGetDTO(item.getDvdServiceModel().getId().get(), item.getDvdServiceModel().getName(), item.getDvdServiceModel().getGenre(), item.getDvdServiceModel().getQuantite(), item.getDvdServiceModel().getPrix());
 
             ClientGetDTO clientGetDTO = new ClientGetDTO(item.getClientServiceModel().getId().get(), item.getClientServiceModel().getName(), item.getClientServiceModel().getFirstname(), item.getClientServiceModel().getEmail(), item.getClientServiceModel().getAdresse());
 
@@ -73,10 +73,10 @@ public class VenteController {
     @GetMapping("/dvd/{name}")
     public ArrayList<VenteGetDTO> findAllByDvdName(@PathVariable String name){
         ArrayList<VenteGetDTO> venteGetDTOS = new ArrayList<>();
-        ArrayList<VenteServiceModel> venteServiceModels = venteService.findAllbyDvdName(name);
+        ArrayList<VenteServiceModel> venteServiceModels = venteService.findAllSalesByDvdName(name);
 
         for ( VenteServiceModel item : venteServiceModels) {
-            DvdStoreGetDTO dvdStoreGetDTO = new DvdStoreGetDTO(item.getDvdServiceModel().getId().get(), item.getDvdServiceModel().getName(), item.getDvdServiceModel().getGenre(), item.getQuantite());
+            DvdStoreGetDTO dvdStoreGetDTO = new DvdStoreGetDTO(item.getDvdServiceModel().getId().get(), item.getDvdServiceModel().getName(), item.getDvdServiceModel().getGenre(), item.getDvdServiceModel().getQuantite(), item.getDvdServiceModel().getPrix());
 
             ClientGetDTO clientGetDTO = new ClientGetDTO(item.getClientServiceModel().getId().get(), item.getClientServiceModel().getName(), item.getClientServiceModel().getFirstname(), item.getClientServiceModel().getEmail(), item.getClientServiceModel().getAdresse());
 

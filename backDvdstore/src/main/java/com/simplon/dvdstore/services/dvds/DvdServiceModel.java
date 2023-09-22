@@ -15,6 +15,7 @@ public class DvdServiceModel {
         private String name;
         private String genre;
         private int quantite;
+        private Float prix;
 
 
         public DvdServiceModel(String name, String genre) {
@@ -28,6 +29,13 @@ public class DvdServiceModel {
                 this.quantite = quantite;
         }
 
+        public DvdServiceModel(String name, String genre, int quantite, Float prix) {
+                this.name = name;
+                this.genre = genre;
+                this.quantite = quantite;
+                this.prix = prix;
+        }
+
         @Override
         public String toString() {
                 return "DvdServiceModel{" +
@@ -35,4 +43,5 @@ public class DvdServiceModel {
                         ", genre='" + genre + '\'' +
                         '}';
         }
+
 }
