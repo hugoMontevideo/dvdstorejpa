@@ -25,7 +25,13 @@ public class VenteController {
 
     @PostMapping
     public boolean add(@RequestBody VenteDTO venteDTO){
-        VenteServiceModel venteServiceModel = new VenteServiceModel(dvdStoreService.findById(venteDTO.getDvdstore_id()), venteDTO.getQuantite(),clientService.findById(venteDTO.getClient_id()));
+
+
+        VenteServiceModel venteServiceModel = new VenteServiceModel(
+                dvdStoreService.findById(venteDTO.getDvdstore_id()),
+                venteDTO.getQuantite(),
+                clientService.findById(venteDTO.getClient_id()));
+
         return venteService.add(venteServiceModel);
     }
 
@@ -36,7 +42,7 @@ public class VenteController {
         ArrayList<VenteServiceModel> venteServiceModels = venteService.findAll() ;
 
 //        venteServiceModels.forEach((item)->{
-            for ( VenteServiceModel item : venteServiceModels) {
+        for ( VenteServiceModel item : venteServiceModels) {
             DvdStoreGetDTO dvdStoreGetDTO = new DvdStoreGetDTO(item.getDvdServiceModel().getId().get(), item.getDvdServiceModel().getName(), item.getDvdServiceModel().getGenre(), item.getQuantite());
 
             ClientGetDTO clientGetDTO = new ClientGetDTO(item.getClientServiceModel().getId().get(), item.getClientServiceModel().getName(), item.getClientServiceModel().getFirstname(), item.getClientServiceModel().getEmail(), item.getClientServiceModel().getAdresse());
@@ -45,6 +51,7 @@ public class VenteController {
            }
         return venteGetDTOS;
     }
+
 
     //get all sales per client name/id
     @GetMapping("/client/{id}")
@@ -59,20 +66,26 @@ public class VenteController {
 
             venteGetDTOS.add(new VenteGetDTO(item.getId().get(), item.getDateDeVente(), dvdStoreGetDTO, item.getQuantite(), clientGetDTO, item.getMontant()));
         }
-
-//        for (VenteGetDTO x : venteGetDTOS) {
-//          if(Objects.equals(x.get, "Dupont")){
-//            System.out.println(x.toString());
-//          }
-//        };
-//
-//        for (VenteGetDTO x : venteGetDTOS) {
-//            if(Objects.equals(x.getClient().getId(), 1)){
-//                System.out.println(x.toString());
-//            }
-//        };
         return venteGetDTOS;
     }
+
+    // get all sales per dvd name/id
+    @GetMapping("/dvd/{name}")
+    public ArrayList<VenteGetDTO> findAllByDvdName(@PathVariable String name){
+        ArrayList<VenteGetDTO> venteGetDTOS = new ArrayList<>();
+        ArrayList<VenteServiceModel> venteServiceModels = venteService.findAllbyDvdName(name);
+
+        for ( VenteServiceModel item : venteServiceModels) {
+            DvdStoreGetDTO dvdStoreGetDTO = new DvdStoreGetDTO(item.getDvdServiceModel().getId().get(), item.getDvdServiceModel().getName(), item.getDvdServiceModel().getGenre(), item.getQuantite());
+
+            ClientGetDTO clientGetDTO = new ClientGetDTO(item.getClientServiceModel().getId().get(), item.getClientServiceModel().getName(), item.getClientServiceModel().getFirstname(), item.getClientServiceModel().getEmail(), item.getClientServiceModel().getAdresse());
+
+            venteGetDTOS.add(new VenteGetDTO(item.getId().get(), item.getDateDeVente(), dvdStoreGetDTO, item.getQuantite(), clientGetDTO, item.getMontant()));
+        }
+        return venteGetDTOS;
+    }
+
+
 
 
 }

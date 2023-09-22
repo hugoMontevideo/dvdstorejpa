@@ -40,7 +40,6 @@ public class VenteService {
 
     public ArrayList<VenteServiceModel> findAll(){
         ArrayList<VenteServiceModel> venteServiceModels = new ArrayList<>();
-
         ArrayList<VenteRepositoryModel> venteRepositoryModels = venteRepository.findAll();
 
         venteRepositoryModels.forEach( (item)->{
@@ -49,7 +48,8 @@ public class VenteService {
             ClientServiceModel clientServiceModel = new ClientServiceModel(Optional.ofNullable(item.getClientRepositoryModel().getId()),item.getClientRepositoryModel().getFirstname(), item.getClientRepositoryModel().getName(), item.getClientRepositoryModel().getEmail(), item.getClientRepositoryModel().getAdresse());
 
             venteServiceModels.add(new VenteServiceModel( Optional.ofNullable(item.getId()), item.getDateDeVente(), dvdServiceModel, item.getQuantite(), clientServiceModel, item.getMontant()));
-        } );
+        });
+
         return venteServiceModels;
     }
 
@@ -67,15 +67,40 @@ public class VenteService {
                 venteServiceModels.add(new VenteServiceModel( Optional.ofNullable(item.getId()), item.getDateDeVente(), dvdServiceModel, item.getQuantite(), clientServiceModel, item.getMontant()));
                 System.out.println(item.toString());
             }
-        };
-//
-//
-//        };
-//        for (VenteGetDTO x : venteGetDTOS) {
-//        if(Objects.equals(x.get, "Dupont")){
-//            System.out.println(x.toString());
-//        }
+        }
+        return venteServiceModels;
+    }
+
+    public ArrayList<VenteServiceModel> findAllbyDvdName(String name){
+        ArrayList<VenteServiceModel> venteServiceModels = new ArrayList<>();
+        ArrayList<VenteRepositoryModel> venteRepositoryModels = venteRepository.findAll();
+
+        for (VenteRepositoryModel item : venteRepositoryModels) {
+            System.out.println(item.getDvdRepositoryModel().getName());
+            if(Objects.equals(item.getDvdRepositoryModel().getName(), name)){
+                DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(item.getDvdRepositoryModel().getId()),item.getDvdRepositoryModel().getGenre(), item.getDvdRepositoryModel().getName(), item.getDvdRepositoryModel().getQuantite());
+
+                ClientServiceModel clientServiceModel = new ClientServiceModel(Optional.ofNullable(item.getClientRepositoryModel().getId()),item.getClientRepositoryModel().getFirstname(), item.getClientRepositoryModel().getName(), item.getClientRepositoryModel().getEmail(), item.getClientRepositoryModel().getAdresse());
+
+                venteServiceModels.add(new VenteServiceModel( Optional.ofNullable(item.getId()), item.getDateDeVente(), dvdServiceModel, item.getQuantite(), clientServiceModel, item.getMontant()));
+                System.out.println(item.toString());
+            }
+        }
 
         return venteServiceModels;
     }
-}
+
+//     get all sales per dvd name/id
+//        for(Vente vente : ventes) {
+//        if(vente.getDvd().getId() == 1){
+//            System.out.println(vente);
+//        }
+//
+
+
+} // **
+
+
+
+
+
