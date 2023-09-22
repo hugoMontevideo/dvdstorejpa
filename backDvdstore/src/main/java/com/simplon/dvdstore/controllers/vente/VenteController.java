@@ -2,6 +2,8 @@ package com.simplon.dvdstore.controllers.vente;
 
 import com.simplon.dvdstore.controllers.client.ClientGetDTO;
 import com.simplon.dvdstore.controllers.dvds.DvdStoreGetDTO;
+import com.simplon.dvdstore.repositories.vente.VenteRepository;
+import com.simplon.dvdstore.repositories.vente.VenteRepositoryModel;
 import com.simplon.dvdstore.services.client.ClientService;
 import com.simplon.dvdstore.services.dvds.DvdStoreService;
 import com.simplon.dvdstore.services.vente.VenteService;
@@ -53,12 +55,26 @@ public class VenteController {
     }
 
 
-    //get all sales per client name/id
+    //get all sales per client by name/id
+//    @GetMapping("/client/{id}")
+//    public ArrayList<VenteGetDTO> findAllById(@PathVariable Long id){
+//        ArrayList<VenteGetDTO> venteGetDTOS = new ArrayList<>();
+//        ArrayList<VenteServiceModel> venteServiceModels = venteService.findAllById(id) ;
+//        System.out.println("hello world");
+//        for ( VenteServiceModel item : venteServiceModels) {
+//            DvdStoreGetDTO dvdStoreGetDTO = new DvdStoreGetDTO(item.getDvdServiceModel().getId().get(), item.getDvdServiceModel().getName(), item.getDvdServiceModel().getGenre(), item.getDvdServiceModel().getQuantite(), item.getDvdServiceModel().getPrix());
+//
+//            ClientGetDTO clientGetDTO = new ClientGetDTO(item.getClientServiceModel().getId().get(), item.getClientServiceModel().getName(), item.getClientServiceModel().getFirstname(), item.getClientServiceModel().getEmail(), item.getClientServiceModel().getAdresse());
+//
+//            venteGetDTOS.add(new VenteGetDTO(item.getId().get(), item.getDateDeVente(), dvdStoreGetDTO, item.getQuantite(), clientGetDTO, item.getMontant()));
+//        }
+//        return venteGetDTOS;
+//    }
     @GetMapping("/client/{id}")
-    public ArrayList<VenteGetDTO> findAllById(@PathVariable Long id){
+    public ArrayList<VenteGetDTO> findAllByIdClient(@PathVariable("id") Long id){
         ArrayList<VenteGetDTO> venteGetDTOS = new ArrayList<>();
-        ArrayList<VenteServiceModel> venteServiceModels = venteService.findAllById(id) ;
-        System.out.println("hello world");
+        ArrayList<VenteServiceModel> venteServiceModels = venteService.findAllByClientId(id) ;
+
         for ( VenteServiceModel item : venteServiceModels) {
             DvdStoreGetDTO dvdStoreGetDTO = new DvdStoreGetDTO(item.getDvdServiceModel().getId().get(), item.getDvdServiceModel().getName(), item.getDvdServiceModel().getGenre(), item.getDvdServiceModel().getQuantite(), item.getDvdServiceModel().getPrix());
 
@@ -66,12 +82,13 @@ public class VenteController {
 
             venteGetDTOS.add(new VenteGetDTO(item.getId().get(), item.getDateDeVente(), dvdStoreGetDTO, item.getQuantite(), clientGetDTO, item.getMontant()));
         }
+
         return venteGetDTOS;
     }
 
     // get all sales per dvd name/id
     @GetMapping("/dvd/{name}")
-    public ArrayList<VenteGetDTO> findAllByDvdName(@PathVariable String name){
+    public ArrayList<VenteGetDTO> findAllByDvdName(@PathVariable("name") String name){
         ArrayList<VenteGetDTO> venteGetDTOS = new ArrayList<>();
         ArrayList<VenteServiceModel> venteServiceModels = venteService.findAllSalesByDvdName(name);
 
