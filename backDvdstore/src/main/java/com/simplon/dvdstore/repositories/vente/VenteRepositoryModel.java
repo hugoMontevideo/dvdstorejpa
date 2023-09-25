@@ -21,7 +21,7 @@ public class VenteRepositoryModel {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @CreationTimestamp
+//    @CreationTimestamp
     @Column(name="date_de_vente")
     Long dateDeVente;
 
@@ -54,5 +54,13 @@ public class VenteRepositoryModel {
         this.dvdRepositoryModel = dvdRepositoryModel;
         this.quantite = quantite;
         this.clientRepositoryModel = clientRepositoryModel;
+    }
+
+    public VenteRepositoryModel(Long dateDeVente, DvdRepositoryModel dvdRepositoryModel, int quantite, ClientRepositoryModel clientRepositoryModel, Float montant) {
+        this.dateDeVente = dateDeVente;
+        this.dvdRepositoryModel = dvdRepositoryModel;
+        this.quantite = quantite;
+        this.clientRepositoryModel = clientRepositoryModel;
+        this.montant = montant;
     }
 }

@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DvdItemComponent } from './dvd-item/dvd-item.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DvdItemComponent } from './dvd-item/dvd-item.component';
     BrowserAnimationsModule, 
     CoreModule,
     SharedModule, 
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

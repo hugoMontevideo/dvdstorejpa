@@ -43,7 +43,7 @@ public class DvdStoreService {
         {
             return null;
         } else {
-            return new DvdServiceModel(dvdRepositoryModel.get().getName(),dvdRepositoryModel.get().getGenre(), dvdRepositoryModel.get().getQuantite(), dvdRepositoryModel.get().getPrix());
+            return new DvdServiceModel(dvdRepositoryModel.get().getName(),dvdRepositoryModel.get().getGenre(), dvdRepositoryModel.get().getQuantite(), dvdRepositoryModel.get().getPrix(), dvdRepositoryModel.get().getPicture());
         }
     }
 

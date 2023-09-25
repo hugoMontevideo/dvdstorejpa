@@ -32,4 +32,19 @@ public class VenteServiceModel {
         this.quantite = quantite;
         this.clientServiceModel = clientServiceModel;
     }
+
+    public VenteServiceModel(Long dateDeVente, DvdServiceModel dvdServiceModel, int quantite, ClientServiceModel clientServiceModel) {
+        this.dateDeVente = dateDeVente;
+        this.dvdServiceModel = dvdServiceModel;
+        this.quantite = quantite;
+        this.clientServiceModel = clientServiceModel;
+    }
+
+    public VenteServiceModel(Long dateDeVente, DvdServiceModel dvdServiceModel, int quantite, ClientServiceModel clientServiceModel, Float montant) {
+        this.dateDeVente = dateDeVente;
+        this.dvdServiceModel = dvdServiceModel;
+        this.quantite = quantite;
+        this.clientServiceModel = clientServiceModel;
+        this.montant = montant;
+    }
 }

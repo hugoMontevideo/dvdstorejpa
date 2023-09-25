@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Dvd } from '../models/dvd.model';
+
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../services/http.service';
+import { Dvd } from '../models/dvd.interface';
 
 @Component({
   selector: 'app-dvd-item',
@@ -11,7 +12,7 @@ import { HttpService } from '../services/http.service';
 export class DvdItemComponent {
   path: string='dvds';
   id: number|any;
-  currentDvd: Dvd = new Dvd();
+  currentDvd!: Dvd;
 
   constructor(private route:ActivatedRoute, private httpService: HttpService){};
 

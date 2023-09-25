@@ -1,1 +1,20 @@
-<p>dvd-item works!</p>
+<div class="container">
+
+    <div class=" dvd_item d-flex">
+        <div class="dvd_picture">
+            <img [src]="currentDvd.picture" alt="">
+        </div>
+        <div class="details">
+            <h1>{{ currentDvd.name }}</h1>
+            <h3>{{ currentDvd.genre }}</h3>
+            <p class="price text-primary">{{ currentDvd.prix }} €</p>
+            <p>{{ currentDvd.quantite }} en stock</p>
+        </div>
+    </div>
+    <div class="synopsis">
+        <h2>Synopsis</h2>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odio corrupti doloribus beatae quaerat? Adipisci nulla recusandae unde animi cumque inventore, officiis facilis ipsam veritatis impedit ratione, voluptatum voluptatem in.
+        </p>
+    </div>
+</div>

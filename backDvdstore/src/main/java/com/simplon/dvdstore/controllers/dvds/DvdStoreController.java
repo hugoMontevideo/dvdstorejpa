@@ -48,11 +48,13 @@ public class DvdStoreController {
     public ResponseEntity<DvdStoreDTO> findById(@PathVariable Long id){
 
         DvdStoreDTO dvdStoreDTO = new DvdStoreDTO();
-
         try{
                 DvdServiceModel dvdServiceModel =  dvdStoreService.findById(id);
                 dvdStoreDTO.setName(dvdServiceModel.getName()) ;
                 dvdStoreDTO.setGenre(dvdServiceModel.getGenre());
+                dvdStoreDTO.setQuantite(dvdServiceModel.getQuantite());
+                dvdStoreDTO.setPrix(dvdServiceModel.getPrix());
+                dvdStoreDTO.setPicture(dvdServiceModel.getPicture());
                 return new ResponseEntity<>(dvdStoreDTO, HttpStatus.OK) ;
 
             }catch(DvdNotFoundException ex){
@@ -96,7 +98,7 @@ public class DvdStoreController {
             dvdStoreService.delete(id);
             return new ResponseEntity<>("le dvd id : " + id + " a été supprimé", HttpStatus.OK);
         }else{
-//            throw new NotFoundException(id);
+         //  throw new NotFoundException(id);
             return new ResponseEntity<>("le dvd id : " + id + " n'a pas été trouvé", HttpStatus.NOT_FOUND);
         }
     }

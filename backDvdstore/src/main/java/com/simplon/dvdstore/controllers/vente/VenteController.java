@@ -29,7 +29,6 @@ public class VenteController {
     @PostMapping
     public boolean add(@RequestBody VenteDTO venteDTO){
 
-
         VenteServiceModel venteServiceModel = new VenteServiceModel(
                 dvdStoreService.findById(venteDTO.getDvdstore_id()),
                 venteDTO.getQuantite(),
