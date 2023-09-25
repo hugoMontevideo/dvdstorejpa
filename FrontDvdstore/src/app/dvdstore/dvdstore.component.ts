@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { HttpService } from '../services/http.service';
+// import { HttpService } from '../services/http.service';
+import { DvdService } from '../services/dvd.service';
+import { Dvd } from '../models/dvd.interface';
+import { DvdGetAllDTO } from '../services/interfaces/dvdgetalldto.inteface';
 
 @Component({
   selector: 'app-dvdstore',
@@ -9,23 +12,46 @@ import { HttpService } from '../services/http.service';
 export class DvdstoreComponent {
   path: string = "dvds";
   dvds: any[]= [];
+  dvdToShow: any[] = [];
 
-  constructor(private httpService: HttpService){}
+  constructor(
+      // private httpService: HttpService,
+      private dvdService : DvdService
+      ){}
 
-  ngOnInit(): void {
-    this.getDvds(this.path);
-  }
+  async ngOnInit() {
+    // this.getDvds(this.path);
+    console.log('hello');
+    
+   const dvdGetAllDTOs = await this.dvdService.getAllDvd();
 
-
-  public getDvds(path:string){
-    this.httpService.getData(path).subscribe({
-      next:(response)=> this.dvds = response,
-      error:(err:Error)=>(console.log("page home all dvds "+ err)),
-      complete: ()=>console.log("all dvds ok")
+   dvdGetAllDTOs.map((value:DvdGetAllDTO)=>{
+      const dvd:Dvd = {
+        id:0,
+        name: value.name,
+        genre: value.genre,
+        quantite: value.quantite,
+        prix: value.prix,
+        picture: value.picture
+      }
+      this.dvds.push(dvd);
     })
-
+   
+    this.dvdToShow = this.dvds;
 
   }
+
+
+  // public getDvds(path:string){
+  //   this.httpService.getData(path).subscribe({
+  //     next:(response)=> this.dvds = response,
+  //     error:(err:Error)=>(console.log("page home all dvds "+ err)),
+  //     complete: ()=>console.log("all dvds ok")
+  //   })
+  // }
+
+
+
 
 
 }
