@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-//@Controller
+@CrossOrigin
 @RestController // donnees json ou xml
 @RequestMapping("dvds")
 public class DvdStoreController {
@@ -24,7 +24,7 @@ public class DvdStoreController {
     @PostMapping  //
     public boolean add(@RequestBody DvdStoreDTO dvdStoreDTO )
     {
-        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite(), dvdStoreDTO.getPrix());
+        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite(), dvdStoreDTO.getPrix(), dvdStoreDTO.getPicture());
 
         return dvdStoreService.add(dvdServiceModel);
 
@@ -39,7 +39,7 @@ public class DvdStoreController {
 
 //        dvdServiceModels.forEach((item)->System.out.println(item.toString()));
 
-        dvdServiceModels.forEach((item)->dvdStoreDTOSs.add(new DvdStoreGetDTO(item.getId().get(), item.getName(), item.getGenre(), item.getQuantite(), item.getPrix())) );
+        dvdServiceModels.forEach((item)->dvdStoreDTOSs.add(new DvdStoreGetDTO(item.getId().get(), item.getName(), item.getGenre(), item.getQuantite(), item.getPrix(), item.getPicture())) );
 
         return dvdStoreDTOSs;
     }
@@ -81,7 +81,7 @@ public class DvdStoreController {
         //        DvdStoreDTO dvdStoreDTO = new DvdStoreDTO();
 
         if (dvdStoreService.findById(id ) != null ){
-            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(id), dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite(), dvdStoreDTO.getPrix());
+            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(id), dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite(), dvdStoreDTO.getPrix(), dvdStoreDTO.getPicture());
             dvdStoreService.update(id, dvdServiceModel);
 
             return new ResponseEntity<>("Le dvd id : " + id +" a été modifié", HttpStatus.OK) ;

@@ -24,6 +24,7 @@ public class ClientRepositoryModel {
     private String adresse;
 
 
+
     public ClientRepositoryModel(String name, String firstname, String email, String adresse) {
         this.name = name;
         this.firstname = firstname;

@@ -7,20 +7,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DvdstoreComponent } from './dvdstore/dvdstore.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { SidebarComponent } from './core/components/sidebar/sidebar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { DvdItemComponent } from './dvd-item/dvd-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DvdstoreComponent,
-    SidebarComponent
+    DvdItemComponent,
+  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule, 
     CoreModule,
-    SharedModule
+    SharedModule, 
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

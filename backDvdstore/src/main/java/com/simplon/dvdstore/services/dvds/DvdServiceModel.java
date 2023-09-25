@@ -16,6 +16,7 @@ public class DvdServiceModel {
         private String genre;
         private int quantite;
         private Float prix;
+        private String picture;
 
 
         public DvdServiceModel(String name, String genre) {
@@ -34,6 +35,14 @@ public class DvdServiceModel {
                 this.genre = genre;
                 this.quantite = quantite;
                 this.prix = prix;
+        }
+
+        public DvdServiceModel(String name, String genre, int quantite, Float prix, String picture) {
+                this.name = name;
+                this.genre = genre;
+                this.quantite = quantite;
+                this.prix = prix;
+                this.picture = picture;
         }
 
         @Override

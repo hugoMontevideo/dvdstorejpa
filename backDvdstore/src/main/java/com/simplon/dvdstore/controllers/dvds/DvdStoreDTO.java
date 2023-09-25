@@ -35,6 +35,7 @@ public class DvdStoreDTO {
     private String genre;
     private int quantite;
     private Float prix;
+    private String picture;
 
 
 }

@@ -22,6 +22,8 @@ public class DvdRepositoryModel {
     private int quantite;
     @Column(name="prix")
     Float prix;
+    @Column(name = "picture")
+    private String picture;
 
     public DvdRepositoryModel(){};
 
@@ -38,6 +40,14 @@ public class DvdRepositoryModel {
         this.name = name;
         this.genre = genre;
         this.quantite = quantite;
+    }
+
+    public DvdRepositoryModel(String name, String genre, int quantite, Float prix, String picture) {
+        this.name = name;
+        this.genre = genre;
+        this.quantite = quantite;
+        this.prix = prix;
+        this.picture = picture;
     }
 
     @Override

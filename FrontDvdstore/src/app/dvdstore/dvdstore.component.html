@@ -1,1 +1,18 @@
-<p>dvdstore works!</p>
+<h1>Nos Dvds</h1>
+<ul class="d-flex mx-auto">
+    <li *ngFor="let dvd of dvds" class="">
+        <div class="card" style="width: 18rem;">
+            <img [src]="dvd.picture" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h3 class="card-title">{{dvd.name | titlecase}}</h3>
+              <h5>{{dvd.genre | titlecase }}</h5>
+              <p class="d-flex justify-content-around">
+                <span>En stock {{ dvd.quantite }}</span>
+                <span class="text-primary">{{ dvd.prix }} €</span>
+              </p>
+              <!-- <a routerLink="dvds/1" class="btn btn-primary">Voir détail</a> -->
+              <a [routerLink]="['/dvdstore/dvds', dvd.id]" class="btn btn-primary">Voir détail</a>
+            </div>
+        </div>     
+    </li>
+</ul>

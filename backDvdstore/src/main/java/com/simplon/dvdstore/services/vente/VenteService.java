@@ -43,7 +43,7 @@ public class VenteService {
         ArrayList<VenteRepositoryModel> venteRepositoryModels = venteRepository.findAll();
 
         venteRepositoryModels.forEach( (item)->{
-            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(item.getDvdRepositoryModel().getId()),item.getDvdRepositoryModel().getName(), item.getDvdRepositoryModel().getGenre(), item.getDvdRepositoryModel().getQuantite(),item.getDvdRepositoryModel().getPrix());
+            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(item.getDvdRepositoryModel().getId()),item.getDvdRepositoryModel().getName(), item.getDvdRepositoryModel().getGenre(), item.getDvdRepositoryModel().getQuantite(),item.getDvdRepositoryModel().getPrix(), item.getDvdRepositoryModel().getPicture());
 
             ClientServiceModel clientServiceModel = new ClientServiceModel(Optional.ofNullable(item.getClientRepositoryModel().getId()),item.getClientRepositoryModel().getFirstname(), item.getClientRepositoryModel().getName(), item.getClientRepositoryModel().getEmail(), item.getClientRepositoryModel().getAdresse());
 
@@ -76,7 +76,7 @@ public class VenteService {
         ArrayList<VenteRepositoryModel> venteRepositoryModels = venteRepository.findAllByClient(id);
 
         for (VenteRepositoryModel item : venteRepositoryModels) {
-            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(item.getDvdRepositoryModel().getId()),item.getDvdRepositoryModel().getName(), item.getDvdRepositoryModel().getGenre(), item.getDvdRepositoryModel().getQuantite(), item.getDvdRepositoryModel().getPrix());
+            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(item.getDvdRepositoryModel().getId()),item.getDvdRepositoryModel().getName(), item.getDvdRepositoryModel().getGenre(), item.getDvdRepositoryModel().getQuantite(), item.getDvdRepositoryModel().getPrix(), item.getDvdRepositoryModel().getPicture());
 
             ClientServiceModel clientServiceModel = new ClientServiceModel(Optional.ofNullable(item.getClientRepositoryModel().getId()),item.getClientRepositoryModel().getFirstname(), item.getClientRepositoryModel().getName(), item.getClientRepositoryModel().getEmail(), item.getClientRepositoryModel().getAdresse());
 
@@ -94,7 +94,7 @@ public class VenteService {
         for (VenteRepositoryModel item : venteRepositoryModels) {
             System.out.println(item.getDvdRepositoryModel().getName());
             if(Objects.equals(item.getDvdRepositoryModel().getName(), name)){
-                DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(item.getDvdRepositoryModel().getId()),item.getDvdRepositoryModel().getName(), item.getDvdRepositoryModel().getGenre(), item.getDvdRepositoryModel().getQuantite(), item.getDvdRepositoryModel().getPrix());
+                DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(item.getDvdRepositoryModel().getId()),item.getDvdRepositoryModel().getName(), item.getDvdRepositoryModel().getGenre(), item.getDvdRepositoryModel().getQuantite(), item.getDvdRepositoryModel().getPrix(), item.getDvdRepositoryModel().getPicture());
 
                 ClientServiceModel clientServiceModel = new ClientServiceModel(Optional.ofNullable(item.getClientRepositoryModel().getId()),item.getClientRepositoryModel().getFirstname(), item.getClientRepositoryModel().getName(), item.getClientRepositoryModel().getEmail(), item.getClientRepositoryModel().getAdresse());
 
