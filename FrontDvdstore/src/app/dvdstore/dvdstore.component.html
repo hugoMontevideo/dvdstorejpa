@@ -8,8 +8,11 @@
 
       <div class="col-md-9 col-xl-10">
 
-          <app-header class="col-12 ">header</app-header>
-          
+          <app-header 
+              class="col-12 "
+              (searchClicked)="onSearchClicked($event)"
+            ></app-header>
+
           <div class="home">
             <h1>Nos Dvds</h1>
             <ul class="d-flex mx-auto">

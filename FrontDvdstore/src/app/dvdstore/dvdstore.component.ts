@@ -3,7 +3,6 @@ import { Component,OnInit } from '@angular/core';
 import { DvdService } from '../services/dvd.service';
 import { Dvd } from '../models/dvd.interface';
 import { DvdGetAllDTO } from '../services/interfaces/dvdgetalldto.inteface';
-import { SharedataService } from '../services/sharedata.service';
 import { GenreEnum } from '../utils/enum/GenreEnum';
 
 @Component({
@@ -22,8 +21,7 @@ export class DvdstoreComponent implements OnInit  {
 
   constructor(
       // private httpService: HttpService,
-      private dvdService : DvdService,
-      private sharedata:SharedataService
+      private dvdService : DvdService
       ){}
 
   async ngOnInit() {
@@ -54,7 +52,12 @@ export class DvdstoreComponent implements OnInit  {
     
   }
 
-
+  onSearchClicked(searchClicked : {search:string}){
+    this.dvdToShow = this.dvds.filter((value) =>{
+      return value.name.toLowerCase() === searchClicked.search ;
+    })
+    
+  }
   // public getDvds(path:string){
   //   this.httpService.getData(path).subscribe({
   //     next:(response)=> this.dvds = response,
@@ -62,9 +65,5 @@ export class DvdstoreComponent implements OnInit  {
   //     complete: ()=>console.log("all dvds ok")
   //   })
   // }
-
-
-
-
 
 }

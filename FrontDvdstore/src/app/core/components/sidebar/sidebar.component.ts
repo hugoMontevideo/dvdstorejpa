@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SharedataService } from 'src/app/services/sharedata.service';
-import { GenreEnum } from 'src/app/utils/enum/GenreEnum';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +13,6 @@ export class SidebarComponent implements OnInit {
   // genreEnum = GenreEnum;
   // genreEnumValues = Object.values(this.genreEnum);
 
-  constructor(private sharedata:SharedataService){}
 
   ngOnInit(): void {
 
