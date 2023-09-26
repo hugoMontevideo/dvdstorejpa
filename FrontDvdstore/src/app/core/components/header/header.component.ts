@@ -11,11 +11,8 @@ export class HeaderComponent {
   searchText!:string;
 
 
-  handleSearchClick(search: string){
-    console.log(search);
-    
+  handleSearchClick(search: string){    
     this.searchClicked.emit({search});
-
   }
 
 
