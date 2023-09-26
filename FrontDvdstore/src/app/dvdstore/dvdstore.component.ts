@@ -1,33 +1,38 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 // import { HttpService } from '../services/http.service';
 import { DvdService } from '../services/dvd.service';
 import { Dvd } from '../models/dvd.interface';
 import { DvdGetAllDTO } from '../services/interfaces/dvdgetalldto.inteface';
+import { SharedataService } from '../services/sharedata.service';
+import { GenreEnum } from '../utils/enum/GenreEnum';
 
 @Component({
   selector: 'app-dvdstore',
   templateUrl: './dvdstore.component.html',
   styleUrls: ['./dvdstore.component.scss']
 })
-export class DvdstoreComponent {
+
+export class DvdstoreComponent implements OnInit  {
   path: string = "dvds";
-  dvds: any[]= [];
-  dvdToShow: any[] = [];
+  dvds: Dvd[]= [];
+  dvdToShow: Dvd[] = [];
+  // @Input vers sidebar
+  genreEnum = GenreEnum;
+  genreEnumValues = Object.values(this.genreEnum);
 
   constructor(
       // private httpService: HttpService,
-      private dvdService : DvdService
+      private dvdService : DvdService,
+      private sharedata:SharedataService
       ){}
 
   async ngOnInit() {
-    // this.getDvds(this.path);
-    console.log('hello');
     
    const dvdGetAllDTOs = await this.dvdService.getAllDvd();
 
    dvdGetAllDTOs.map((value:DvdGetAllDTO)=>{
       const dvd:Dvd = {
-        id:0,
+        id:value.id,
         name: value.name,
         genre: value.genre,
         quantite: value.quantite,
@@ -38,7 +43,15 @@ export class DvdstoreComponent {
     })
    
     this.dvdToShow = this.dvds;
+  }
 
+  onGenreClicked(genreClicked : {genre:string}){
+    this.dvdToShow = this.dvds.filter((value) =>{
+      return value.genre === genreClicked.genre ;
+    })
+
+    console.log(genreClicked.genre);
+    
   }
 
 
