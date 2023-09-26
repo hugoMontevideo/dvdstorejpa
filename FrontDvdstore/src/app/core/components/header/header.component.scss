@@ -1,3 +1,38 @@
-ul{
-    list-style: none;
+
+nav{
+    input{
+        width: 20rem;
+        font-size: .8rem;
+    }
+   
+  
+}
+.navbar-principal{
+    background-color: #fecc00;
+    padding: 1.5rem 1.5rem;
+    position: relative;
+    h1{ 
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: 600;
+        font-size: 2.2rem;
+        color: black;
+    
+    }
+}
+.navbar-secondary{
+    
+    border-bottom: 1px solid rgb(194, 183, 183);
+    padding: .1rem 1.5rem;
+
+    ul{
+        list-style: none;
+        width: 100%;
+        a{
+            font-size: .8rem;
+        }
+    }
 }
