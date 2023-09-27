@@ -11,7 +11,8 @@
       
     ></app-header>
 
-      <form #form="ngForm" (ngSubmit)="onSubmit()">
+      <form #form="ngForm" (ngSubmit)="onSubmit()" >
+        <!-- <form #form="ngForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data"> -->
         <legend>{{ legend }}</legend>
           <div class="form-group">
             <label  for="name">Nom</label>
@@ -34,10 +35,15 @@
             <input type="number" name="prix" [(ngModel)]="dvdDTO.prix" 
                 id="prix" placeholder="Prix" class="form-control" >
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label  for="picture">Url de la photo</label>
             <input type="text" name="picture" [(ngModel)]="dvdDTO.picture" 
                 id="picture" placeholder="Url" class="form-control"  value="">
+          </div> -->
+          <div class="form-group">
+            <label  for="picture">Chargez une image</label>
+            <input type="file" name="picture" [(ngModel)]="dvdDTO.picture" 
+                id="picture" accept="image/*" class="form-control"  >
           </div>
       
           <button type="submit" class="btn btn-primary mt-3" >Ajouter</button>

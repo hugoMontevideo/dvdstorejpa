@@ -19,6 +19,13 @@ export class DvdFormComponent implements OnInit{
     prix:0,
     picture:'',
   }
+  dvdGetDTO: DvdGetDTO = {
+    name:'',
+    genre:'',
+    quantite:0,
+    prix:0,
+    picture:'',
+  }
   
   genreEnum = GenreEnum;
   genreEnumValues = Object.values(this.genreEnum);
