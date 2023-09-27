@@ -16,7 +16,7 @@ public class DvdStoreService {
 
     public boolean add(DvdServiceModel dvdServiceModel){
 
-        DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel( dvdServiceModel.getName(), dvdServiceModel.getGenre());
+        DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel( dvdServiceModel.getName(), dvdServiceModel.getGenre(),dvdServiceModel.getQuantite(), dvdServiceModel.getPrix(), dvdServiceModel.getPicture());
         DvdRepositoryModel dvdRepositoryModelReturn = dvdStoreRepository.save( dvdRepositoryModel);
 
         return dvdRepositoryModelReturn != null ;

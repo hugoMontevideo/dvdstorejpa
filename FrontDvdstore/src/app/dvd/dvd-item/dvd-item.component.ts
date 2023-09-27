@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../services/http.service';
-import { Dvd } from '../../models/dvd.interface';
+import { Dvd } from '../../utils/models/dvd.interface';
 
 @Component({
   selector: 'app-dvd-item',

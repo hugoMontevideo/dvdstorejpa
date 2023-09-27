@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 // import { HttpService } from '../services/http.service';
 import { DvdService } from '../../services/dvd.service';
-import { Dvd } from '../../models/dvd.interface';
+import { Dvd } from '../../utils/models/dvd.interface';
 import { DvdGetAllDTO } from '../../services/interfaces/dvdgetalldto.inteface';
 import { GenreEnum } from '../../utils/enum/GenreEnum';
 
@@ -27,6 +27,7 @@ export class DvdstoreComponent implements OnInit  {
     
    const dvdGetAllDTOs = await this.dvdService.getAllDvd();
 
+   //mapping
    dvdGetAllDTOs.map((value:DvdGetAllDTO)=>{
       const dvd:Dvd = {
         id:value.id,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DvdDTO } from '../../services/interfaces/dvdDTO.interface';
 import { GenreEnum } from 'src/app/utils/enum/GenreEnum';
+import { DvdService } from 'src/app/services/dvd.service';
 
 @Component({
   selector: 'app-dvd-form',
@@ -18,17 +19,19 @@ export class DvdFormComponent implements OnInit{
     prix:0,
     picture:'',
   }
+  
   genreEnum = GenreEnum;
   genreEnumValues = Object.values(this.genreEnum);
 
+  constructor(private dvdService:DvdService){};
+
   ngOnInit(): void {
-    console.log(this.dvdDTO);
+
     
   }
 
-
-  formulaire = (form:NgForm)=>{
-    console.log(form);
+  onSubmit = async ()=>{
+   await  this.dvdService.addDvd(this.dvdDTO);
   }
 
 }

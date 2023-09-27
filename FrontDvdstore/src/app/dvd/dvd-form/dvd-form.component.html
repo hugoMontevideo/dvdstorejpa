@@ -11,7 +11,7 @@
       
     ></app-header>
 
-      <form #form="ngForm" (submit)="formulaire(form)">
+      <form #form="ngForm" (ngSubmit)="onSubmit()">
         <legend>{{ legend }}</legend>
           <div class="form-group">
             <label  for="name">Nom</label>
