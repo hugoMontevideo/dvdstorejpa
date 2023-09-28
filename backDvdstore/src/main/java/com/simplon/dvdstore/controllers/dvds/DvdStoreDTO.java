@@ -16,16 +16,6 @@ import lombok.NoArgsConstructor;
 //////
 //public record DvdStoreDTO(String name, String genre, @Value("${url.genre}") String urlGenre) {
 //}
-
-// re
-//
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.Getter;
-
-//@Getter
-
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

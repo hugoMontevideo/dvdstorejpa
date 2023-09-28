@@ -7,32 +7,30 @@
          ></app-sidebar>
     <div class="col-md-9 col-xl-10">
       <app-header 
-      class="col-12 "
-      
+      class="col-12"
     ></app-header>
 
-      <form #form="ngForm" (ngSubmit)="onSubmit()" >
-        <!-- <form #form="ngForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data"> -->
+      <form #form="ngForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
         <legend>{{ legend }}</legend>
           <div class="form-group">
             <label  for="name">Nom</label>
-            <input type="text" [(ngModel)]="dvdDTO.name" name="name" id="name" 
+            <input type="text" [(ngModel)]="dvdFileDTO.name" name="name" id="name" 
                   placeholder="Nom du dvd" class="form-control" >
           </div>
           <div class="form-group">
             <label  for="genre">Selectionnez le genre</label>
-            <select  id="genre" [(ngModel)]="dvdDTO.genre" name="genre" class="form-control">
+            <select  id="genre" [(ngModel)]="dvdFileDTO.genre" name="genre" class="form-control">
               <option *ngFor="let item of genreEnumValues" [value]="item">{{ item }}</option>
             </select>
           </div>
           <div class="form-group">
             <label  for="quantite">Quantité</label>
-            <input type="number" name="quantite" [(ngModel)]="dvdDTO.quantite" id="quantite" 
+            <input type="number" name="quantite" [(ngModel)]="dvdFileDTO.quantite" id="quantite" 
                   id="quantite" placeholder="Quantité" class="form-control" >
           </div>
           <div class="form-group">
             <label  for="prix">Prix</label>
-            <input type="number" name="prix" [(ngModel)]="dvdDTO.prix" 
+            <input type="number" name="prix" [(ngModel)]="dvdFileDTO.prix" 
                 id="prix" placeholder="Prix" class="form-control" >
           </div>
           <!-- <div class="form-group">
@@ -41,9 +39,12 @@
                 id="picture" placeholder="Url" class="form-control"  value="">
           </div> -->
           <div class="form-group">
-            <label  for="picture">Chargez une image</label>
-            <input type="file" name="picture" [(ngModel)]="dvdDTO.picture" 
-                id="picture" accept="image/*" class="form-control"  >
+            <label  for="selectedFile">Chargez une image</label>
+            <input type="file" name="selectedFile" (change)="onFileSelected($event)"
+                id="selectedFile"  class="form-control"  >
+          </div>
+          <div>
+            <img src="http://localhost/dvdstore/upload/loupe.png" alt="">
           </div>
       
           <button type="submit" class="btn btn-primary mt-3" >Ajouter</button>

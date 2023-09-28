@@ -8,8 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -21,10 +26,33 @@ public class DvdStoreController {
     @Autowired
     DvdStoreService dvdStoreService;
 
+    @PostMapping("/upload")
+    public String uploadPicture(@RequestParam MultipartFile file){
+        System.out.println(file.getName());
+        try{
+            String uploadDirectory = "/public/upload"; // dossier de chargement
+            String filename = file.getOriginalFilename(); // nom fichier chargé
+            Path path= Paths.get(".",uploadDirectory).toAbsolutePath(); // absolute path
+            File targetFile = new File(path.toString(),filename);
+            if(!targetFile.getParentFile().exists()){
+                targetFile.getParentFile().mkdirs();
+            }
+            file.transferTo(targetFile);
+            return "l'image a été chargée avec succès";
+        }catch(IOException e){
+            e.printStackTrace();
+            return "Erreur lors du chargement image";
+        }
+    }
+
     @PostMapping  //
-    public boolean add(@RequestBody DvdStoreDTO dvdStoreDTO )
+    public boolean add(@RequestBody DvdStoreFileDTO dvdStoreFileDTO )
     {
-        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite(), dvdStoreDTO.getPrix(), dvdStoreDTO.getPicture());
+        String fileName = dvdStoreFileDTO.getPicture().getOriginalFilename();// nom fichier téléchargé
+
+        dvdStoreService.uploadImage(dvdStoreFileDTO.getPicture());
+
+        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreFileDTO.getName(), dvdStoreFileDTO.getGenre(), dvdStoreFileDTO.getQuantite(), dvdStoreFileDTO.getPrix(), fileName);
 
         return dvdStoreService.add(dvdServiceModel);
 

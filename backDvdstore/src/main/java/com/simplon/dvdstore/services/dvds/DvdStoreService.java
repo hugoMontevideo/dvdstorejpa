@@ -4,7 +4,10 @@ import com.simplon.dvdstore.repositories.dvds.DvdRepositoryModel;
 import com.simplon.dvdstore.repositories.dvds.DvdStoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -73,6 +76,39 @@ public class DvdStoreService {
         dvdStoreRepository.deleteAll();
         return "La bdd a été effacée.";
     }
+
+    public String uploadImage( MultipartFile file){
+        try {
+            // Spécifiez le chemin où vous souhaitez enregistrer l'image téléchargée.
+            String uploadDirectory = "chemin/vers/votre/dossier";
+
+            // Obtenez le nom du fichier téléchargé.
+            String fileName = file.getOriginalFilename();
+
+            // Créez un objet File pour enregistrer l'image dans le dossier spécifié.
+            File targetFile = new File(uploadDirectory, fileName);
+
+            // Vérifiez si le dossier cible existe. Sinon, créez-le.
+            if (!targetFile.getParentFile().exists()) {
+                targetFile.getParentFile().mkdirs();
+            }
+
+            // Enregistrez l'image dans le dossier cible.
+            file.transferTo(targetFile);
+            return "L'image a été téléchargée avec succès.";
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Erreur lors du téléchargement de l'image.";
+        }
+
+
+    }
+
+
+
+
+
 }
 
 //        if ( dvdStoreRepository.existsById(id) ){
