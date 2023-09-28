@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -104,10 +106,25 @@ public class DvdStoreService {
 
 
     }
+    public boolean uploadPicture( MultipartFile file) {
 
+        try {
+            String uploadDirectory = "/public/upload"; // dossier de chargement
+            String filename = file.getOriginalFilename(); // nom fichier chargé
+            Path path = Paths.get(".", uploadDirectory).toAbsolutePath(); // absolute path
+            File targetFile = new File(path.toString(), filename);
+            if (!targetFile.getParentFile().exists()) {
+                targetFile.getParentFile().mkdirs();
+            }
+            file.transferTo(targetFile);
+            return true;
 
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
 
-
+    }
 
 }
 

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environments';
 
 
 @Injectable({
@@ -7,12 +8,13 @@ import { Injectable } from '@angular/core';
 })
 
 export class DvdService{
+    ENV_DEV: string = environment.apiUrl;
 
     constructor(){ }
 
     getAllDvd = async () => {
     
-        return( await axios.get('http://localhost/dvdstore/dvds')).data ;
+        return( await axios.get(`${this.ENV_DEV}/dvds`)).data ;
     }
 
     // addDvd = async ( dvdFileDTO: DvdFileDTO ) => {
@@ -25,7 +27,7 @@ export class DvdService{
     addDvd = ( formData: FormData ) => {
         
         console.log(formData);
-        axios.post('http://localhost/dvdstore/dvds/upload', formData)
+        axios.post('http://localhost/dvdstore/dvds', formData)
         // .then((response)=> {
         //     console.log("succes ", response.data);
         //     return "ok";

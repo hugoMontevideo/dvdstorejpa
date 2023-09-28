@@ -26,37 +26,34 @@ public class DvdStoreController {
     @Autowired
     DvdStoreService dvdStoreService;
 
-    @PostMapping("/upload")
-    public String uploadPicture(@RequestParam MultipartFile file){
-        System.out.println(file.getName());
-        try{
-            String uploadDirectory = "/public/upload"; // dossier de chargement
-            String filename = file.getOriginalFilename(); // nom fichier chargé
-            Path path= Paths.get(".",uploadDirectory).toAbsolutePath(); // absolute path
-            File targetFile = new File(path.toString(),filename);
-            if(!targetFile.getParentFile().exists()){
-                targetFile.getParentFile().mkdirs();
-            }
-            file.transferTo(targetFile);
-            return "l'image a été chargée avec succès";
-        }catch(IOException e){
-            e.printStackTrace();
-            return "Erreur lors du chargement image";
+    @PostMapping
+    public void uploadPicture(
+                              @RequestParam("name") String name,
+                              @RequestParam("genre") String genre,
+                              @RequestParam("quantite") int quantite,
+                              @RequestParam("prix") Float prix,
+                              @RequestPart("file") Optional<MultipartFile> file
+                              ){
+
+        if(!file.isEmpty()){
+            if(dvdStoreService.uploadPicture(file.get())){
+                dvdStoreService.add(new DvdServiceModel(name, genre,quantite,prix,file.get().getOriginalFilename()));
+            };
         }
-    }
-
-    @PostMapping  //
-    public boolean add(@RequestBody DvdStoreFileDTO dvdStoreFileDTO )
-    {
-        String fileName = dvdStoreFileDTO.getPicture().getOriginalFilename();// nom fichier téléchargé
-
-        dvdStoreService.uploadImage(dvdStoreFileDTO.getPicture());
-
-        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreFileDTO.getName(), dvdStoreFileDTO.getGenre(), dvdStoreFileDTO.getQuantite(), dvdStoreFileDTO.getPrix(), fileName);
-
-        return dvdStoreService.add(dvdServiceModel);
 
     }
+
+//    @PostMapping  //
+//    public boolean add(@RequestBody DvdStoreFileDTO dvdStoreFileDTO )
+//    {
+//        String fileName = dvdStoreFileDTO.getPicture().getOriginalFilename();// nom fichier téléchargé
+//
+//        dvdStoreService.uploadImage(dvdStoreFileDTO.getPicture());
+//
+//        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreFileDTO.getName(), dvdStoreFileDTO.getGenre(), dvdStoreFileDTO.getQuantite(), dvdStoreFileDTO.getPrix(), fileName);
+//
+//        return dvdStoreService.add(dvdServiceModel);
+//    }
 
     @GetMapping
     public ArrayList<DvdStoreGetDTO> findAll(){

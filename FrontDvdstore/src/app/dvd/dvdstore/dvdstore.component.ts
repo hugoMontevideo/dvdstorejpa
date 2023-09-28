@@ -4,6 +4,7 @@ import { DvdService } from '../../services/dvd.service';
 import { Dvd } from '../../utils/models/dvd.interface';
 import { DvdGetAllDTO } from '../../services/interfaces/dvdgetalldto.inteface';
 import { GenreEnum } from '../../utils/enum/GenreEnum';
+import { environment } from 'src/environments/environments';
 
 @Component({
   selector: 'app-dvdstore',
@@ -41,6 +42,12 @@ export class DvdstoreComponent implements OnInit  {
     })
    
     this.dvdToShow = this.dvds;
+
+    if (!environment.production) {
+      console.log('Mode de production');
+      console.log('URL de l\'API :', environment.apiUrl);
+      console.log('Clé API :', environment.apiKey);
+    }
   }
 
   
