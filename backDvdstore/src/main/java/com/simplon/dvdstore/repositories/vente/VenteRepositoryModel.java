@@ -29,7 +29,7 @@ public class VenteRepositoryModel {
 
     @ManyToOne
     @JoinColumn(name = "dvdstore_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private DvdRepositoryModel dvdRepositoryModel;
 
     @Column(name="quantite")

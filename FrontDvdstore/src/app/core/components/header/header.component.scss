@@ -8,14 +8,28 @@ nav{
             padding-left: 2.2rem;
         }
         img{
+            position: absolute;
             width: 20px;
             height: 20px;
             object-fit: cover;
-            position: absolute;
             left: .6rem;
         }
-
-
+        .login{
+            position:absolute;
+            right: 0;
+        }
+        .initials{
+            width: 2rem;
+            height: 2rem;
+            background-color: rgb(245, 4, 169);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            color: white;
+            margin-left: .2rem;
+        }
     }
    
   

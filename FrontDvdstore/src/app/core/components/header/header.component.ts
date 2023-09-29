@@ -10,6 +10,8 @@ export class HeaderComponent {
   @Output() searchClicked = new EventEmitter<{ search: string }>();
   searchText!:string;
 
+  initials: string = "x";
+
 
   handleSearchClick(search: string){    
     this.searchClicked.emit({search});

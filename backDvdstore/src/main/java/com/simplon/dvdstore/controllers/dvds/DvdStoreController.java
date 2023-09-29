@@ -87,29 +87,6 @@ public class DvdStoreController {
 
     }
 
-        //        if (dvdStoreService.findById(id ) != null ){
-        //            DvdServiceModel dvdServiceModel =  dvdStoreService.findById(id);
-        //            dvdStoreDTO.setName(dvdServiceModel.getName()) ;
-        //            dvdStoreDTO.setGenre(dvdServiceModel.getGenre());
-        //        return new ResponseEntity<>(dvdStoreDTO, HttpStatus.OK) ;
-        //        }else{
-        //        throw new DvdNotFoundException(id);
-        //        }
-//    @PutMapping("/{id}")
-//    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody DvdStoreDTO dvdStoreDTO) throws DvdNotFoundException {
-//
-//        //        DvdStoreDTO dvdStoreDTO = new DvdStoreDTO();
-//
-//        if (dvdStoreService.findById(id ) != null ){
-//            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(id), dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite(), dvdStoreDTO.getPrix(), dvdStoreDTO.getPicture());
-//            dvdStoreService.update(id, dvdServiceModel);
-//
-//            return new ResponseEntity<>("Le dvd id : " + id +" a été modifié", HttpStatus.OK) ;
-//        }else{
-//            throw new DvdNotFoundException(HttpStatus.NOT_FOUND, "La ressource n'a pas été trouvé");
-//        }
-//    }
-
     @PutMapping("/{id}")
     public ResponseEntity<String> updateDvd(
             @PathVariable("id") Optional<Long> id,
@@ -134,12 +111,11 @@ public class DvdStoreController {
             throw new DvdNotFoundException(HttpStatus.NOT_FOUND, "La ressource n'a pas été trouvé");
         }
 
-//        dvdStoreService.add(new DvdServiceModel(name, genre,quantite,prix,picture));
-
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws DvdNotFoundException{
+    public ResponseEntity<String> delete(@PathVariable Long id){
+
         if(dvdStoreService.findById(id) != null ){
             dvdStoreService.delete(id);
             return new ResponseEntity<>("le dvd id : " + id + " a été supprimé", HttpStatus.OK);
@@ -158,3 +134,27 @@ public class DvdStoreController {
 
 
 }
+
+//        if (dvdStoreService.findById(id ) != null ){
+//            DvdServiceModel dvdServiceModel =  dvdStoreService.findById(id);
+//            dvdStoreDTO.setName(dvdServiceModel.getName()) ;
+//            dvdStoreDTO.setGenre(dvdServiceModel.getGenre());
+//        return new ResponseEntity<>(dvdStoreDTO, HttpStatus.OK) ;
+//        }else{
+//        throw new DvdNotFoundException(id);
+//        }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody DvdStoreDTO dvdStoreDTO) throws DvdNotFoundException {
+//
+//        //        DvdStoreDTO dvdStoreDTO = new DvdStoreDTO();
+//
+//        if (dvdStoreService.findById(id ) != null ){
+//            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(id), dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite(), dvdStoreDTO.getPrix(), dvdStoreDTO.getPicture());
+//            dvdStoreService.update(id, dvdServiceModel);
+//
+//            return new ResponseEntity<>("Le dvd id : " + id +" a été modifié", HttpStatus.OK) ;
+//        }else{
+//            throw new DvdNotFoundException(HttpStatus.NOT_FOUND, "La ressource n'a pas été trouvé");
+//        }
+//    }
+

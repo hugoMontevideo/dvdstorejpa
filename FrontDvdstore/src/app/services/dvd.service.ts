@@ -26,18 +26,11 @@ export class DvdService{
     // }
 
     addDvd = ( formData: FormData ) => {
-        
-        console.log(formData);
         axios.post(`${this.ENV_DEV}/dvds`, formData)
-        // .then((response)=> {
-        //     console.log("succes ", response.data);
-        //     return "ok";
-        // })
-        // .catch((error)=>{
-        //     console.log("error", error);
-        //     return "error";
-        // })
-
+        .then(response => {
+            this.router.navigateByUrl("dvdstore");
+        })
+       
     }
 
     updateDvd = (formData: FormData, id:number)=>{

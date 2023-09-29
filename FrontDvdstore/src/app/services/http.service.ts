@@ -15,9 +15,13 @@ export class HttpService{
         return this.http.get(`http://localhost/dvdstore/${table}`, {responseType: "json"});
     }
 
-    getById(path:string, id:number): Observable<any>
+    getById(table:string, id:number): Observable<any>
     {
-        return this.http.get(`http://localhost/dvdstore/${path}/${id}`, {responseType: "json"});
+        return this.http.get(`http://localhost/dvdstore/${table}/${id}`, {responseType: "json"});
+    }
+
+    deleteById = (table:string, id:number|null) => {
+        return this.http.delete(`http://localhost/dvdstore/${table}/${id}`, {responseType: "json"});
     }
 
 }

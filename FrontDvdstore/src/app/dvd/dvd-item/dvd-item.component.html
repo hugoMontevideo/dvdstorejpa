@@ -24,8 +24,8 @@
                         <p>{{ currentDvd.quantite }} en stock</p>
                     </div>
                     <div class="action d-flex">
-                        <a class="btn btn-primary" [routerLink]=" ['/dvdstore/form', id] " >Modifier</a>
-                        <button class="btn btn-delete">Effacer</button>
+                        <a class="btn btn-primary" [routerLink]="['/dvdstore/form', id]" >Modifier</a>
+                        <button class="btn btn-delete" (click)="onDelete(id)">Effacer</button>
                     </div>
                 </div>
             </div>
