@@ -52,16 +52,16 @@ public class DvdStoreService {
         }
     }
 
-    public boolean update(Long id, DvdServiceModel dvdServiceModel) {
+    public boolean update( DvdServiceModel dvdServiceModel ) {
 
 //        Optional<DvdRepositoryModel> dvdRepositoryModel = dvdStoreRepository.findById(id);
 
-        if(!dvdStoreRepository.existsById(id))
+        if(!dvdStoreRepository.existsById(dvdServiceModel.getId().get()))
         {
             return false;
 
         } else {
-            DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel(id,dvdServiceModel.getName(),dvdServiceModel.getGenre(),dvdServiceModel.getQuantite(),dvdServiceModel.getPrix(), dvdServiceModel.getPicture());
+            DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel(dvdServiceModel.getId().get(),dvdServiceModel.getName(),dvdServiceModel.getGenre(),dvdServiceModel.getQuantite(),dvdServiceModel.getPrix(), dvdServiceModel.getPicture());
 
             DvdRepositoryModel dvdRepositoryModelReturned = dvdStoreRepository.save( dvdRepositoryModel);
 

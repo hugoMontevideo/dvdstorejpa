@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { environment } from 'src/environments/environments';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,6 +7,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+
+  ENV_ICON = `${environment.apiImg}/icons/`;
 
   @Input() genreEnumValues!: String[];
   @Output() genreClicked = new EventEmitter< {genre:string} >();

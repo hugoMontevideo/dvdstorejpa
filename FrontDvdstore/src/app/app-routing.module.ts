@@ -10,6 +10,7 @@ const routes: Routes = [
   // { path: '**', redirectTo: 'dvdstore'},
   { path: 'dvdstore/dvds/:id', component: DvdItemComponent},
   { path: 'dvdstore/form', component: DvdFormComponent},
+  { path: 'dvdstore/form/:id', component: DvdFormComponent},
     
 ];
 

@@ -1,8 +1,21 @@
 
 nav{
-    input{
-        width: 20rem;
-        font-size: .8rem;
+    div.collapse{
+        position: relative;
+        input{
+            width: 20rem;
+            font-size: .8rem;
+            padding-left: 2.2rem;
+        }
+        img{
+            width: 20px;
+            height: 20px;
+            object-fit: cover;
+            position: absolute;
+            left: .6rem;
+        }
+
+
     }
    
   
@@ -12,12 +25,13 @@ nav{
     padding: 1.5rem 1.5rem;
     position: relative;
     h1{ 
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         display: block;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-weight: 600;
+        font-weight:800;
         font-size: 2.2rem;
         color: black;
     

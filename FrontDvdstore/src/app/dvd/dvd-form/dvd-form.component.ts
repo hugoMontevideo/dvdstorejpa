@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DvdDTO } from '../../services/interfaces/dvdDTO.interface';
 import { GenreEnum } from 'src/app/utils/enum/GenreEnum';
 import { DvdService } from 'src/app/services/dvd.service';
 import { DvdFileDTO } from 'src/app/services/interfaces/dvdFileDTO.interface';
 import { environment } from 'src/environments/environments';
+import { ActivatedRoute } from '@angular/router';
+import { HttpService } from 'src/app/services/http.service';
+import { Dvd } from 'src/app/utils/models/dvd.interface';
+import { DvdGetDTO } from 'src/app/services/interfaces/dvdGetDTO.interface';
 
 @Component({
   selector: 'app-dvd-form',
@@ -12,57 +15,78 @@ import { environment } from 'src/environments/environments';
   styleUrls: ['./dvd-form.component.scss']
 })
 export class DvdFormComponent implements OnInit{
-  legend: string = "Ajouter un dvd";
+  legend: string = "Ajouter";
+  table: string ="dvds";
   ENV_DEV: string = environment.apiUrl;
-
-  // dvdDTO: DvdDTO = {
-  //   name:'',
-  //   genre:'',
-  //   quantite:0,
-  //   prix:0,
-  //   picture:'',
-  // }
-  dvdFileDTO: DvdFileDTO = {
+  id!:number;
+  currentDvd: Dvd = {
+    id:null,
     name:'',
     genre:'',
     quantite:0,
     prix:0,
-    picture: null,
+    picture: '',
   }
 
-  selectedFile: File | null = null;
+  // dvdFileDTO!: DvdFileDTO;
+  // dvdGetDTO!: DvdGetDTO;
   
   genreEnum = GenreEnum;
   genreEnumValues = Object.values(this.genreEnum);
+  selectedFile!: File | null;
 
-  constructor(private dvdService:DvdService){};
+  constructor(private dvdService:DvdService,
+              private route:ActivatedRoute,
+              private httpService: HttpService){};
 
   ngOnInit(): void {
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+ 
+    if(this.id != 0){
+      console.log(this.id)
+      this.getDvdById(this.table, this.id);
+      this.legend="Modifier";
+    }
   }
+
   onFileSelected(event: any) {   
-    this.dvdFileDTO.picture = event.target.files[0];
+    this.selectedFile = event.target.files[0];
   }
 
   onSubmit() {
-     console.log(this.dvdFileDTO.picture);
-    if (!this.dvdFileDTO.picture) {
-      console.error("Aucun fichier sélectionné.");
-      return;
-    }
-    // Vous pouvez maintenant envoyer this.selectedFile au serveur pour l'upload.
-    // Vous pouvez utiliser une bibliothèque comme Axios ou HttpClient pour effectuer la requête POST.
-    // Exemple simplifié :
+      // Vous pouvez maintenant envoyer this.selectedFile au serveur pour l'upload.
+      // Vous pouvez utiliser une bibliothèque comme Axios ou HttpClient pour effectuer la requête POST.
+      // Exemple simplifié :
     const formData = new FormData();
-    formData.append('name', this.dvdFileDTO.name);
-    formData.append('genre', this.dvdFileDTO.genre);
-    formData.append('quantite',  this.dvdFileDTO.quantite.toString()  ) ;
-    formData.append('prix', this.dvdFileDTO.prix.toString() );
+      formData.append('name', this.currentDvd.name);
+      formData.append('genre', this.currentDvd.genre);
+      formData.append('quantite',  this.currentDvd.quantite.toString()  ) ;
+      formData.append('prix', this.currentDvd.prix.toString() );
 
-    formData.append('file', this.dvdFileDTO.picture);
-    
-    this.dvdService.addDvd(formData);
-   
-    
+    if(this.legend ==  "Ajouter"){
+      if (!this.selectedFile) {
+        console.error("Aucun fichier sélectionné.");
+        return;
+      }
+      formData.append('file', this.selectedFile);
+      this.dvdService.addDvd(formData);
+    }else{  //  Modify    
+
+      if(this.selectedFile){
+        formData.append('file', this.selectedFile);
+      }
+      formData.append('picture', this.currentDvd.picture);
+      this.dvdService.updateDvd(formData, this.id );
+    }
+  } // onSubmit
+
+  public getDvdById(path:string, id:number){
+    this.httpService.getById(path, id).subscribe({
+      next:(response:Dvd)=> this.currentDvd = response,
+      error: (err: Error)=>console.error("Error getDvdById"),
+      complete: ()=>console.log(this.currentDvd)
+    })
+
   }
 
     // onSubmit = ()=>{

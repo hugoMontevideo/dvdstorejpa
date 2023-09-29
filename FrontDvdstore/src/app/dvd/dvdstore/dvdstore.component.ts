@@ -13,12 +13,14 @@ import { environment } from 'src/environments/environments';
 })
 
 export class DvdstoreComponent implements OnInit  {
-  path: string = "dvds";
+  table: string = "dvds";
   dvds: Dvd[]= [];
   dvdToShow: Dvd[] = [];
   // @Input vers sidebar
   genreEnum = GenreEnum;
   genreEnumValues = Object.values(this.genreEnum);
+
+  ENV_DEV_IMG = environment.apiImg + '/';
 
   constructor(
       private dvdService : DvdService
@@ -42,15 +44,7 @@ export class DvdstoreComponent implements OnInit  {
     })
    
     this.dvdToShow = this.dvds;
-
-    if (!environment.production) {
-      console.log('Mode de production');
-      console.log('URL de l\'API :', environment.apiUrl);
-      console.log('Clé API :', environment.apiKey);
-    }
   }
-
-  
 
   onGenreClicked(genreClicked : {genre:string}){
     this.dvdToShow = this.dvds.filter((value) =>{

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { Dvd } from '../../utils/models/dvd.interface';
+import { environment } from 'src/environments/environments';
 
 @Component({
   selector: 'app-dvd-item',
@@ -10,9 +11,10 @@ import { Dvd } from '../../utils/models/dvd.interface';
   styleUrls: ['./dvd-item.component.scss']
 })
 export class DvdItemComponent {
-  path: string='dvds';
-  id: number|any;
+  table: string='dvds';
+  id!: number|null;
   currentDvd!: Dvd;
+  ENV_DEV_IMG = `${environment.apiImg}/`;
 
   constructor(private route:ActivatedRoute, private httpService: HttpService){};
 
@@ -21,19 +23,20 @@ export class DvdItemComponent {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
 
     if(this.id != null){
-      this.getDvdById(this.path, this.id);
+      this.getDvdById(this.table, this.id);
     }
 
   }
 
-  public getDvdById(path:string, id:number){
-    this.httpService.getById(path, id).subscribe({
+  public getDvdById(table:string, id:number){
+    this.httpService.getById(table, id).subscribe({
       next:(response:Dvd)=> this.currentDvd = response,
       error: (err: Error)=>console.error("Error getDvdById"),
-      complete: ()=>console.log('display dvd ok')
+      complete: ()=>console.log(this.currentDvd)
     })
 
   }
+
 
 
 }

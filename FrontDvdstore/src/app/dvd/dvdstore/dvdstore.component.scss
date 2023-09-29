@@ -48,7 +48,17 @@ ul{
             h3, h5{
                 text-align: center;
             }
+            h3{
+                font-size: 1.3rem;
+                margin:.5rem 0.2rem;
+            }
+            h5{
+                font-size: .9rem;
+                font-weight: bold;
+                color: rgba(0, 0, 0, 0.63);
+            }
         }
 
     }
 }
+

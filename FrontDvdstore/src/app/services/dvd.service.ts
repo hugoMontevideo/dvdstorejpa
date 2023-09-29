@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environments';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environments';
 export class DvdService{
     ENV_DEV: string = environment.apiUrl;
 
-    constructor(){ }
+    constructor(private router: Router){ }
 
     getAllDvd = async () => {
     
@@ -27,7 +28,7 @@ export class DvdService{
     addDvd = ( formData: FormData ) => {
         
         console.log(formData);
-        axios.post('http://localhost/dvdstore/dvds', formData)
+        axios.post(`${this.ENV_DEV}/dvds`, formData)
         // .then((response)=> {
         //     console.log("succes ", response.data);
         //     return "ok";
@@ -37,6 +38,13 @@ export class DvdService{
         //     return "error";
         // })
 
+    }
+
+    updateDvd = (formData: FormData, id:number)=>{
+         axios.put(`http://localhost/dvdstore/dvds/${id}`, formData)
+         .then(response => {
+            this.router.navigateByUrl("dvdstore");
+        })
     }
 
 

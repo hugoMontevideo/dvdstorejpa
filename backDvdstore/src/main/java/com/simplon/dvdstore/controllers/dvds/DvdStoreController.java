@@ -34,7 +34,6 @@ public class DvdStoreController {
                               @RequestParam("prix") Float prix,
                               @RequestPart("file") Optional<MultipartFile> file
                               ){
-
         if(!file.isEmpty()){
             if(dvdStoreService.uploadPicture(file.get())){
                 dvdStoreService.add(new DvdServiceModel(name, genre,quantite,prix,file.get().getOriginalFilename()));
@@ -72,15 +71,11 @@ public class DvdStoreController {
     @GetMapping("/{id}")
     public ResponseEntity<DvdStoreDTO> findById(@PathVariable Long id){
 
-        DvdStoreDTO dvdStoreDTO = new DvdStoreDTO();
+
         try{
                 DvdServiceModel dvdServiceModel =  dvdStoreService.findById(id);
-                dvdStoreDTO.setName(dvdServiceModel.getName()) ;
-                dvdStoreDTO.setGenre(dvdServiceModel.getGenre());
-                dvdStoreDTO.setQuantite(dvdServiceModel.getQuantite());
-                dvdStoreDTO.setPrix(dvdServiceModel.getPrix());
-                dvdStoreDTO.setPicture(dvdServiceModel.getPicture());
-                return new ResponseEntity<>(dvdStoreDTO, HttpStatus.OK) ;
+//                DvdStoreDTO dvdStoreDTO = new DvdStoreDTO(dvdServiceModel.getName(),dvdServiceModel.getGenre(),dvdServiceModel.getQuantite(),dvdServiceModel.getPrix(),dvdServiceModel.getPicture());
+                return new ResponseEntity<>(new DvdStoreDTO(dvdServiceModel.getName(),dvdServiceModel.getGenre(),dvdServiceModel.getQuantite(),dvdServiceModel.getPrix(),dvdServiceModel.getPicture()), HttpStatus.OK) ;
 
             }catch(DvdNotFoundException ex){
 
@@ -100,21 +95,47 @@ public class DvdStoreController {
         //        }else{
         //        throw new DvdNotFoundException(id);
         //        }
-
+//    @PutMapping("/{id}")
+//    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody DvdStoreDTO dvdStoreDTO) throws DvdNotFoundException {
+//
+//        //        DvdStoreDTO dvdStoreDTO = new DvdStoreDTO();
+//
+//        if (dvdStoreService.findById(id ) != null ){
+//            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(id), dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite(), dvdStoreDTO.getPrix(), dvdStoreDTO.getPicture());
+//            dvdStoreService.update(id, dvdServiceModel);
+//
+//            return new ResponseEntity<>("Le dvd id : " + id +" a été modifié", HttpStatus.OK) ;
+//        }else{
+//            throw new DvdNotFoundException(HttpStatus.NOT_FOUND, "La ressource n'a pas été trouvé");
+//        }
+//    }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody DvdStoreDTO dvdStoreDTO) throws DvdNotFoundException {
-
-        //        DvdStoreDTO dvdStoreDTO = new DvdStoreDTO();
-
-        if (dvdStoreService.findById(id ) != null ){
-            DvdServiceModel dvdServiceModel = new DvdServiceModel(Optional.ofNullable(id), dvdStoreDTO.getName(), dvdStoreDTO.getGenre(), dvdStoreDTO.getQuantite(), dvdStoreDTO.getPrix(), dvdStoreDTO.getPicture());
-            dvdStoreService.update(id, dvdServiceModel);
+    public ResponseEntity<String> updateDvd(
+            @PathVariable("id") Optional<Long> id,
+            @RequestParam("name") String name,
+            @RequestParam("genre") String genre,
+            @RequestParam("quantite") int quantite,
+            @RequestParam("prix") Float prix,
+            @RequestParam("picture") String picture,
+            @RequestPart("file") Optional<MultipartFile> file
+    ){
+        if (dvdStoreService.findById(  id.get() ) != null ){
+            DvdServiceModel dvdServiceModel = new DvdServiceModel(id, name, genre, quantite, prix, picture);
+            if(!file.isEmpty()){
+                //  ***  TODO **** il faut effacer l'ancienne image  ****
+                dvdStoreService.uploadPicture(file.get()); // charger l'image
+                dvdServiceModel.setPicture(file.get().getOriginalFilename()); // mettre à jour le nom de picture
+            }
+            dvdStoreService.update( dvdServiceModel );
 
             return new ResponseEntity<>("Le dvd id : " + id +" a été modifié", HttpStatus.OK) ;
         }else{
             throw new DvdNotFoundException(HttpStatus.NOT_FOUND, "La ressource n'a pas été trouvé");
         }
+
+//        dvdStoreService.add(new DvdServiceModel(name, genre,quantite,prix,picture));
+
     }
 
     @DeleteMapping("/{id}")

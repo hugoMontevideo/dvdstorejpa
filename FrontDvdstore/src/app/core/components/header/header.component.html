@@ -1,10 +1,14 @@
 <nav class="navbar-principal navbar-expand-lg">
-  <h1><a href="">Dvdstore</a></h1>
+  <h1><a routerLink="/dvdstore">Dvdstore</a></h1>
   <div class="container-fluid">         
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <input class="form-control me-2" type="search" placeholder="Rechercher" 
+        <input class="form-control me-2 search" type="search" placeholder="Rechercher" 
             aria-label="Search" name="searchText" [(ngModel)]="searchText" (ngModelChange)="handleSearchClick(searchText.toLowerCase())"/>
-        <!-- <button class="btn btn-outline-success" >Rechercher</button>  -->
+        <div>
+          <button class="btn btn-outline-success" >Connexion</button>
+
+        </div>
+        <img src="/assets/pictures/loupe.png" alt="">
     </div>
       <a class="navbar-brand" href="#"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
