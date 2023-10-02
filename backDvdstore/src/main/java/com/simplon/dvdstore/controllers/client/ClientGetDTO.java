@@ -1,4 +1,19 @@
 package com.simplon.dvdstore.controllers.client;
 
-public record ClientGetDTO (Long id, String name, String firstname, String email, String adresse){
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ClientGetDTO {
+    private Long id;
+    private String name;
+    private String firstname;
+    private String email;
+    private String adresse;
+
 }
+

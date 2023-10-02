@@ -63,14 +63,14 @@ export class DvdFormComponent implements OnInit{
       formData.append('quantite',  this.currentDvd.quantite.toString()  ) ;
       formData.append('prix', this.currentDvd.prix.toString() );
 
-    if(this.legend ==  "Ajouter"){
+    if(this.legend ==  "Ajouter"){  // Add ***
       if (!this.selectedFile) {
         console.error("Aucun fichier sélectionné.");
         return;
       }
       formData.append('file', this.selectedFile);
       this.dvdService.addDvd(formData);
-    }else{  //  Modify    
+    }else{            //  Modify    ***
 
       if(this.selectedFile){
         formData.append('file', this.selectedFile);

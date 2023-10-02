@@ -35,6 +35,7 @@ export class DvdService{
 
     updateDvd = (formData: FormData, id:number)=>{
          axios.put(`http://localhost/dvdstore/dvds/${id}`, formData)
+         
          .then(response => {
             this.router.navigateByUrl("dvdstore");
         })

@@ -41,7 +41,7 @@ public class DvdStoreController {
 
     }
 
-    @GetMapping
+    @GetMapping         // getAll
     public ArrayList<DvdStoreGetDTO> findAll(){
 
         ArrayList<DvdStoreGetDTO> dvdStoreDTOSs = new ArrayList<>();
@@ -55,7 +55,7 @@ public class DvdStoreController {
         return dvdStoreDTOSs;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}")   // findById
     public ResponseEntity<DvdStoreDTO> findById(@PathVariable Long id){
 
 
@@ -73,7 +73,7 @@ public class DvdStoreController {
             }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}")    // update
     public ResponseEntity<String> updateDvd(
             @PathVariable("id") Optional<Long> id,
             @RequestParam("name") String name,
