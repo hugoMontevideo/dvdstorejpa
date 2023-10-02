@@ -1,0 +1,42 @@
+
+<div class="container-fluid wrapper">
+  
+  <div class="row flex-nowrap col-12">
+
+      <app-sidebar class="col-md-3 col-xl-2 px-0 "
+        [genreEnumValues]="genreEnumValues" 
+        (genreClicked)="onGenreClicked($event)"  ></app-sidebar>
+
+      <div class="col-md-9 col-xl-10 px-0 content">
+        <app-header 
+            class="col-12 "
+            (searchClicked)="onSearchClicked($event)"
+          ></app-header>
+
+        <div class="home">
+          <h2>Nos Dvds</h2>
+          <a class="btn btn-primary" routerLink="/dvdstore/form">Ajouter un dvd</a>
+          <ul class="d-flex mx-auto">
+              <li *ngFor="let dvd of dvdToShow; let index = index" >
+                  <div class="card" style="width: 18rem;">
+                      <img [src]="ENV_DEV_IMG + dvd.picture" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h3 class="card-title">{{dvd.name | titlecase}}</h3>
+                        <h5>{{dvd.genre | titlecase }}</h5>
+                        <p class="d-flex justify-content-around">
+                          <span>En stock {{ dvd.quantite }}</span>
+                          <span class="text-primary">{{ dvd.prix }} €</span>
+                        </p>
+                        <!-- <a routerLink="dvds/1" class="btn btn-primary">Voir détail</a> -->
+                        <a [href]="'/dvdstore/dvds/'+ dvd.id" class="btn btn-primary">Voir détail</a>
+                      </div>
+                  </div>     
+              </li>
+          </ul>
+
+        </div>    
+      </div>
+  </div>
+
+</div>
+<!-- <img [src]="ENV_DEV+'/upload/loupe.png'" alt=""> -->

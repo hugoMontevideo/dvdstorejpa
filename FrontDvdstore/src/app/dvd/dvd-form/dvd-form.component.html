@@ -1,0 +1,57 @@
+
+<div class="container-fluid">
+  <div class="row flex-nowrap col-12">
+
+      <app-sidebar class="col-auto col-md-3 col-xl-2 px-0 "
+        [genreEnumValues]="genreEnumValues" 
+         ></app-sidebar>
+    <div class="col-md-9 col-xl-10">
+      <app-header 
+      class="col-12"
+    ></app-header>
+
+      <form #form="ngForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <legend>{{ legend }} un dvd.</legend>
+        <!-- <input type="hidden" name="id" [(ngModel)]="currentDvd.id" > -->
+        <div class="form-group">
+          <label  for="name">Nom</label>
+          <input type="text" [(ngModel)]="currentDvd.name" name="name" id="name" 
+                placeholder="Nom du dvd" class="form-control" >
+        </div>
+        <div class="form-group">
+          <label  for="genre">Selectionnez le genre</label>
+          <select  id="genre" [(ngModel)]="currentDvd.genre" name="genre" class="form-control">
+            <option *ngFor="let item of genreEnumValues" [value]="item">{{ item }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label  for="quantite">Quantité</label>
+          <input type="number" name="quantite" [(ngModel)]="currentDvd.quantite" 
+                id="quantite" placeholder="Quantité" class="form-control" >
+        </div>
+        <div class="form-group">
+          <label  for="prix">Prix</label>
+          <input type="number" name="prix" [(ngModel)]="currentDvd.prix" 
+              id="prix" placeholder="Prix" class="form-control" >
+        </div>
+        <!-- <div class="form-group">
+          <label  for="picture">Url de la photo</label>
+          <input type="text" name="picture" [(ngModel)]="dvdDTO.picture" 
+              id="picture" placeholder="Url" class="form-control"  value="">
+        </div> -->
+        <input type="hidden" name="picture" [(ngModel)]="currentDvd.picture" >
+        <div class="form-group">
+          <label  for="selectedFile">Chargez une image</label>
+          <input type="file" name="selectedFile" (change)="onFileSelected($event)"
+              id="selectedFile"  class="form-control"  >
+        </div>
+        <div>
+          <!-- <img src="http://localhost/dvdstore/upload/loupe.png" width="25" alt=""> -->
+          <!-- <img [src]="ENV_DEV+'/upload/loupe.png'" alt=""> -->
+        </div>
+    
+        <button type="submit" class="btn btn-primary mt-3" >{{ legend }}</button>
+      </form>
+    </div>
+  </div>
+</div>

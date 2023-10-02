@@ -1,0 +1,42 @@
+.wrapper{
+    padding:0;
+    .row{
+        padding: 0;
+        margin: 0;
+    }
+    .home{
+        padding: 3rem 3.5rem;
+        h1{
+            font-size: 2rem;
+            color: #625757;
+            font-weight: 500;
+        }
+        h3{
+            font-size: 1.3rem;
+        }
+        .details{
+            margin: 0 2.5rem;
+            .btn{
+                width: 6rem;
+                font-size: .8rem;
+                &-delete{
+                    background-color: #fb6508db;
+                    color: rgba(255, 255, 255, 0.852);
+                    margin-left: .3rem;
+                }
+            }
+        }
+    }
+    .synopsis{
+        margin: 1rem 3.5rem;
+        max-width: 55rem;
+    }
+}
+
+
+
+.content{
+    padding: 0;
+    
+}
+

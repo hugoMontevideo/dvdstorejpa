@@ -1,0 +1,41 @@
+
+<div class="container-fluid">
+    <div class="row flex-nowrap col-12">
+        <app-sidebar class="col-auto col-md-3 col-xl-2 px-0 "
+          [genreEnumValues]="genreEnumValues" 
+           ></app-sidebar>
+      <div class="col-md-9 col-xl-10">
+        <app-header 
+        class="col-12"
+      ></app-header>
+  
+        <form #form="ngForm" (ngSubmit)="onSubmit()">
+          <legend>{{ legend }} un client</legend>
+          <!-- <input type="hidden" name="id" [(ngModel)]="currentDvd.id" > -->
+          <div class="form-group">
+            <label  for="name">Nom</label>
+            <input type="text" [(ngModel)]="currentClient.name" name="name" id="name" 
+                  placeholder="Nom" class="form-control" >
+          </div>
+          <div class="form-group">
+            <label  for="firstname">Prénom</label>
+            <input type="text" name="firstname" [(ngModel)]="currentClient.firstname" id="firstname" 
+                   placeholder="Prénom" class="form-control" >
+          </div>
+          <div class="form-group">
+            <label  for="email">Email</label>
+            <input type="email" name="email" [(ngModel)]="currentClient.email"  
+                  id="email" placeholder="Email" class="form-control" >
+          </div>
+          <div class="form-group">
+            <label  for="adresse">Adresse</label>
+            <input type="text" name="adresse" [(ngModel)]="currentClient.adresse" 
+                id="adresse" placeholder="Adresse" class="form-control" >
+          </div>
+      
+          <button type="submit" class="btn btn-primary mt-3" >{{ legend }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

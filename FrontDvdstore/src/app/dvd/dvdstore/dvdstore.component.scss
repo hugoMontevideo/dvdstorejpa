@@ -1,0 +1,64 @@
+
+.wrapper{
+    padding:0;
+    .row{
+        padding: 0;
+        margin: 0;
+    }
+    .home{
+        padding: 2rem 1.5rem;
+        h2{
+            text-align: center;
+            font-size: 2rem;
+            color: #625757;
+            font-weight: 400;
+        }
+    }
+}
+
+
+
+.content{
+    padding: 0;
+    
+}
+
+
+ul{
+    max-width: 65rem;
+    flex-wrap: wrap;
+    list-style-type: none;
+    li{
+        margin: 1rem;
+        img{
+            width: 14rem;
+            height: 14rem;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 0 auto;
+            
+        }
+        .card{
+            border: none;
+            .btn{
+                display: block;
+                width: 45%;
+                margin: 0 auto;
+            }
+            h3, h5{
+                text-align: center;
+            }
+            h3{
+                font-size: 1.3rem;
+                margin:.5rem 0.2rem;
+            }
+            h5{
+                font-size: .9rem;
+                font-weight: bold;
+                color: rgba(0, 0, 0, 0.63);
+            }
+        }
+
+    }
+}
+

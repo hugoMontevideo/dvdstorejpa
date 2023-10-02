@@ -1,0 +1,35 @@
+.sidebar{
+    background-color: #efefef;
+    padding: 0 4rem;
+    height: 100%;
+}
+
+.logo{
+    width: 100%;
+    a{
+        img{
+           width: 60%; 
+        }
+    }
+    h1{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+}
+.cinema{
+    width: 40px;
+    margin: 2rem auto;
+    img{
+        width: 100%;
+    }
+}
+
+a.nav-link{
+    color: rgb(35, 33, 33);
+    font-weight: 400;
+    font-size: .9rem;
+    &.menu{
+        color: #0B5ED7;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+}
