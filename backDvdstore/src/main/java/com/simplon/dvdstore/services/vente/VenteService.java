@@ -30,12 +30,10 @@ public class VenteService {
 
         Optional<DvdRepositoryModel> dvdRepositoryModel = dvdStoreRepository.findById(venteServiceModel.getDvdServiceModel().getId().get() );
         Optional<ClientRepositoryModel> clientRepositoryModel = clientRepository.findById(venteServiceModel.getClientServiceModel().getId().get());
-        Long nbMilliSec = System.currentTimeMillis();
 
-        VenteRepositoryModel venteRepositoryModel = new VenteRepositoryModel( nbMilliSec,dvdRepositoryModel.get(), venteServiceModel.getQuantite(), clientRepositoryModel.get(), venteServiceModel.getQuantite()*dvdRepositoryModel.get().getPrix() );
+        VenteRepositoryModel venteRepositoryModel = new VenteRepositoryModel( venteServiceModel.getDateDeVente(),dvdRepositoryModel.get(), venteServiceModel.getQuantite(), clientRepositoryModel.get(), venteServiceModel.getQuantite()*dvdRepositoryModel.get().getPrix() );
 
         VenteRepositoryModel venteRepositoryReturned = venteRepository.save(venteRepositoryModel);
-
         return venteRepositoryReturned != null ;
     }
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -44,16 +45,31 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClientDTO> findById(@PathVariable Long id){
+    public ResponseEntity<ClientGetDTO> findById(@PathVariable Long id){
         try{
             ClientServiceModel clientServiceModel =  clientService.findById(id);
-            return new ResponseEntity<>(new ClientDTO(clientServiceModel.getName(),clientServiceModel.getFirstname(),clientServiceModel.getEmail(),clientServiceModel.getAdresse()), HttpStatus.OK) ;
+            return new ResponseEntity<>(new ClientGetDTO(clientServiceModel.getId().get(), clientServiceModel.getName(),clientServiceModel.getFirstname(),clientServiceModel.getEmail(),clientServiceModel.getAdresse()), HttpStatus.OK) ;
         }catch(DvdNotFoundException ex){
 
             System.out.println(ex.getReason());
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, ex.getReason() );
-
         }
+    }
+
+    @PutMapping   // update
+    public ResponseEntity<String> updateDvd(
+            @RequestBody ClientGetDTO clientGetDTO
+            ){
+        if (clientService.findById( clientGetDTO.getId() ) != null ){
+            ClientServiceModel clientServiceModel = new ClientServiceModel( Optional.ofNullable(clientGetDTO.getId()), clientGetDTO.getName(), clientGetDTO.getFirstname(), clientGetDTO.getEmail(), clientGetDTO.getAdresse() );
+
+            clientService.update( clientServiceModel );
+
+            return new ResponseEntity<>("Le dvd id : " + Optional.ofNullable(clientGetDTO.getId()) +" a été modifié", HttpStatus.OK) ;
+        }else{
+            throw new DvdNotFoundException(HttpStatus.NOT_FOUND, "La ressource n'a pas été trouvé");
+        }
+
     }
 }

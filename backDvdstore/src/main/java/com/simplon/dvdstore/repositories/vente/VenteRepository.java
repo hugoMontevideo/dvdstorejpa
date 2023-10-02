@@ -12,4 +12,5 @@ public interface VenteRepository extends CrudRepository<VenteRepositoryModel, Lo
 
     @Query("SELECT v FROM VenteRepositoryModel v WHERE v.clientRepositoryModel.id=:id")
     ArrayList<VenteRepositoryModel> findAllByClient(Long id);
+
 }

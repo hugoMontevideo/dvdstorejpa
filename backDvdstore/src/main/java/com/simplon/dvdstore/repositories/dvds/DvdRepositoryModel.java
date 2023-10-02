@@ -21,7 +21,7 @@ public class DvdRepositoryModel {
     @Column(name="quantite")
     private int quantite;
     @Column(name="prix")
-    Float prix;
+    private Float prix;
     @Column(name = "picture")
     private String picture;
 

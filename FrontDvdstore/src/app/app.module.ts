@@ -14,6 +14,8 @@ import { DvdFormComponent } from './dvd/dvd-form/dvd-form.component';
 import { ClientsComponent } from './client/clients/clients.component';
 import { ClientItemComponent } from './client/client-item/client-item.component';
 import { ClientFormComponent } from './client/client-form/client-form.component';
+import { VentesComponent } from './vente/ventes/ventes.component';
+import { VentesFormComponent } from './vente/ventes-form/ventes-form.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { ClientFormComponent } from './client/client-form/client-form.component'
     ClientsComponent,
     ClientItemComponent,
     ClientFormComponent,
+    VentesComponent,
+    VentesFormComponent,
   
   ],
   imports: [

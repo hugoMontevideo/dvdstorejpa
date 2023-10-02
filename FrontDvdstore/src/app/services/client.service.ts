@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environments';
 import { Router } from '@angular/router';
 import { Client } from '../utils/models/client.interface';
+import { ClientGetAllDTO } from './interfaces/clientgetalldto.inteface';
 
 
 @Injectable({
@@ -15,7 +16,6 @@ export class ClientService{
     constructor(private router: Router){ }
 
     getAllClient = async () => {
-    
         return( await axios.get(`${this.ENV_DEV}/clients`)).data ;
     }
 
@@ -34,10 +34,10 @@ export class ClientService{
        
     }
 
-    updateClient = (formData: FormData, id:number)=>{
-         axios.put(`http://localhost/dvdstore/clients/${id}`, formData)
+    updateClient = ( client: ClientGetAllDTO )=>{
+         axios.put(`${this.ENV_DEV}/clients`, client)
          .then(response => {
-            this.router.navigateByUrl("dvdstore");
+            this.router.navigateByUrl("clients");
         })
     }
 

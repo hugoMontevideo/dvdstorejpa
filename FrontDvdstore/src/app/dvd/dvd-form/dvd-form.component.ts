@@ -54,23 +54,20 @@ export class DvdFormComponent implements OnInit{
   }
 
   onSubmit() {
-      // Vous pouvez maintenant envoyer this.selectedFile au serveur pour l'upload.
-      // Vous pouvez utiliser une bibliothèque comme Axios ou HttpClient pour effectuer la requête POST.
-      // Exemple simplifié :
     const formData = new FormData();
       formData.append('name', this.currentDvd.name);
       formData.append('genre', this.currentDvd.genre);
       formData.append('quantite',  this.currentDvd.quantite.toString()  ) ;
       formData.append('prix', this.currentDvd.prix.toString() );
 
-    if(this.legend ==  "Ajouter"){
+    if(this.legend ==  "Ajouter"){  // Add ***
       if (!this.selectedFile) {
         console.error("Aucun fichier sélectionné.");
         return;
       }
       formData.append('file', this.selectedFile);
       this.dvdService.addDvd(formData);
-    }else{  //  Modify    
+    }else{            //  Modify    ***
 
       if(this.selectedFile){
         formData.append('file', this.selectedFile);

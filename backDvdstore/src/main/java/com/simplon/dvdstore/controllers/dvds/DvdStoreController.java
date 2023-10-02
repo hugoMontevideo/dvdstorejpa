@@ -22,7 +22,6 @@ import java.util.Optional;
 @RestController // donnees json ou xml
 @RequestMapping("dvds")
 public class DvdStoreController {
-
     @Autowired
     DvdStoreService dvdStoreService;
 
@@ -41,7 +40,7 @@ public class DvdStoreController {
 
     }
 
-    @GetMapping
+    @GetMapping         // getAll
     public ArrayList<DvdStoreGetDTO> findAll(){
 
         ArrayList<DvdStoreGetDTO> dvdStoreDTOSs = new ArrayList<>();
@@ -55,14 +54,12 @@ public class DvdStoreController {
         return dvdStoreDTOSs;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DvdStoreDTO> findById(@PathVariable Long id){
-
-
+    @GetMapping("/{id}")   // findById
+    public ResponseEntity<DvdStoreGetDTO> findById(@PathVariable Long id){
         try{
                 DvdServiceModel dvdServiceModel =  dvdStoreService.findById(id);
 //                DvdStoreDTO dvdStoreDTO = new DvdStoreDTO(dvdServiceModel.getName(),dvdServiceModel.getGenre(),dvdServiceModel.getQuantite(),dvdServiceModel.getPrix(),dvdServiceModel.getPicture());
-                return new ResponseEntity<>(new DvdStoreDTO(dvdServiceModel.getName(),dvdServiceModel.getGenre(),dvdServiceModel.getQuantite(),dvdServiceModel.getPrix(),dvdServiceModel.getPicture()), HttpStatus.OK) ;
+                return new ResponseEntity<>(new DvdStoreGetDTO( dvdServiceModel.getId().get(), dvdServiceModel.getName(),dvdServiceModel.getGenre(),dvdServiceModel.getQuantite(),dvdServiceModel.getPrix(),dvdServiceModel.getPicture()), HttpStatus.OK) ;
 
             }catch(DvdNotFoundException ex){
 
@@ -73,7 +70,7 @@ public class DvdStoreController {
             }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}")    // update
     public ResponseEntity<String> updateDvd(
             @PathVariable("id") Optional<Long> id,
             @RequestParam("name") String name,

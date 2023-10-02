@@ -1,11 +1,19 @@
 package com.simplon.dvdstore.services.client;
 
+import com.simplon.dvdstore.exceptions.DvdNotFoundException;
 import com.simplon.dvdstore.repositories.client.ClientRepository;
 import com.simplon.dvdstore.repositories.client.ClientRepositoryModel;
 import com.simplon.dvdstore.repositories.dvds.DvdRepositoryModel;
 import com.simplon.dvdstore.services.dvds.DvdServiceModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -49,5 +57,13 @@ public class ClientService {
 
     }
 
-
+    public boolean update( ClientServiceModel clientServiceModel) {
+        if(!clientRepository.existsById(clientServiceModel.getId().get())){
+            return false;
+        }else{
+            ClientRepositoryModel clientRepositoryModelReturned = clientRepository.save(new ClientRepositoryModel(clientServiceModel.getId().get(), clientServiceModel.getName(), clientServiceModel.getFirstname(),
+                    clientServiceModel.getEmail(), clientServiceModel.getAdresse()));
+            return clientRepositoryModelReturned != null;
+        }
+    }
 }
