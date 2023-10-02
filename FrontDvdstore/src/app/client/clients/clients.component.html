@@ -1,0 +1,60 @@
+
+<div class="container-fluid wrapper">
+  
+  <div class="row flex-nowrap col-12">
+
+      <app-sidebar class="col-md-3 col-xl-2 px-0 " 
+          [genreEnumValues]="genreEnumValues"
+      ></app-sidebar>
+
+      <div class="col-md-9 col-xl-10 px-0 content">
+        <app-header 
+            class="col-12 "
+            (searchClicked)="onSearchClicked($event)"
+          ></app-header>
+
+        <div class="home">
+          <h2>Clients</h2>
+          <a class="btn btn-primary" routerLink="/clients/form">Ajouter un client</a>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Adresse</th>
+                <th scope="col"> - </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let client of clientToShow; let index = index" >
+                <th scope="row">{{ client.id }}</th>
+                <td>{{ client.name }}</td>
+                <td>{{ client.firstname}}</td>
+                <td>{{ client.email }}</td>
+                <td>{{client.adresse }}</td>
+                <td>
+                  <a [href]="'/clients/'+ client.id" class="btn btn-primary">Voir détail</a>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+    
+        </div>    
+      </div>
+  </div>
+  
+  </div>
+  <!-- <img [src]="ENV_DEV+'/upload/loupe.png'" alt=""> -->

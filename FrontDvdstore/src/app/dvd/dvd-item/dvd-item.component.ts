@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environments';
   templateUrl: './dvd-item.component.html',
   styleUrls: ['./dvd-item.component.scss']
 })
-export class DvdItemComponent {
+export class DvdItemComponent implements OnInit{
   table: string='dvds';
   id!: number|null;
   currentDvd!: Dvd;

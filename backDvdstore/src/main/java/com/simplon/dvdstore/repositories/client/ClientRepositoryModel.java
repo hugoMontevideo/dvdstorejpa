@@ -23,12 +23,12 @@ public class ClientRepositoryModel {
     @Column(name="adresse")
     private String adresse;
 
-
-
     public ClientRepositoryModel(String name, String firstname, String email, String adresse) {
         this.name = name;
         this.firstname = firstname;
         this.email = email;
         this.adresse = adresse;
     }
+
+
 }

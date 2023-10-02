@@ -11,6 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { DvdItemComponent } from './dvd/dvd-item/dvd-item.component';
 import { FormsModule } from '@angular/forms';
 import { DvdFormComponent } from './dvd/dvd-form/dvd-form.component';
+import { ClientsComponent } from './client/clients/clients.component';
+import { ClientItemComponent } from './client/client-item/client-item.component';
+import { ClientFormComponent } from './client/client-form/client-form.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { DvdFormComponent } from './dvd/dvd-form/dvd-form.component';
     DvdstoreComponent,
     DvdItemComponent,
     DvdFormComponent,
+    ClientsComponent,
+    ClientItemComponent,
+    ClientFormComponent,
   
   ],
   imports: [

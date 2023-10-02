@@ -80,8 +80,8 @@ export class DvdFormComponent implements OnInit{
     }
   } // onSubmit
 
-  public getDvdById(path:string, id:number){
-    this.httpService.getById(path, id).subscribe({
+  public getDvdById(table:string, id:number){
+    this.httpService.getById(table, id).subscribe({
       next:(response:Dvd)=> this.currentDvd = response,
       error: (err: Error)=>console.error("Error getDvdById"),
       complete: ()=>console.log(this.currentDvd)

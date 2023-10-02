@@ -26,14 +26,13 @@ public class DvdStoreController {
     @Autowired
     DvdStoreService dvdStoreService;
 
-    @PostMapping
-    public void uploadPicture(
-                              @RequestParam("name") String name,
-                              @RequestParam("genre") String genre,
-                              @RequestParam("quantite") int quantite,
-                              @RequestParam("prix") Float prix,
-                              @RequestPart("file") Optional<MultipartFile> file
-                              ){
+    @PostMapping     // insert
+    public void add(  @RequestParam("name") String name,
+                      @RequestParam("genre") String genre,
+                      @RequestParam("quantite") int quantite,
+                      @RequestParam("prix") Float prix,
+                      @RequestPart("file") Optional<MultipartFile> file
+                      ){
         if(!file.isEmpty()){
             if(dvdStoreService.uploadPicture(file.get())){
                 dvdStoreService.add(new DvdServiceModel(name, genre,quantite,prix,file.get().getOriginalFilename()));
@@ -41,18 +40,6 @@ public class DvdStoreController {
         }
 
     }
-
-//    @PostMapping  //
-//    public boolean add(@RequestBody DvdStoreFileDTO dvdStoreFileDTO )
-//    {
-//        String fileName = dvdStoreFileDTO.getPicture().getOriginalFilename();// nom fichier téléchargé
-//
-//        dvdStoreService.uploadImage(dvdStoreFileDTO.getPicture());
-//
-//        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreFileDTO.getName(), dvdStoreFileDTO.getGenre(), dvdStoreFileDTO.getQuantite(), dvdStoreFileDTO.getPrix(), fileName);
-//
-//        return dvdStoreService.add(dvdServiceModel);
-//    }
 
     @GetMapping
     public ArrayList<DvdStoreGetDTO> findAll(){
@@ -84,7 +71,6 @@ public class DvdStoreController {
                         HttpStatus.NOT_FOUND, ex.getReason() );
 
             }
-
     }
 
     @PutMapping("/{id}")
@@ -156,5 +142,17 @@ public class DvdStoreController {
 //        }else{
 //            throw new DvdNotFoundException(HttpStatus.NOT_FOUND, "La ressource n'a pas été trouvé");
 //        }
+//    }
+
+//    @PostMapping  //
+//    public boolean add(@RequestBody DvdStoreFileDTO dvdStoreFileDTO )
+//    {
+//        String fileName = dvdStoreFileDTO.getPicture().getOriginalFilename();// nom fichier téléchargé
+//
+//        dvdStoreService.uploadImage(dvdStoreFileDTO.getPicture());
+//
+//        DvdServiceModel dvdServiceModel = new DvdServiceModel(dvdStoreFileDTO.getName(), dvdStoreFileDTO.getGenre(), dvdStoreFileDTO.getQuantite(), dvdStoreFileDTO.getPrix(), fileName);
+//
+//        return dvdStoreService.add(dvdServiceModel);
 //    }
 

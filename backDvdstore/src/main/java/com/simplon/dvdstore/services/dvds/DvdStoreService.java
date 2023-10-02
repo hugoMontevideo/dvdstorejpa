@@ -67,7 +67,6 @@ public class DvdStoreService {
 
             return dvdRepositoryModelReturned != null ;
         }
-
     }
 
     public void delete(Long id) {
@@ -103,8 +102,6 @@ public class DvdStoreService {
             e.printStackTrace();
             return "Erreur lors du téléchargement de l'image.";
         }
-
-
     }
     public boolean uploadPicture( MultipartFile file) {
 
