@@ -34,7 +34,6 @@ export class LoginService {
                 
         return this.httpClient.post<any>(`${this.ENV_LOG}/${this.table}/authorize`, loginView, {responseType:"json"})
         .pipe(map(data=>{
-
             console.log(data);
             this.currentUser.username = data.user.login;
             this.currentUser.token = data.token;
