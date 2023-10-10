@@ -9,16 +9,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("auth")
+@CrossOrigin
 public class SecurityController {
     @Autowired
     private JwtUserService userService;
+
+    //Remarque : ajouter un nouvel utilisateur et génère un JWT à la volée
     @PostMapping("/register")
     public ResponseEntity<AuthResponseDto> register(@RequestBody AuthRequestDto dto) throws AccountExistsException {
         UserDetails user = userService.save(dto.getUsername(),
@@ -26,14 +26,14 @@ public class SecurityController {
         String token = userService.generateJwtForUser(user);
         return ResponseEntity.ok(new AuthResponseDto(user,token));
     }
-//Remarque : ajouter un nouvel utilisateur et génère un JWT à la volée
 
     @PostMapping("/authorize")
     public ResponseEntity<AuthResponseDto> authorize(@RequestBody AuthRequestDto requestDto) throws UnauthorizedException {
         Authentication authentication = null;
         try {
+            System.out.println(requestDto);
             authentication = userService.authenticate(requestDto.getUsername(),
-                    requestDto.getPassword());
+                      requestDto.getPassword());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 // Token generation
             UserDetails user = (UserDetails) authentication.getPrincipal();

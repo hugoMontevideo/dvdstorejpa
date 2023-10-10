@@ -1,26 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DvdstoreComponent } from './dvd/dvdstore/dvdstore.component';
-import { DvdItemComponent } from './dvd/dvd-item/dvd-item.component';
-import { DvdFormComponent } from './dvd/dvd-form/dvd-form.component';
-import { ClientsComponent } from './client/clients/clients.component';
-import { ClientFormComponent } from './client/client-form/client-form.component';
-import { ClientItemComponent } from './client/client-item/client-item.component';
-import { VentesComponent } from './vente/ventes/ventes.component';
-import { VentesFormComponent } from './vente/ventes-form/ventes-form.component';
+import { DvdstoreComponent } from './admin/dvd/dvdstore/dvdstore.component';
+import { DvdItemComponent } from './admin/dvd/dvd-item/dvd-item.component';
+import { DvdFormComponent } from './admin/dvd/dvd-form/dvd-form.component';
+import { ClientsComponent } from './admin/client/clients/clients.component';
+import { ClientFormComponent } from './admin/client/client-form/client-form.component';
+import { ClientItemComponent } from './admin/client/client-item/client-item.component';
+import { VentesComponent } from './admin/vente/ventes/ventes.component';
+import { VentesFormComponent } from './admin/vente/ventes-form/ventes-form.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent},
   { path: 'dvdstore', component: DvdstoreComponent},
   // { path: '**', redirectTo: 'dvdstore'},
   { path: 'dvdstore/dvds/:id', component: DvdItemComponent},
   { path: 'dvdstore/form', component: DvdFormComponent},
   { path: 'dvdstore/form/:id', component: DvdFormComponent},
-  { path: 'clients', component: ClientsComponent},
-  { path: 'clients/:id', component: ClientItemComponent},
-  { path: 'clients/form', component: ClientFormComponent},
-  { path: 'clients/form/:id', component: ClientFormComponent},
-  { path: 'ventes', component: VentesComponent},
-  { path: 'ventes/form', component: VentesFormComponent},
+  { path: 'dvdstore/clients', component: ClientsComponent},
+  { path: 'dvdstore/clients/:id', component: ClientItemComponent},
+  { path: 'dvdstore/clients/form', component: ClientFormComponent},
+  { path: 'dvdstore/clients/form/:id', component: ClientFormComponent},
+  { path: 'dvdstore/ventes', component: VentesComponent},
+  { path: 'dvdstore/ventes/form', component: VentesFormComponent},
 
 ];
 

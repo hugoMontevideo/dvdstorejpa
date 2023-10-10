@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("clients")
+@RequestMapping("dvdstore/clients")
 public class ClientController {
 
     @Autowired
@@ -45,10 +45,11 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClientGetDTO> findById(@PathVariable Long id){
+    public ResponseEntity<ClientServiceModel> findById(@PathVariable Long id){
         try{
             ClientServiceModel clientServiceModel =  clientService.findById(id);
-            return new ResponseEntity<>(new ClientGetDTO(clientServiceModel.getId().get(), clientServiceModel.getName(),clientServiceModel.getFirstname(),clientServiceModel.getEmail(),clientServiceModel.getAdresse()), HttpStatus.OK) ;
+//            return new ResponseEntity<>(new ClientGetDTO(clientServiceModel.getId().get(), clientServiceModel.getName(),clientServiceModel.getFirstname(),clientServiceModel.getEmail(),clientServiceModel.getAdresse()), HttpStatus.OK) ; // *** mappage à revoir
+            return new ResponseEntity<>(clientServiceModel, HttpStatus.OK) ;
         }catch(DvdNotFoundException ex){
 
             System.out.println(ex.getReason());

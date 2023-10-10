@@ -1,45 +1,41 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DvdstoreComponent } from './dvd/dvdstore/dvdstore.component';
-import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
-import { DvdItemComponent } from './dvd/dvd-item/dvd-item.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { DvdFormComponent } from './dvd/dvd-form/dvd-form.component';
-import { ClientsComponent } from './client/clients/clients.component';
-import { ClientItemComponent } from './client/client-item/client-item.component';
-import { ClientFormComponent } from './client/client-form/client-form.component';
-import { VentesComponent } from './vente/ventes/ventes.component';
-import { VentesFormComponent } from './vente/ventes-form/ventes-form.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { AdminModule } from './admin/admin.module';
+import { JWTTokenService } from './services/JWTTokens.service';
+import { JWTInterceptorService } from './jwtinterceptor.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DvdstoreComponent,
-    DvdItemComponent,
-    DvdFormComponent,
-    ClientsComponent,
-    ClientItemComponent,
-    ClientFormComponent,
-    VentesComponent,
-    VentesFormComponent,
+    LoginComponent,
+    RegisterComponent,
   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule, 
-    CoreModule,
     SharedModule, 
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AdminModule
   ],
-  providers: [],
+  providers: [
+    JWTTokenService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JWTInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

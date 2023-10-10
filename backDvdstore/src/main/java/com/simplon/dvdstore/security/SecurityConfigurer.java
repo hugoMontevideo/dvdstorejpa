@@ -1,5 +1,6 @@
 package com.simplon.dvdstore.security;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -15,7 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfigurer {
-
     @Bean
     public SecurityFilter securityFilter() {
         return new SecurityFilter();
@@ -24,21 +24,27 @@ public class SecurityConfigurer {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 // Standard pour les REST API
         http = http.cors().and().csrf().disable();
         http = http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();
+
 // On place notre filter dans le middleware
         http = http.addFilterBefore(securityFilter(),
                 UsernamePasswordAuthenticationFilter.class);
 // Si vous venez du web et souhaitez le faire dans le sens inverse
 // Détermination des endpoints privées
-        http = http.authorizeHttpRequests((r) ->
-                r.requestMatchers("/api/v1/**").authenticated()
-                        .anyRequest().permitAll());
-        return http.build();
+            http = http.authorizeHttpRequests((r) ->
+            r.requestMatchers("/dvdstore/**").authenticated()
+                    .anyRequest().permitAll());
+            return http.build();
+//        http = http.authorizeHttpRequests((r) ->
+//                r.requestMatchers("/auth/authorize").permitAll()
+//                        .requestMatchers("/dvdstore/dvds").permitAll());
+
+
+//        return http.build();
     }
 
 

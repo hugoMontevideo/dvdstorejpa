@@ -7,6 +7,7 @@ import com.simplon.dvdstore.services.jwt.JwtUserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,10 +24,8 @@ import java.util.Date;
 public class JwtUserServiceImpl implements JwtUserService {
     @Autowired
     private OwnerRepository ownerRepository;
-
     @Autowired
     AuthenticationConfiguration authenticationConfiguration;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
     private final String signingKey;
@@ -48,11 +47,9 @@ public class JwtUserServiceImpl implements JwtUserService {
 
     @Override
     public Authentication authenticate(String username, String password) throws Exception {
-        Authentication authentication = new
-                UsernamePasswordAuthenticationToken(username, password);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(username, password);
         return authenticationConfiguration.getAuthenticationManager().authenticate(authentication);
     }
-
 
     @Override
     public UserDetails save(String username, String password) throws AccountExistsException {
@@ -65,11 +62,9 @@ public class JwtUserServiceImpl implements JwtUserService {
         owner.setPassword(passwordEncoder.encode(password));
         ownerRepository.save(owner);
         return owner;
-
     }
 
     //USED FOR AUTHENTIFICATION
-
     @Override
     public UserDetails getUserFromJwt(String jwt) {
         String username = getUsernameFromToken(jwt);
@@ -83,15 +78,16 @@ public class JwtUserServiceImpl implements JwtUserService {
         return claims.getSubject();
     }
 
-
     @Override
     public String generateJwtForUser(UserDetails user) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + 3600 * 1000);
-        return
-                Jwts.builder().setSubject(user.getUsername()).setIssuedAt(now).setExpiration(expiryDate)
-                        .signWith(SignatureAlgorithm.HS512, signingKey)
-                        .compact();
+        return Jwts.builder()
+                .setSubject(user.getUsername())
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512, signingKey)
+                .compact();
     }
 
 }

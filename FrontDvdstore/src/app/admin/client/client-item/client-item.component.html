@@ -1,0 +1,29 @@
+
+<div class="container-fluid wrapper">
+    <div class="row flex-nowrap col-12">
+        <app-sidebar class="col-md-3 col-xl-2 px-0 "
+            ></app-sidebar>
+  
+        <div class="col-md-9 col-xl-10 px-0 content">
+  
+          <app-header 
+              class="col-12 "
+            ></app-header>
+
+            <div class=" dvd_item home">
+                <div class="details d-flex flex-column justify-content-between">
+                    <div class="details-content">
+                        <h1>{{ currentClient.name }}</h1>
+                        <h3>{{ currentClient.firstname }}</h3>
+                        <p class="price text-primary">{{ currentClient.email }}</p>
+                        <p>{{ currentClient.adresse }}</p>
+                    </div>
+                    <div class="action d-flex">
+                        <!-- <a class="btn btn-primary" [routerLink]="['/dvdstore/clients/form', id]" >Modifier</a> -->
+                        <button class="btn btn-delete" (click)="onDelete(id)">Effacer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController // donnees json ou xml
-@RequestMapping("dvds")
+@RequestMapping("dvdstore/dvds")
 public class DvdStoreController {
     @Autowired
     DvdStoreService dvdStoreService;

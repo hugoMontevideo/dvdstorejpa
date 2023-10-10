@@ -14,7 +14,6 @@ public class Owner implements UserDetails {
     private int id;
     @Column(unique = true, length = 32)  // security : avoid conceptual duplicates to
     // avoid unexpected behaviors
-
     private String login;
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)

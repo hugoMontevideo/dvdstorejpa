@@ -19,7 +19,7 @@ import java.util.Date;
 
 @CrossOrigin
 @RestController
-@RequestMapping("ventes")
+@RequestMapping("dvdstore/ventes")
 public class VenteController {
     @Autowired
     VenteService venteService;

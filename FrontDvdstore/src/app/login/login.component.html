@@ -1,0 +1,55 @@
+<div class="container-fluid wrapper">
+    <div class="row flex-nowrap col-12">
+
+        <!-- <app-sidebar class="col-md-3 col-xl-2 px-0 "
+          ></app-sidebar>
+  
+        <div class="col-md-9 col-xl-10 px-0 content">
+          <app-header 
+              class="col-12 "
+            ></app-header> -->
+
+        <form>
+            <div class="row">
+                <div class="w-75">
+                    <div class="card mt-3">
+                        <h5 class="card-header">Login</h5>
+                        <div class="card-body">
+                            <div class="form-group form-row">
+                                <label for="username" class="col-md-4 col-form-label">Pseudo</label>
+                                <div class="col-md-8">
+                                    <input type="text"
+                                            name="username"
+                                            id="username"
+                                            [(ngModel)]="loginView.username"
+                                            class="form-control"
+                                            placeholder="Pseudo"
+                                            autofocus="autofocus">
+                                </div>
+                            </div>
+                            <div class="form-group form-row">
+                                <label for="password" class="col-md-4 col-form-label">Mot de passe</label>
+                                <div class="col-md-8">
+                                    <input type="password"
+                                            name="password"
+                                            [(ngModel)]="loginView.password"
+                                            id="password"
+                                            class="form-control"
+                                            placeholder="mot de passe"
+                                            autofocus="autofocus">
+                                </div>
+                            </div>
+                        
+                        <a class="btn btn-primary" (click)="onLoginClick()">Connexion</a>
+                        </div>
+                        <div class="card-footer text-right">
+                            <span class="text-danger">{{ loginError }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    <!-- </div> -->
+</div>

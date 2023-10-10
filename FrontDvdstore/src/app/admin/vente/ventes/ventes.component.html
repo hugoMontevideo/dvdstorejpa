@@ -1,0 +1,53 @@
+
+<div class="container-fluid wrapper" > 
+  <div class="row flex-nowrap col-12">
+    <!-- <app-sidebar class="col-md-3 col-xl-2 px-0 " 
+        [genreEnumValues]="genreEnumValues"
+    ></app-sidebar> -->
+
+    <div class="col-md-9 col-xl-10 px-0 content">
+      <!-- <app-header 
+          class="col-12 "
+          (searchClicked)="onSearchClicked($event)"
+        ></app-header> -->
+
+      <div class="home">
+        <h2 class="mt-2">Ventes</h2>
+        <a class="btn btn-light border add" routerLink="/dvdstore/ventes/form">+ Ajouter une vente</a>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Date de la vente</th>
+              <th scope="col">Id du dvd</th>
+              <th scope="col">Nom du dvd</th>
+              <th scope="col">Quantité</th>
+              <th scope="col">Id du client</th>
+              <th scope="col">Nom du client</th>
+              <th scope="col">Montant</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let vente of venteToShow; let index = index" >
+              <th scope="row">{{ vente.id }}</th>
+              <td>{{ vente.dateDeVente}}</td>
+              <td>{{ vente.dvdstore_id }}</td>
+              <td>{{ vente.dvdstore_name }}</td>
+              <td>{{ vente.quantite }}</td>
+              <td>{{ vente.client_id }}</td>
+              <td>{{ vente.client_name }}</td>
+              <td>{{ vente.montant }}</td>
+              <td>
+                <a [href]="'/dvdstore/ventes/'+ vente.id" class="btn btn-primary">Voir détail</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>    
+    </div>
+  </div>
+    
+</div>
+    <!-- <img [src]="ENV_DEV+'/upload/loupe.png'" alt=""> -->
+  

@@ -1,0 +1,41 @@
+
+
+<div class="container-fluid wrapper">
+    <div class="row flex-nowrap col-12">
+
+        <app-sidebar class="col-md-3 col-xl-2 px-0 "
+            ></app-sidebar>
+  
+        <div class="col-md-9 col-xl-10 px-0 content">
+  
+          <app-header 
+              class="col-12 "
+            ></app-header>
+
+            <div class=" dvd_item d-flex home">
+                <div class="dvd_picture">
+                    <img [src]="ENV_DEV_IMG + currentDvd.picture" alt="">
+                </div>
+                <div class="details d-flex flex-column justify-content-between">
+                    <div class="details-content">
+                        <h1>{{ currentDvd.name }}</h1>
+                        <h3>{{ currentDvd.genre }}</h3>
+                        <p class="price text-primary">{{ currentDvd.prix }} €</p>
+                        <p>{{ currentDvd.quantite }} en stock</p>
+                    </div>
+                    <div class="action d-flex">
+                        <!-- <a class="btn btn-primary" [routerLink]="['/dvdstore/form', id]" >Modifier</a> -->
+                        <button class="btn btn-delete" (click)="onDelete(id)">Effacer</button>
+                    </div>
+                </div>
+            </div>
+            <div class="synopsis">
+                <h2>Synopsis</h2>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odio corrupti doloribus beatae quaerat? Adipisci nulla recusandae unde animi cumque inventore, officiis facilis ipsam veritatis impedit ratione, voluptatum voluptatem in.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:80/dvdstore',
-    apiImg: 'http://localhost:80/dvdstore/upload',
+    apiUrl: 'http://localhost:80',
+    apiImg: 'http://localhost:80/upload',
     apiKey: 'your-api-key'
   };

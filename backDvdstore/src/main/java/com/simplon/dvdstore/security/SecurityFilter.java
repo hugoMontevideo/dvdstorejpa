@@ -18,17 +18,16 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUserService jwtUserService;
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse
-            response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String header = request.getHeader("Authorization");
 // Authentification
-// Authorization: bearer eyolfdilfsdkfdslkflsdkfjjdslfhlsdfjlsdfjlk
+// Authorization: Bearer eyolfdilfsdkfdslkflsdkfjjdslfhlsdfjlsdfjlk
             String incomingJwt = header.substring(7);
-            UserDetails user = jwtUserService.getUserFromJwt(incomingJwt);
+            UserDetails userDetails = jwtUserService.getUserFromJwt(incomingJwt);
 // On le passe aux controllers grâce au context
             Authentication authentication = new
-                    UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                    UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception e) {
             logger.info("Trying parse token but failed");
