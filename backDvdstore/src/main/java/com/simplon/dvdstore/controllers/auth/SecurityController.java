@@ -35,7 +35,7 @@ public class SecurityController {
             authentication = userService.authenticate(requestDto.getUsername(),
                       requestDto.getPassword());
             SecurityContextHolder.getContext().setAuthentication(authentication);
-// Token generation
+        // Token generation
             UserDetails user = (UserDetails) authentication.getPrincipal();
             String token = userService.generateJwtForUser(user);
             return ResponseEntity.ok(new AuthResponseDto(user, token));
@@ -45,6 +45,6 @@ public class SecurityController {
             throw new RuntimeException(e);
         }
     }
-//Remarque: authentifie le principal (le user) à partir du JWT.
+    //Remarque: authentifie le principal (le user) à partir du JWT.
 }
 

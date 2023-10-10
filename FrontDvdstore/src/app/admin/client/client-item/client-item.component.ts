@@ -9,9 +9,10 @@ import { Client } from 'src/app/admin/utils/model/client.interface';
   styleUrls: ['./client-item.component.scss']
 })
 export class ClientItemComponent implements OnInit{
+
   table: string='clients';
   currentClient!: Client;
-  id!: number|null;
+  id!: number;
 
   constructor(private route:ActivatedRoute, 
     private httpService: HttpService,
@@ -24,14 +25,21 @@ export class ClientItemComponent implements OnInit{
     if(this.id != null){
       this.getClientById(this.table, this.id);
     }
-
   }
 
   getClientById=(table:string, id:number)=>{
-    this.httpService.getById(table, id).subscribe({
-      next:(response:Client)=> this.currentClient = response,
-      error: (err: Error)=>console.error("Error getDvdById"),
-      complete: ()=>console.log(this.currentClient)
+    this.httpService.getById(table, id)
+    .subscribe({
+      next:(response:Client)=>{
+        this.currentClient = response;
+      } ,
+      error: (err: Error)=>{
+        console.error("Error getDvdById"+ err);
+        
+      },
+      complete: ()=>{
+        console.log(this.currentClient);       
+      }
     })
   }
 

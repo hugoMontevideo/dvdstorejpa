@@ -7,6 +7,7 @@ import com.simplon.dvdstore.services.dvds.DvdStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -26,6 +27,7 @@ public class DvdStoreController {
     DvdStoreService dvdStoreService;
 
     @PostMapping     // insert
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void add(  @RequestParam("name") String name,
                       @RequestParam("genre") String genre,
                       @RequestParam("quantite") int quantite,
@@ -71,6 +73,7 @@ public class DvdStoreController {
     }
 
     @PutMapping("/{id}")    // update
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> updateDvd(
             @PathVariable("id") Optional<Long> id,
             @RequestParam("name") String name,

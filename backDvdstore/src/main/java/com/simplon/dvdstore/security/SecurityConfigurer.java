@@ -35,10 +35,13 @@ public class SecurityConfigurer {
                 UsernamePasswordAuthenticationFilter.class);
 // Si vous venez du web et souhaitez le faire dans le sens inverse
 // Détermination des endpoints privées
-            http = http.authorizeHttpRequests((r) ->
-            r.requestMatchers("/dvdstore/**").authenticated()
-                    .anyRequest().permitAll());
-            return http.build();
+        http = http.authorizeHttpRequests((r) ->{
+
+            r.requestMatchers("/dvdstore/**").authenticated();
+            r.anyRequest().permitAll();
+
+        });
+        return http.build();
 //        http = http.authorizeHttpRequests((r) ->
 //                r.requestMatchers("/auth/authorize").permitAll()
 //                        .requestMatchers("/dvdstore/dvds").permitAll());

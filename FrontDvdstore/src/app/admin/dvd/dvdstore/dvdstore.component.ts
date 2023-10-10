@@ -13,7 +13,6 @@ import { HttpService } from '../../services/http.service';
 
 export class DvdstoreComponent implements OnInit {
   ENV_DEV_IMG = environment.apiImg + '/';
-  ENV_DEV = environment.apiUrl + '/';
   table: string = "dvds";
   dvds: Dvd[]= [];
   dvdToShow: Dvd[] | any = [];
@@ -48,8 +47,9 @@ export class DvdstoreComponent implements OnInit {
     })
   }
 
-  public getDvds(path:string){
-    this.httpService.getData(path).subscribe({
+  public getDvds(table:string){
+    this.httpService.getData(table)
+    .subscribe({
       next:(response: Dvd[])=> this.dvdToShow = response,
       error:(err:Error)=>(console.log("page home all dvds "+ err)),
       complete: ()=>console.table(this.dvdToShow)
