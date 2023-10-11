@@ -43,14 +43,16 @@ export class ClientItemComponent implements OnInit{
     })
   }
 
-  onDelete = (id: number|null): void => {
+  onDelete = (id: number): void => {
     this.httpService.deleteById( this.table, this.id).subscribe({
-      next:(response)=> console.log(response),
+      next:(response)=> this.router.navigateByUrl("clients")
+     ,
       error: (err: Error)=>{  
           console.error("error on deleting");   /// *** TODO **** Gérer cette erreur !
           this.router.navigateByUrl("clients");
         },
-      complete:()=> this.router.navigateByUrl("clients")
+      complete:()=> console.log("delete ok")
+      
     });
   }
 

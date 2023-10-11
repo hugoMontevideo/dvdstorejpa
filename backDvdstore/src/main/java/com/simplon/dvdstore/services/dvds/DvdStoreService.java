@@ -104,7 +104,7 @@ public class DvdStoreService {
         }
     }
     public boolean uploadPicture( MultipartFile file) {
-
+        System.out.println(file);
         try {
             String uploadDirectory = "/public/upload"; // dossier de chargement
             String filename = file.getOriginalFilename(); // nom fichier chargé

@@ -29,7 +29,7 @@ export class DvdItemComponent implements OnInit{
     }
   }
 
-  public getDvdById(table:string, id:number){
+  getDvdById = (table:string, id:number)=>{
     this.httpService.getById(table, id)
     .subscribe({
       next:(response:Dvd)=> this.currentDvd = response,

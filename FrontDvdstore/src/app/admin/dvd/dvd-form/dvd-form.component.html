@@ -44,6 +44,7 @@
           <label  for="selectedFile">Chargez une image</label>
           <input type="file" name="selectedFile" (change)="onFileSelected($event)"
               id="selectedFile"  class="form-control"  >
+              <small class="text-danger">{{ errorMsg }}</small>
         </div>
         <div>
           <!-- <img src="http://localhost/dvdstore/upload/loupe.png" width="25" alt=""> -->
