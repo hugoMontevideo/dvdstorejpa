@@ -14,18 +14,23 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name="panier_dvd")
 public class PanierDvdRepositoryModel {
+    @Column(name="dvd_id")
+    private Long dvdId;
+
+    @Column(name="panier_id")
+    private Long panierId;
+
+    @Column(name="dvd_subtotal")
+    private Float dvdSubtotal;
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    @Column(name="dvd_id")
-    private Long dvdId;
-    @Column(name="panier_id")
-    private Long panierId;
-    @Column(name="dvd_quantite")
-    private Integer dvdQuantite;
-    @Column(name="dvd_prix")
-    private Float dvdPrix;
+
     @Column(name="client_id")
     private Long clientId;
+
+
+
 
 }

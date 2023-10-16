@@ -1,21 +1,21 @@
-package com.simplon.dvdstore.cart.controllers;
+package com.simplon.dvdstore.cart.services;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-public class PanierDvdResponseDTO {
-
+@AllArgsConstructor
+public class PanierDvdServiceResponseModel {
     private Long dvdId;
 
     private Long panierId;
 
+
     private Float dvdSubtotal;
 
     private Long clientId;
-
 }

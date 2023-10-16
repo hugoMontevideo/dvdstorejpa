@@ -11,10 +11,10 @@ public interface PanierDvdRepository extends CrudRepository<PanierDvdRepositoryM
     ArrayList<PanierDvdRepositoryModel> findAll();
 
 
-    @Query(value="CALL ps_calculate_totals(:dvd_id,:panier_id,:quantite_dvd,:prix_dvd,:id_client)", nativeQuery = true)
-    void savePanierDvd(Integer dvd_id, Integer panier_id, Integer quantite_dvd,Float prix_dvd, Integer id_client);
+    @Query(value="CALL ps_calculate_totals2(:dvd_id,:panier_id,:dvd_quantite,:dvd_prix,:client_id)", nativeQuery = true)
+    void savePanierDvd(Integer dvd_id, Integer panier_id, Integer dvd_quantite,Float dvd_prix, Integer client_id);
 
-
-
+    @Query(value="CALL calculate2(:dvd_subtotal,:client_id)", nativeQuery = true)
+    void saveTest2(Float dvd_subtotal, Integer client_id);
 
 }

@@ -12,22 +12,23 @@ public class PanierDvdService {
 
     @Autowired PanierDvdRepository panierDvdRepository;
 
-    public PanierDvdServiceRequestModel findById(Long id) {
-
+    public PanierDvdServiceResponseModel findById(Long id) {
         Optional<PanierDvdRepositoryModel> panierDvdRepositoryModel = panierDvdRepository.findById(id);
 
-        if(panierDvdRepositoryModel.isEmpty())
-        {
+        if (panierDvdRepositoryModel.isEmpty()) {
             return null;
         } else {
-//            return new PanierDvdServiceRequestModel(panierDvdRepositoryModel.get().getId(), panierDvdRepositoryModel.get().getDvdId(),panierDvdRepositoryModel.get().getPanierId(), panierDvdRepositoryModel.get().getDvdQuantite(), panierDvdRepositoryModel.get().getDvdPrix());
-            // ** todo *******
-            return new PanierDvdServiceRequestModel();
+            return new PanierDvdServiceResponseModel(panierDvdRepositoryModel.get().getDvdId(), panierDvdRepositoryModel.get().getPanierId(), panierDvdRepositoryModel.get().getDvdSubtotal(), panierDvdRepositoryModel.get().getClientId());
+
         }
     }
 
     public void savePanierDvd(PanierDvdServiceRequestModel panierDvdServiceRequestModel){
         panierDvdRepository.savePanierDvd(panierDvdServiceRequestModel.getDvdId().intValue(), panierDvdServiceRequestModel.getPanierId().intValue(), panierDvdServiceRequestModel.getDvdQuantite(), panierDvdServiceRequestModel.getDvdPrix(), panierDvdServiceRequestModel.getClientId().intValue() );
 
+    }
+
+    public void delete(Long id) {
+        panierDvdRepository.deleteById(id);
     }
 }
