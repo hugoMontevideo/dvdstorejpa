@@ -30,19 +30,18 @@ public class PanierController {
     }
     @GetMapping("/{id}")   // findById
     public ResponseEntity<PanierDvdResponseDTO> findById(@PathVariable Long id){
+        System.out.println(id);
         try{
             PanierDvdServiceResponseModel panierDvdServiceResponseModel =  panierDvdService.findById(id);
 //
             return new ResponseEntity<>(new PanierDvdResponseDTO(panierDvdServiceResponseModel.getDvdId(),
                     panierDvdServiceResponseModel.getPanierId(),panierDvdServiceResponseModel.getDvdSubtotal(),panierDvdServiceResponseModel.getClientId()),
                     HttpStatus.OK) ;
-//
         }catch(Exception ex){
 
             System.out.println(ex.getMessage());
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, ex.getMessage() );
-//
         }
     }
 
@@ -61,6 +60,8 @@ public class PanierController {
 
     @GetMapping
     public String test(){
+
+        System.out.println("soutfeing");
         return "helloworld";
     }
 //    @PutMapping
