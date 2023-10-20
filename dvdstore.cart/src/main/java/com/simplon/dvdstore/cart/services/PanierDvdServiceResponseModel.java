@@ -10,12 +10,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PanierDvdServiceResponseModel {
+
     private Long dvdId;
 
-    private Long panierId;
+    private PanierServiceModel panier;
 
+    private Long id;
 
     private Float dvdSubtotal;
 
     private Long clientId;
+
+    private Integer dvdQuantite;
 }

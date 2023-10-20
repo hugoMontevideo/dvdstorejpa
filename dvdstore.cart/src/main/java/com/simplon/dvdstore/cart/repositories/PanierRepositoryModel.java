@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -25,5 +28,8 @@ public class PanierRepositoryModel {
 
     @Column(name="created_at")
     private Long createdAt;
+
+   @OneToMany(mappedBy = "panier", orphanRemoval = true)
+    private List<PanierDvdRepositoryModel> dvds = new ArrayList<>() ;
 
 }

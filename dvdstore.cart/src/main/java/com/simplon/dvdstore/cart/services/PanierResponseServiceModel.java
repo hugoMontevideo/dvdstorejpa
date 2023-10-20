@@ -4,20 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PanierDvdServiceRequestModel {
-    private Long dvdId;
+public class PanierResponseServiceModel {
+    Long id;
+//    Optional<Long> id;
 
-    private Long panierId;
-
-    private Float dvdSubtotal;
+    private Float amount;
 
     private Long clientId;
 
-    private Integer dvdQuantite;
-
-    private Float dvdPrix;
+    private Long createdAt;
 
 }

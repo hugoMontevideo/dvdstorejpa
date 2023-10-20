@@ -13,10 +13,11 @@ public class PanierDvdInsertDTO {
 
     private Long panierId;
 
-    private Integer dvdQuantite;
-
-    private Float dvdPrix;
+    private Float dvdSubtotal = 0F;
 
     private Long clientId;
 
+    private Integer dvdQuantite;
+
+    private Float dvdPrix;
 }

@@ -25,7 +25,6 @@ public class DvdStoreService {
         DvdRepositoryModel dvdRepositoryModelReturn = dvdStoreRepository.save( dvdRepositoryModel);
 
         return dvdRepositoryModelReturn != null ;
-
     }
 
     public ArrayList<DvdServiceModel> findAll() {

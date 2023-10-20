@@ -34,8 +34,7 @@ public class JwtUserServiceImpl implements JwtUserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws
-            UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Owner owner = ownerRepository.findByLogin(username);
         if (owner == null) {
             throw new UsernameNotFoundException("The owner could not be found");

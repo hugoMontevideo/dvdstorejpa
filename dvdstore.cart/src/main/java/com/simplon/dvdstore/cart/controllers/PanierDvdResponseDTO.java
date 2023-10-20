@@ -12,10 +12,13 @@ public class PanierDvdResponseDTO {
 
     private Long dvdId;
 
-    private Long panierId;
+    private PanierResponseDTO panier;
+
+    private Long id;
 
     private Float dvdSubtotal;
 
     private Long clientId;
 
+    private Integer dvdQuantite;
 }

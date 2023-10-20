@@ -19,3 +19,37 @@ public interface MicroservicePanierProxy {
     PanierDvdFeignBean findById(@PathVariable("id") Long id);
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

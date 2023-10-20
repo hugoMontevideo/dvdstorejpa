@@ -12,8 +12,11 @@ import java.util.Date;
 @NoArgsConstructor
 public class VenteAddDTO {
     private String dateDeVente;
+
     private Long dvdstore_id;
+
     private int quantite;
+
     private Long client_id;
 
 }

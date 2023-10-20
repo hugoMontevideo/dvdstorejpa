@@ -1,41 +1,54 @@
 package com.simplon.dvdstore.cart.controllers;
 
+import com.simplon.dvdstore.cart.mappers.DvdStoreCartMapper;
 import com.simplon.dvdstore.cart.repositories.PanierDvdRepository;
 import com.simplon.dvdstore.cart.repositories.PanierDvdRepositoryModel;
-import com.simplon.dvdstore.cart.services.PanierDvdService;
-import com.simplon.dvdstore.cart.services.PanierDvdServiceRequestModel;
-import com.simplon.dvdstore.cart.services.PanierDvdServiceResponseModel;
+import com.simplon.dvdstore.cart.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 @CrossOrigin
 @RestController
-@RequestMapping("cart")
+@RequestMapping("carts")
 public class PanierController {
     @Autowired
     PanierDvdService panierDvdService;
     @Autowired
-    PanierDvdRepository panierDvdRepository;
+    PanierService panierService;
 
-    @PutMapping //insère une ligne dans panier_dvd
-    public ResponseEntity<String> insertIntoPanierDvd(@RequestBody PanierDvdInsertDTO panierDvdInsertDTO){
-        System.out.println(panierDvdInsertDTO);
+    private final DvdStoreCartMapper dvdStoreCartMapper = DvdStoreCartMapper.INSTANCE;
 
-        panierDvdService.savePanierDvd(new PanierDvdServiceRequestModel( panierDvdInsertDTO.getDvdId(), panierDvdInsertDTO.getPanierId(), panierDvdInsertDTO.getDvdQuantite(), panierDvdInsertDTO.getDvdPrix(), panierDvdInsertDTO.getClientId()));
+    @PostMapping  // insert a cart
+    ResponseEntity<String> insertPanier(@RequestBody PanierDTO panierDTO){
 
-        return new ResponseEntity<>("Le dvd  " + panierDvdInsertDTO.getDvdId() +" a été ajoutée", HttpStatus.OK) ;
+        boolean isOk = panierService.save(new PanierServiceModel(0L, panierDTO.getAmount(), panierDTO.getClientId(), panierDTO.getCreatedAt(), new ArrayList<>()));
+
+        return new ResponseEntity<>("Le panier a été ajouté : " + isOk , HttpStatus.OK);
     }
-    @GetMapping("/{id}")   // findById
-    public ResponseEntity<PanierDvdResponseDTO> findById(@PathVariable Long id){
-        System.out.println(id);
+
+    @DeleteMapping("/panier/{id}")  // Deleting a cart by Id
+    public ResponseEntity<String> deletePanierById(@PathVariable Long id){
+        if(panierService.findById(id) != null ){
+            panierService.delete(id);
+            return new ResponseEntity<>("le panier id : " + id + " a été supprimé", HttpStatus.OK);
+        }else{
+            //  throw new NotFoundException(id);
+            return new ResponseEntity<>("le panier id : " + id + " n'a pas été trouvé", HttpStatus.NOT_FOUND);
+        }
+    }
+    @GetMapping("/panier/{id}")   // findById  table panier
+    public ResponseEntity<PanierGetDTO> findPanierById(@PathVariable Long id){
         try{
-            PanierDvdServiceResponseModel panierDvdServiceResponseModel =  panierDvdService.findById(id);
-//
-            return new ResponseEntity<>(new PanierDvdResponseDTO(panierDvdServiceResponseModel.getDvdId(),
-                    panierDvdServiceResponseModel.getPanierId(),panierDvdServiceResponseModel.getDvdSubtotal(),panierDvdServiceResponseModel.getClientId()),
+            PanierServiceModel panierServiceModel =  panierService.findById(id);
+
+            return new ResponseEntity<>(new PanierGetDTO(panierServiceModel.getId(),
+                    panierServiceModel.getAmount(),panierServiceModel.getClientId(),panierServiceModel.getCreatedAt()),
                     HttpStatus.OK) ;
         }catch(Exception ex){
 
@@ -44,7 +57,6 @@ public class PanierController {
                     HttpStatus.NOT_FOUND, ex.getMessage() );
         }
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
@@ -57,13 +69,6 @@ public class PanierController {
         }
     }
 
-
-    @GetMapping
-    public String test(){
-
-        System.out.println("soutfeing");
-        return "helloworld";
-    }
 //    @PutMapping
 //    public ResponseEntity<String> insertIntoPanierTest(@RequestBody PanierTestDto panierTestDto){
 //        System.out.println(panierTestDto);

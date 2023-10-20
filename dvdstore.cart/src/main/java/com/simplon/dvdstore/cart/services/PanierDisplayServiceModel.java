@@ -7,17 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PanierDvdServiceRequestModel {
-    private Long dvdId;
+public class PanierDisplayServiceModel {
 
-    private Long panierId;
+    Long id;
 
-    private Float dvdSubtotal;
+    private Float amount;
 
     private Long clientId;
 
-    private Integer dvdQuantite;
-
-    private Float dvdPrix;
+    private Long createdAt;
 
 }

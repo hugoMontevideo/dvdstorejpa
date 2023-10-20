@@ -52,6 +52,7 @@ public class VenteController {
 
         VenteServiceModel venteServiceModel = new VenteServiceModel(milliseconds, dvdServiceModel,
         venteAddDTO.getQuantite(), clientService.findById(venteAddDTO.getClient_id()));
+
         return venteService.add(venteServiceModel);
     }
 

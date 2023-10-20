@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PanierDvdFeignBean {
+
     private Long dvdId;
 
     private Long panierId;
