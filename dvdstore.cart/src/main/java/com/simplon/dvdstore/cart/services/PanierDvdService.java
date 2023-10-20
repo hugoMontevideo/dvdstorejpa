@@ -53,6 +53,9 @@ public class PanierDvdService {
         panierDvdRepositoryModel.setPanier(panierRepositoryModel.get());
 
         panierDvdRepository.save(panierDvdRepositoryModel);
+
+
+
     }
 
 
@@ -61,6 +64,16 @@ public class PanierDvdService {
 }
 
 
-//        panierDvdRepositoryModel.get().getPanier().getDvds().stream().map(
-//                dvdStoreCartMapper::panierDvdRepositorytoService
-//        ).collect(Collectors.toList());
+
+//   panierDvdRepositoryModel.get().getPanier().getDvds().stream().map(
+//           (value) -> dvdStoreCartMapper.panierRepositoryToService(value)
+////                dvdStoreCartMapper::panierDvdRepositorytoService
+//           ).collect(Collectors.toList());
+
+
+
+
+
+
+
+

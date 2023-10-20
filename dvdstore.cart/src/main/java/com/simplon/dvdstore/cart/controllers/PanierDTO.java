@@ -13,6 +13,6 @@ public class PanierDTO {
 
     private Long clientId;
 
-    private Long createdAt;
+    private Long createdAt = 0L;
 
 }

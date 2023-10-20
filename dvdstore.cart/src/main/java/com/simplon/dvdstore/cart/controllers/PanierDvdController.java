@@ -39,11 +39,7 @@ public class PanierDvdController {
 
             PanierDvdResponseDTO panierDvdResponseDTO = dvdStoreCartMapper.panierDvdServiceToDto(panierDvdServiceResponseModel);
 
-//            PanierResponseDTO panierResponseDTO = new PanierResponseDTO( panierDvdServiceResponseModel.getPanier().getId(), panierDvdServiceResponseModel.getPanier().getAmount(), panierDvdServiceResponseModel.getPanier().getClientId(),
-//                    panierDvdServiceResponseModel.getPanier().getCreatedAt());
-//
-//            return new ResponseEntity<>(new PanierDvdResponseDTO(panierDvdServiceResponseModel.getDvdId(), panierResponseDTO, panierDvdServiceResponseModel.getId(), panierDvdServiceResponseModel.getDvdSubtotal(),panierDvdServiceResponseModel.getClientId()),
-//                    HttpStatus.OK) ;
+
             return new ResponseEntity<>( panierDvdResponseDTO,
                     HttpStatus.OK) ;
         }catch(Exception ex){
@@ -54,4 +50,26 @@ public class PanierDvdController {
         }
     }
 
+    @DeleteMapping("/panierdvd/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id){
+        if(panierDvdService.findById(id) != null ){
+            panierDvdService.delete(id);
+            return new ResponseEntity<>("le dvd id : " + id + " a été supprimé", HttpStatus.OK);
+        }else{
+            //  throw new NotFoundException(id);
+            return new ResponseEntity<>("le dvd id : " + id + " n'a pas été trouvé", HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
+
+
+
 }
+
+//            PanierResponseDTO panierResponseDTO = new PanierResponseDTO( panierDvdServiceResponseModel.getPanier().getId(), panierDvdServiceResponseModel.getPanier().getAmount(), panierDvdServiceResponseModel.getPanier().getClientId(),
+//                    panierDvdServiceResponseModel.getPanier().getCreatedAt());
+//
+//            return new ResponseEntity<>(new PanierDvdResponseDTO(panierDvdServiceResponseModel.getDvdId(), panierResponseDTO, panierDvdServiceResponseModel.getId(), panierDvdServiceResponseModel.getDvdSubtotal(),panierDvdServiceResponseModel.getClientId()),
+//                    HttpStatus.OK) ;

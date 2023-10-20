@@ -1,13 +1,17 @@
 package com.simplon.dvdstore.cart.services;
 
 import com.simplon.dvdstore.cart.controllers.PanierGetDTO;
+import com.simplon.dvdstore.cart.mappers.DvdStoreCartMapper;
 import com.simplon.dvdstore.cart.repositories.PanierDvdRepositoryModel;
 import com.simplon.dvdstore.cart.repositories.PanierRepository;
 import com.simplon.dvdstore.cart.repositories.PanierRepositoryModel;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -15,54 +19,44 @@ public class PanierService {
     @Autowired
     PanierRepository panierRepository;
 
-    public boolean save(PanierServiceModel panierServiceModel) {
+    private final DvdStoreCartMapper dvdStoreCartMapper = DvdStoreCartMapper.INSTANCE;
+
+    public PanierServiceModel save(PanierServiceModel panierServiceModel) {
 
         ArrayList<PanierDvdRepositoryModel>  panierDvdRepositoryModels = new ArrayList<>();
 
-        for (PanierDvdServiceResponseModel panierDvdService : panierServiceModel.getDvds()) {
-
-//            PanierDvdRepositoryModel panierDvd = new PanierDvdRepositoryModel(panierDvdService.getDvdId(), null, panierDvdService.getId(), panierDvdService.getDvdSubtotal(), panierDvdService.getClientId() );
-
-            PanierDvdRepositoryModel panierDvd = new PanierDvdRepositoryModel( );
-
-            panierDvdRepositoryModels.add(panierDvd);
-        }
+        Date date = new Date();
+        Long  millisecDate = date.getTime();
 
         PanierRepositoryModel panierRepositoryModel = new PanierRepositoryModel(
                0L,
                 panierServiceModel.getAmount(),
                 panierServiceModel.getClientId(),
-                panierServiceModel.getCreatedAt(),
+                millisecDate,
                 panierDvdRepositoryModels);
-
         PanierRepositoryModel panierRepositoryModelReturn = panierRepository.save(panierRepositoryModel);
 
-        return panierServiceModel != null;
+        return dvdStoreCartMapper.panierRepositoryToService2(panierRepositoryModelReturn);
     }
 
+  @Transactional  // gère le debut et la fin du commit
     public PanierServiceModel findById(Long id) {
-        ArrayList<PanierDvdServiceResponseModel>  panierDvdServiceResponses = new ArrayList<>();
-
-        System.out.println(panierDvdServiceResponses.toString());
 
         Optional<PanierRepositoryModel> panierRepositoryModel = panierRepository.findById(id);
-
-
-        if (panierRepositoryModel.isEmpty()) {
-            return null;
-        } else {
-
-//            for (PanierDvdRepositoryModel panierDvdRepositoryModel : panierRepositoryModel.get().getDvds()) {
-//
-//                PanierResponseServiceModel panierServiceModel = new PanierResponseServiceModel( Optional.ofNullable(panierDvdRepositoryModel.getPanier().getId()),panierDvdRepositoryModel.getPanier().getAmount(),panierDvdRepositoryModel.getPanier().getClientId(),panierDvdRepositoryModel.getPanier().getCreatedAt() );
-//
-//                PanierDvdServiceResponseModel panierDvd = new PanierDvdServiceResponseModel(panierDvdRepositoryModel.getDvdId(), panierServiceModel, panierDvdRepositoryModel.getId(), panierDvdRepositoryModel.getDvdSubtotal(), panierDvdRepositoryModel.getClientId() );
-//
-//                panierDvdServiceResponses.add(panierDvd);
-//            }
-            return new PanierServiceModel((panierRepositoryModel.get().getId()), panierRepositoryModel.get().getAmount(), panierRepositoryModel.get().getClientId(), panierRepositoryModel.get().getCreatedAt(), panierDvdServiceResponses );
-
+        if(panierRepositoryModel.isPresent()){
+            return dvdStoreCartMapper.panierRepositoryToService2(panierRepositoryModel.get());
         }
+        return null;
+
+//        if (panierRepositoryModel.isEmpty()) {
+//            return null;
+//        } else {
+//
+//            return dvdStoreCartMapper.panierRepositoryToService2(panierRepositoryModel.get());
+//
+////            return new PanierServiceModel((panierRepositoryModel.get().getId()), panierRepositoryModel.get().getAmount(), panierRepositoryModel.get().getClientId(), panierRepositoryModel.get().getCreatedAt(), panierDvdServiceResponses );
+//
+//        }
     }
 
     public void delete(Long id) {
@@ -70,3 +64,18 @@ public class PanierService {
     }
 
 }
+
+
+
+//   save     PanierDvdRepositoryModel panierDvd = new PanierDvdRepositoryModel(panierDvdService.getDvdId(), null, panierDvdService.getId(), panierDvdService.getDvdSubtotal(), panierDvdService.getClientId() );
+
+
+
+// by id //            for (PanierDvdRepositoryModel panierDvdRepositoryModel : panierRepositoryModel.get().getDvds()) {
+////
+////                PanierResponseServiceModel panierServiceModel = new PanierResponseServiceModel( Optional.ofNullable(panierDvdRepositoryModel.getPanier().getId()),panierDvdRepositoryModel.getPanier().getAmount(),panierDvdRepositoryModel.getPanier().getClientId(),panierDvdRepositoryModel.getPanier().getCreatedAt() );
+////
+////                PanierDvdServiceResponseModel panierDvd = new PanierDvdServiceResponseModel(panierDvdRepositoryModel.getDvdId(), panierServiceModel, panierDvdRepositoryModel.getId(), panierDvdRepositoryModel.getDvdSubtotal(), panierDvdRepositoryModel.getClientId() );
+////
+////                panierDvdServiceResponses.add(panierDvd);
+////            }

@@ -30,7 +30,6 @@ public interface DvdStoreCartMapper {
 
 
 
-
     // ------------------------------------------------------------------------------
     //             List<Repository>  ->  List<Service>  -->  List<GetDTO>
     // ------------------------------------------------------------------------------
@@ -45,10 +44,19 @@ public interface DvdStoreCartMapper {
     @Mapping(target = "dvds", ignore = true)
     PanierServiceModel panierRepositoryToService(PanierRepositoryModel panierRepositoryModel);
 
+    PanierServiceModel panierRepositoryToService2(PanierRepositoryModel panierRepositoryModel);
+
+
+    PanierResponseDTO panierServiceToDTO(PanierServiceModel panierServiceModel);
+
+
+
+
     @Mapping(target = "panier", ignore = true)
     PanierDvdServiceResponseModel panierDvdRepositoryToService(PanierDvdRepositoryModel panierDvdRepositoryModel );
 
     PanierDvdResponseDTO panierDvdServiceToDto(PanierDvdServiceResponseModel panierDvdServiceResponseModel );
+
 
 
 }

@@ -12,7 +12,7 @@ import java.util.Optional;
 public class PanierServiceModel {
 
 //    Optional<Long> id;
-    Long id;
+    private Long id;
 
     private Float amount;
 
