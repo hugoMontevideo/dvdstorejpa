@@ -7,7 +7,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 @Table(name="dvdstore")
 public class DvdRepositoryModel {
@@ -24,8 +24,6 @@ public class DvdRepositoryModel {
     private Float prix;
     @Column(name = "picture")
     private String picture;
-
-    public DvdRepositoryModel(){};
 
 
     public DvdRepositoryModel(String name, String genre) {

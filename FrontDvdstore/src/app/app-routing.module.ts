@@ -9,6 +9,7 @@ import { ClientItemComponent } from './admin/client/client-item/client-item.comp
 import { VentesComponent } from './admin/vente/ventes/ventes.component';
 import { VentesFormComponent } from './admin/vente/ventes-form/ventes-form.component';
 import { LoginComponent } from './login/login.component';
+import { PanierComponent } from './admin/core/panier/panier.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'dvdstore/clients/form/:id', component: ClientFormComponent},
   { path: 'dvdstore/ventes', component: VentesComponent},
   { path: 'dvdstore/ventes/form', component: VentesFormComponent},
+  { path: 'panier', component: PanierComponent},
 
 ];
 

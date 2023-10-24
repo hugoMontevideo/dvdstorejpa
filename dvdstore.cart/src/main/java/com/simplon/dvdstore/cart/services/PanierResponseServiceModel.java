@@ -9,7 +9,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PanierResponseServiceModel {
-    Long id;
+    private Long id;
 //    Optional<Long> id;
 
     private Float amount;

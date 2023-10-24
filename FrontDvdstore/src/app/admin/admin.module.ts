@@ -13,6 +13,8 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { SidebarComponent } from './core/components/sidebar/sidebar.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { PanierComponent } from './core/panier/panier.component';
+import { PanierItemComponent } from './core/panier-item/panier-item.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,11 @@ import { RouterModule } from '@angular/router';
     VentesComponent,
     VentesFormComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    PanierComponent,
+    PanierItemComponent,
+
+  
   ],
   imports: [
     BrowserModule,

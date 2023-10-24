@@ -1,7 +1,6 @@
 package com.simplon.dvdstore.cart.controllers;
 
 import com.simplon.dvdstore.cart.mappers.DvdStoreCartMapper;
-import com.simplon.dvdstore.cart.repositories.PanierDvdRepositoryModel;
 import com.simplon.dvdstore.cart.services.PanierDvdService;
 import com.simplon.dvdstore.cart.services.PanierDvdServiceRequestModel;
 import com.simplon.dvdstore.cart.services.PanierDvdServiceResponseModel;
@@ -11,11 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+//@CrossOrigin(origins = "http://localhost:80")
 @CrossOrigin
 @RestController
 @RequestMapping("carts")
 public class PanierDvdController {
-
     @Autowired
     PanierDvdService panierDvdService;
 
@@ -34,6 +33,7 @@ public class PanierDvdController {
 
     @GetMapping("/panierdvd/{id}")   // findById table  panierDvd
     public ResponseEntity<PanierDvdResponseDTO> findById(@PathVariable Long id){
+        System.out.println("hiii");
         try{
             PanierDvdServiceResponseModel panierDvdServiceResponseModel =  panierDvdService.findById(id);
 

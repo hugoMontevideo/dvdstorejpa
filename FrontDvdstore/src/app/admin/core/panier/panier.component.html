@@ -1,0 +1,62 @@
+<div class="container-fluid wrapper">
+  <app-panier-item></app-panier-item>
+  <div class="row dvdpanier">
+    <h2 class="text-center">Client id : {{panierDTOs[indexDvd].id}}</h2>
+    <table class="table table-striped container">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id dvd</th>
+          <th scope="col">Quantité</th>
+          <th scope="col">Sous-total</th>
+          <th scope="col">Actions</th>  
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let dvdPanier of panierDTOs[indexDvd].dvds; let index1 = index" >  
+              <th class="row">{{dvdPanier.id}}</th>
+              <th class="">{{dvdPanier.dvdId}}</th>
+              <th class="">{{dvdPanier.dvdQuantite}}</th>
+              <th class="">{{dvdPanier.dvdSubtotal}}</th>
+              <th class="">
+                <button (click)="display(index1)">Voir</button> 
+                <button (click)="deleteDvdPanier(index1)">Supprimer</button> 
+              </th>
+             
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panier-list">
+    <h2 class="text-center">Liste de paniers</h2>
+    <table class="table table-striped container">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id client</th>
+          <th scope="col">Date d'achat</th>
+          <!-- <th scope="col">Liste d'achats</th> -->
+          <th scope="col">Sous-total</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let panier of panierDTOs; let index = index" >  
+              <th class="row">{{panier.id}}</th>
+              <th class="">{{panier.clientId}}</th>
+              <th class="">{{ panier.createdAt | date:'dd/MM/yy' }} </th>         
+              <!-- <th class="">
+                  <div *ngFor="let panierDvd of panier.dvds">
+                      {{panierDvd.dvdQuantite}} = {{panierDvd.dvdSubtotal}} €
+                  </div>
+              </th> -->
+              <th class="">{{panier.amount}}</th>
+              <th>
+                <button (click)="display(index)">Voir</button> 
+                <button (click)="delete(index)">Supprimer</button> 
+              </th>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

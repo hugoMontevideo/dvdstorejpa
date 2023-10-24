@@ -45,7 +45,15 @@ export class HttpService{
         }));
     }
 
+    // PANIER API  ********
+    getPaniers = ( table: string ): Observable<any> =>{
+        return this.httpClient.get(`${this.ENV_DEV}/carts/${table}`, {responseType: "json"});
+    }
 
+
+    deletePanierDvd = ( table: string, id: number ): Observable<any> =>{
+        return this.httpClient.delete(`${this.ENV_DEV}/carts/${table}/${id}`, {responseType: "json"});
+    }
 
 
 }

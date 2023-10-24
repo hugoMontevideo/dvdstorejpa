@@ -11,11 +11,16 @@ public class PanierDvdFeignBean {
 
     private Long dvdId;
 
-    private Long panierId;
+    private PanierFeignBean panier;
+
+    private Long id;
 
     private Float dvdSubtotal;
 
     private Long clientId;
+
+    private Integer dvdQuantite;
+
 
     PanierDvdFeignBean( Float amount){
         dvdSubtotal = amount;

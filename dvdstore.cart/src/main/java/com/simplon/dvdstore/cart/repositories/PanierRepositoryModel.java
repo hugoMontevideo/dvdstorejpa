@@ -29,7 +29,7 @@ public class PanierRepositoryModel {
     @Column(name="created_at")
     private Long createdAt;
 
-   @OneToMany(mappedBy = "panier", orphanRemoval = true)
+    @OneToMany(mappedBy = "panier", orphanRemoval = true)
     private List<PanierDvdRepositoryModel> dvds = new ArrayList<>() ;
 
 }

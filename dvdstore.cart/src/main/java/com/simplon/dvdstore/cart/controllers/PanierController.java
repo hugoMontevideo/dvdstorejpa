@@ -1,9 +1,6 @@
 package com.simplon.dvdstore.cart.controllers;
 
 import com.simplon.dvdstore.cart.mappers.DvdStoreCartMapper;
-import com.simplon.dvdstore.cart.repositories.PanierDvdRepository;
-import com.simplon.dvdstore.cart.repositories.PanierDvdRepositoryModel;
-import com.simplon.dvdstore.cart.repositories.PanierRepositoryModel;
 import com.simplon.dvdstore.cart.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
+// @CrossOrigin(origins = "http://localhost:80")
 @CrossOrigin
 @RestController
 @RequestMapping("carts")
@@ -36,6 +33,8 @@ public class PanierController {
     public ResponseEntity<PanierResponseDTO> findPanierById(@PathVariable Long id){
         try{
             PanierServiceModel panierServiceModel =  panierService.findById(id);
+
+            System.out.println(panierServiceModel);
             return new ResponseEntity<>( dvdStoreCartMapper.panierServiceToDTO(panierServiceModel) ,HttpStatus.OK) ;
 
         }catch(Exception ex){
@@ -45,6 +44,18 @@ public class PanierController {
         }
     }
 
+    @GetMapping("/panier")
+    public ArrayList<PanierResponseDTO> getAll(){
+        ArrayList<PanierResponseDTO> panierResponseDTOS = new ArrayList<>();
+
+        ArrayList<PanierServiceModel> panierServiceModels = panierService.findAll() ;
+        panierServiceModels.forEach((item)->{
+            PanierResponseDTO panierResponseDTO = dvdStoreCartMapper.panierServiceToDTO(item);
+            panierResponseDTOS.add(panierResponseDTO);
+            });
+
+        return panierResponseDTOS;
+    }
 
     @DeleteMapping("/panier/{id}")  // Deleting a cart by Id
     public ResponseEntity<String> deletePanierById(@PathVariable Long id){
@@ -84,3 +95,9 @@ public class PanierController {
 //
 //        }
 //    }
+
+//     add       DvdStoreGetDTO dvdStoreGetDTO = new DvdStoreGetDTO(item.getDvdServiceModel().getId().get(), item.getDvdServiceModel().getName(), item.getDvdServiceModel().getGenre(), item.getDvdServiceModel().getQuantite(), item.getDvdServiceModel().getPrix(), item.getDvdServiceModel().getPicture());
+//
+//                ClientGetDTO clientGetDTO = new ClientGetDTO(item.getClientServiceModel().getId().get(), item.getClientServiceModel().getName(), item.getClientServiceModel().getFirstname(), item.getClientServiceModel().getEmail(), item.getClientServiceModel().getAdresse());
+//
+//                venteGetAllDTOS.add(new VenteGetAllDTO(item.getId().get(), item.getDateDeVente(), dvdStoreGetDTO.id(), dvdStoreGetDTO.name(), item.getQuantite(), clientGetDTO.getId(), clientGetDTO.getName(), item.getMontant()));

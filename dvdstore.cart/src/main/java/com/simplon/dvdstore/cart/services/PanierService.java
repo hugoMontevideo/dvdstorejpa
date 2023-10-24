@@ -39,16 +39,38 @@ public class PanierService {
         return dvdStoreCartMapper.panierRepositoryToService2(panierRepositoryModelReturn);
     }
 
-  @Transactional  // gère le debut et la fin du commit
+    @Transactional  // gère le debut et la fin du commit
     public PanierServiceModel findById(Long id) {
-
         Optional<PanierRepositoryModel> panierRepositoryModel = panierRepository.findById(id);
         if(panierRepositoryModel.isPresent()){
             return dvdStoreCartMapper.panierRepositoryToService2(panierRepositoryModel.get());
         }
         return null;
+    }
 
-//        if (panierRepositoryModel.isEmpty()) {
+
+    @Transactional
+    public ArrayList<PanierServiceModel> findAll() {
+
+        ArrayList<PanierServiceModel> panierServiceModels = new ArrayList<>();
+
+        ArrayList<PanierRepositoryModel> panierRepositoryModels = panierRepository.findAll();
+
+        panierRepositoryModels.forEach( (item)->{
+            PanierServiceModel dvdServiceModel = dvdStoreCartMapper.panierRepositoryToService2(item);
+            panierServiceModels.add(dvdServiceModel);
+        });
+
+        return panierServiceModels;
+    }
+
+    public void delete(Long id) {
+        panierRepository.deleteById(id);
+    }
+}
+
+
+//  findbyId      if (panierRepositoryModel.isEmpty()) {
 //            return null;
 //        } else {
 //
@@ -57,13 +79,6 @@ public class PanierService {
 ////            return new PanierServiceModel((panierRepositoryModel.get().getId()), panierRepositoryModel.get().getAmount(), panierRepositoryModel.get().getClientId(), panierRepositoryModel.get().getCreatedAt(), panierDvdServiceResponses );
 //
 //        }
-    }
-
-    public void delete(Long id) {
-        panierRepository.deleteById(id);
-    }
-
-}
 
 
 

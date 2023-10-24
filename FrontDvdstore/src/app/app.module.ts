@@ -16,8 +16,7 @@ import { JWTInterceptorService } from './jwtinterceptor.service';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
-  
+    RegisterComponent,  
   ],
   imports: [
     BrowserModule,

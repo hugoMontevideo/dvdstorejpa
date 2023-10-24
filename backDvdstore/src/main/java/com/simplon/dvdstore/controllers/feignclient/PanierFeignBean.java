@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +20,7 @@ public class PanierFeignBean {
     private Float amount;
     private Long clientId;
     private Long createdAt;
+    private List<PanierDvdFeignBean> dvds = new ArrayList<>() ;
 
     PanierFeignBean( Float amount){
         this.amount = amount;

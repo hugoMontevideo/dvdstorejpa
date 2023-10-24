@@ -21,9 +21,7 @@ export class DvdstoreComponent implements OnInit {
   genreEnumValues = Object.values(this.genreEnum);
   currentUser!: User;
 
-  constructor(
-      private httpService: HttpService
-     ){}
+  constructor( private httpService: HttpService ){}
 
   ngOnInit( ) {
     // get the token if any

@@ -6,6 +6,7 @@ import com.simplon.dvdstore.cart.repositories.PanierDvdRepository;
 import com.simplon.dvdstore.cart.repositories.PanierDvdRepositoryModel;
 import com.simplon.dvdstore.cart.repositories.PanierRepository;
 import com.simplon.dvdstore.cart.repositories.PanierRepositoryModel;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,11 @@ public class PanierDvdService {
     PanierRepository panierRepository;
     private final DvdStoreCartMapper dvdStoreCartMapper = DvdStoreCartMapper.INSTANCE;
 
+    @Transactional
     public PanierDvdServiceResponseModel findById(Long id) {
 
         Optional<PanierDvdRepositoryModel> panierDvdRepositoryModel = panierDvdRepository.findById(id);
-
+        System.out.println(panierDvdRepositoryModel.get().getPanier().getDvds());
         if (panierDvdRepositoryModel.isEmpty()) {
             return null;
         } else {
@@ -40,12 +42,9 @@ public class PanierDvdService {
         panierDvdRepository.savePanierDvd(panierDvdServiceRequestModel.getDvdId().intValue(), panierDvdServiceRequestModel.getPanierId().intValue(), panierDvdServiceRequestModel.getDvdQuantite(), panierDvdServiceRequestModel.getDvdPrix(), panierDvdServiceRequestModel.getClientId().intValue() );
     }
 
-    public void delete(Long id) {
-        panierDvdRepository.deleteById(id);
-    }
-
 
     public void insertIntoPanierDvd(PanierDvdServiceRequestModel panierDvdServiceRequestModel) {
+        // get panier object
         Optional<PanierRepositoryModel> panierRepositoryModel = panierRepository.findById(panierDvdServiceRequestModel.getPanierId());
 
         PanierDvdRepositoryModel panierDvdRepositoryModel = dvdStoreCartMapper.serviceToRepository(panierDvdServiceRequestModel);
@@ -54,8 +53,10 @@ public class PanierDvdService {
 
         panierDvdRepository.save(panierDvdRepositoryModel);
 
+    }
 
-
+    public void delete(Long id) {
+        panierDvdRepository.deleteById(id);
     }
 
 
