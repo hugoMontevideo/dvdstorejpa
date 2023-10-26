@@ -8,8 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PanierGetDTO {
+
     private Long Id;
+
     private Float amount;
+
     private Long clientId;
+
     private Long createdAt;
+
 }

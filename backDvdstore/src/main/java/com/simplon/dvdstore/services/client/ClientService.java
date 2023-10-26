@@ -61,8 +61,7 @@ public class ClientService {
         if(!clientRepository.existsById(clientServiceModel.getId().get())){
             return false;
         }else{
-            ClientRepositoryModel clientRepositoryModelReturned = clientRepository.save(new ClientRepositoryModel(clientServiceModel.getId().get(), clientServiceModel.getName(), clientServiceModel.getFirstname(),
-                    clientServiceModel.getEmail(), clientServiceModel.getAdresse()));
+            ClientRepositoryModel clientRepositoryModelReturned = clientRepository.save(new ClientRepositoryModel(clientServiceModel.getId().get(), clientServiceModel.getName(), clientServiceModel.getFirstname(), clientServiceModel.getEmail(), clientServiceModel.getAdresse()));
             return clientRepositoryModelReturned != null;
         }
     }

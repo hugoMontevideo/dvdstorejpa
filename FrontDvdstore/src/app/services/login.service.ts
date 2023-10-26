@@ -6,6 +6,8 @@ import { environment } from "src/environments/environments";
 import { LoginResponse } from "../register/model/login-response.interface";
 import { JWTTokenService } from "./JWTTokens.service";
 import { Router } from "@angular/router";
+import { PanierDTO } from "../admin/core/panier/panierDTO.interface";
+import { PanierCreateDTO } from "../admin/core/panier/panierCreateDTO.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +15,8 @@ import { Router } from "@angular/router";
 
 export class LoginService {
     ENV_LOG: string = `http://localhost`;
+    ENV_DEV = environment.apiUrl;
+
     table:string = "auth";
 
     currentUser: LoginResponse = {
@@ -34,14 +38,20 @@ export class LoginService {
                 
         return this.httpClient.post<any>(`${this.ENV_LOG}/${this.table}/authorize`, loginView, {responseType:"json"})
         .pipe(map(data=>{
-            console.log(data);
+            // console.log(data);
             this.currentUser.username = data.user.login;
             this.currentUser.token = data.token;
             sessionStorage.setItem("currentUser", JSON.stringify(this.currentUser));
             return this.currentUser.username;    
-            
         }));
     }
+
+     // -- >> PANIER API PANIER ********
+    
+     createPanier = ( table: string, panierDTO : PanierCreateDTO): Observable<any> =>{
+        return this.httpClient.post(`http://localhost/carts/panier`, panierDTO, {responseType: "json"});
+    }
+
 
 }
 

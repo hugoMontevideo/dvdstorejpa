@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable,map } from "rxjs";
 import { environment } from "src/environments/environments";
 import { Router } from "@angular/router";
+import { PanierCreateDTO } from "../core/panier/panierCreateDTO.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -50,9 +51,12 @@ export class HttpService{
         return this.httpClient.get(`${this.ENV_DEV}/carts/${table}`, {responseType: "json"});
     }
 
-
     deletePanierDvd = ( table: string, id: number ): Observable<any> =>{
         return this.httpClient.delete(`${this.ENV_DEV}/carts/${table}/${id}`, {responseType: "json"});
+    }
+
+    createPanier = ( table: string, panierDTO : PanierCreateDTO): Observable<any> =>{
+        return this.httpClient.post(`http://localhost/carts/panier`, panierDTO, {responseType: "json"});
     }
 
 

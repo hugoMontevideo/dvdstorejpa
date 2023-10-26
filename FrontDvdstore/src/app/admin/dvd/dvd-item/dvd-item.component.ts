@@ -53,7 +53,11 @@ export class DvdItemComponent implements OnInit{
       complete:()=> this.router.navigateByUrl("dvdstore")
     });
   }
-
+  onModifyDvd = (id:number) =>{
+    console.log("hello");
+    
+    this.router.navigateByUrl('/dvdstore');
+  }
 
 
 }

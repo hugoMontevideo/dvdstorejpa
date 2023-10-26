@@ -3,9 +3,9 @@ nav{
     div.collapse{
         position: relative;
         input{
-            width: 20rem;
+            // width: 20rem;
             font-size: .8rem;
-            padding-left: 2.2rem;
+            // padding-left: 2.2rem;
         }
         img{
             position: absolute;
@@ -48,6 +48,9 @@ nav{
         font-weight:800;
         font-size: 2.2rem;
         color: black;
+        img{
+            width: 50px;
+        }
     
     }
 }

@@ -2,8 +2,10 @@ package com.simplon.dvdstore.controllers.auth;
 
 import com.simplon.dvdstore.exceptions.AccountExistsException;
 import com.simplon.dvdstore.exceptions.UnauthorizedException;
+import com.simplon.dvdstore.services.client.ClientServiceModel;
 import com.simplon.dvdstore.services.jwt.JwtUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -44,6 +46,20 @@ public class SecurityController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    @GetMapping("/{name}")
+    public ResponseEntity<ClientServiceModel> findByName(@PathVariable String name){
+//        try{
+//            ClientServiceModel clientServiceModel =  clientService.findById(id);
+////            return new ResponseEntity<>(new ClientGetDTO(clientServiceModel.getId().get(), clientServiceModel.getName(),clientServiceModel.getFirstname(),clientServiceModel.getEmail(),clientServiceModel.getAdresse()), HttpStatus.OK) ; // *** mappage à revoir
+//            return new ResponseEntity<>(clientServiceModel, HttpStatus.OK) ;
+//        }catch(DvdNotFoundException ex){
+//
+//            System.out.println(ex.getReason());
+//            throw new ResponseStatusException(
+//                    HttpStatus.NOT_FOUND, ex.getReason() );
+//        }
+        return new ResponseEntity<>(new ClientServiceModel(), HttpStatus.OK) ;
     }
     //Remarque: authentifie le principal (le user) à partir du JWT.
 }

@@ -1,5 +1,6 @@
 package com.simplon.dvdstore.domain;
 
+import com.simplon.dvdstore.repositories.client.ClientRepositoryModel;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,7 @@ public class Owner implements UserDetails {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
+
 
     // Adding setters for registration purposes
     public int getId() {

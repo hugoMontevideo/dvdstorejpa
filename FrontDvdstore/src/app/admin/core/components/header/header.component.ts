@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { User } from 'src/app/admin/utils/model/user.interface';
+import { environment } from 'src/environments/environments';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,8 @@ export class HeaderComponent implements OnInit{
   searchText!:string;
   conButton:string = "Connexion";
   initials: string = "x";
+  ENV_ICON = `${environment.apiImg}/icons/`;
+
 
   currentUser!:User;
 

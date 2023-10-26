@@ -1,7 +1,7 @@
 <div class="container-fluid wrapper">
-  <app-panier-item></app-panier-item>
+  <!-- <app-panier-item></app-panier-item> -->
   <div class="row dvdpanier">
-    <h2 class="text-center">Client id : {{panierDTOs[indexDvd].id}}</h2>
+    <h2 class="text-center">Panier du client id : {{panierDTOs[indexDvd].id}}</h2>
     <table class="table table-striped container">
       <thead>
         <tr>
@@ -27,7 +27,7 @@
       </tbody>
     </table>
   </div>
-  <div class="panier-list">
+  <!-- <div class="panier-list">
     <h2 class="text-center">Liste de paniers</h2>
     <table class="table table-striped container">
       <thead>
@@ -35,7 +35,6 @@
           <th scope="col">#</th>
           <th scope="col">Id client</th>
           <th scope="col">Date d'achat</th>
-          <!-- <th scope="col">Liste d'achats</th> -->
           <th scope="col">Sous-total</th>
           <th scope="col">Actions</th>
         </tr>
@@ -45,11 +44,7 @@
               <th class="row">{{panier.id}}</th>
               <th class="">{{panier.clientId}}</th>
               <th class="">{{ panier.createdAt | date:'dd/MM/yy' }} </th>         
-              <!-- <th class="">
-                  <div *ngFor="let panierDvd of panier.dvds">
-                      {{panierDvd.dvdQuantite}} = {{panierDvd.dvdSubtotal}} €
-                  </div>
-              </th> -->
+
               <th class="">{{panier.amount}}</th>
               <th>
                 <button (click)="display(index)">Voir</button> 
@@ -58,5 +53,5 @@
           </tr>
       </tbody>
     </table>
-  </div>
+  </div> -->
 </div>

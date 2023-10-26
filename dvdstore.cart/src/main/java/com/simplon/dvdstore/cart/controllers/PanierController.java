@@ -23,7 +23,7 @@ public class PanierController {
 
     @PostMapping("/panier")  // insert a cart
     ResponseEntity<PanierResponseDTO> insertPanier(@RequestBody PanierDTO panierDTO){
-
+        System.out.println("ok front");
         PanierServiceModel isOk = panierService.save(new PanierServiceModel(0L, 0F, panierDTO.getClientId(), panierDTO.getCreatedAt(), new ArrayList<>()));
 
         return new ResponseEntity<>( dvdStoreCartMapper.panierServiceToDTO(isOk) , HttpStatus.OK);
@@ -39,8 +39,7 @@ public class PanierController {
 
         }catch(Exception ex){
             System.out.println(ex.getMessage());
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, ex.getMessage() );
+            throw new ResponseStatusException( HttpStatus.NOT_FOUND, ex.getMessage() );
         }
     }
 

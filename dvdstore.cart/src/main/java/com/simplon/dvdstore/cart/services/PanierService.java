@@ -24,7 +24,6 @@ public class PanierService {
     public PanierServiceModel save(PanierServiceModel panierServiceModel) {
 
         ArrayList<PanierDvdRepositoryModel>  panierDvdRepositoryModels = new ArrayList<>();
-
         Date date = new Date();
         Long  millisecDate = date.getTime();
 

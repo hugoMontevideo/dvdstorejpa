@@ -4,6 +4,7 @@ import { GenreEnum } from '../../utils/enum/GenreEnum';
 import { environment } from 'src/environments/environments';
 import { User } from 'src/app/admin/utils/model/user.interface';
 import { HttpService } from '../../services/http.service';
+import { PanierCreateDTO } from '../../core/panier/panierCreateDTO.interface';
 
 @Component({
   selector: 'app-dvdstore',
@@ -53,6 +54,17 @@ export class DvdstoreComponent implements OnInit {
       complete: ()=>console.table(this.dvdToShow)
     })
   }
+
+  // onCreatePanier = ()=> {        
+  //   this.httpService.createPanier("panier", this.panierDTO)
+  //   .subscribe({
+  //     next:(data)=>{ console.log(data);
+  //     },
+  //     error:(err : Error)=>{console.log("create error"+ err);
+  //     }
+  //   })
+  // }
+
 
 
 }

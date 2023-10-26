@@ -34,11 +34,8 @@ export class PanierComponent {
               dvds: response[i].dvds,
             }
             this.panierDTOs.push(panierDto);
-         }         
-      
-           // console.table(this.panierDTOs);
-            
-          },
+          }         
+        },
       error:(err:Error)=>(console.log("page panier "+ err)),
       complete: ()=>console.log("end traitement")
     })

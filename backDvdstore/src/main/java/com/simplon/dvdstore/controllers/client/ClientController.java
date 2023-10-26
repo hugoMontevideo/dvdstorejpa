@@ -58,6 +58,21 @@ public class ClientController {
         }
     }
 
+    @GetMapping("/{name}")
+    public ResponseEntity<ClientServiceModel> findByName(@PathVariable String name){
+//        try{
+//            ClientServiceModel clientServiceModel =  clientService.findById(id);
+////            return new ResponseEntity<>(new ClientGetDTO(clientServiceModel.getId().get(), clientServiceModel.getName(),clientServiceModel.getFirstname(),clientServiceModel.getEmail(),clientServiceModel.getAdresse()), HttpStatus.OK) ; // *** mappage à revoir
+//            return new ResponseEntity<>(clientServiceModel, HttpStatus.OK) ;
+//        }catch(DvdNotFoundException ex){
+//
+//            System.out.println(ex.getReason());
+//            throw new ResponseStatusException(
+//                    HttpStatus.NOT_FOUND, ex.getReason() );
+//        }
+        return new ResponseEntity<>(new ClientServiceModel(), HttpStatus.OK) ;
+    }
+
     @PutMapping   // update
     public ResponseEntity<String> updateDvd(
             @RequestBody ClientGetDTO clientGetDTO

@@ -17,6 +17,16 @@ public class FeignClientController {
 
     private final MicroservicePanierProxy panierProxy;
 
+    @PostMapping("/panier")
+    ResponseEntity<String> addPanier(@RequestBody PanierFeignCreate panier){
+        System.out.println("hello");
+        System.out.println(panier);
+
+        panierProxy.save(panier);
+
+        return new ResponseEntity<>("panierDvd crée.", HttpStatus.OK);
+    }
+
     @GetMapping("/panier/{id}")
     PanierFeignBean panierById(@PathVariable("id") Long id)
     {
@@ -32,6 +42,13 @@ public class FeignClientController {
         return panierFeignBeans;
     }
 
+    @PostMapping("/panierdvd")
+    ResponseEntity<String> addPanierDvd(@PathVariable("id") Long id){
+
+        panierProxy.deletePanierDvd(id);
+
+        return new ResponseEntity<>("panierDvd supprimé.", HttpStatus.OK);
+    }
     @DeleteMapping("/panierdvd/{id}")
     ResponseEntity<String> deletePanierDvd(@PathVariable("id") Long id){
         System.out.println("hello");
