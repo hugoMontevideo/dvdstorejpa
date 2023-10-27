@@ -1,5 +1,6 @@
-
 .wrapper{
+    // height: 100vh;
+    // overflow-y: auto;
     padding:0;
     .row{
         padding: 0;
@@ -13,12 +14,17 @@
             color: #625757;
             font-weight: 400;
         }
+        a.btn-warning{
+            img{
+                width: 22px;
+            }
+        }
     }
 }
 
+
 .content{
-    padding: 0;
-    
+    padding: 0;  
 }
 
 

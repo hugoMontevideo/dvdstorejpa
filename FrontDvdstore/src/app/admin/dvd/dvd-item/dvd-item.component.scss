@@ -4,6 +4,9 @@
         padding: 0;
         margin: 0;
     }
+    .header{
+        padding: 0;
+    }
     .home{
         padding: 3rem 3.5rem;
         h1{
@@ -15,21 +18,25 @@
             font-size: 1.3rem;
         }
         .details{
-            margin: 0 2.5rem;
+            width: 100%;
+            // margin: 0 2.5rem;
+            .action{ margin: 0 auto}
             .btn{
-                width: 6rem;
+                width: 5rem;
                 font-size: .8rem;
+                &-warning{ margin-right: .2rem;}
                 &-delete{
                     background-color: #fb6508db;
                     color: rgba(255, 255, 255, 0.852);
-                    margin-left: .3rem;
+                    margin-left: .2rem;
                 }
+
             }
         }
     }
     .synopsis{
-        margin: 1rem 3.5rem;
-        max-width: 55rem;
+        // margin: 1rem 3.5rem;
+        // max-width: 55rem;
     }
 }
 

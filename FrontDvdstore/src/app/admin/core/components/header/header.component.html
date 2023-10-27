@@ -1,75 +1,56 @@
-
-
-
-<nav class="navbar-principal navbar-expand-lg">
-  <ion-item>
-
-
-  <h1>
-    <a routerLink="/dvdstore"
-            class="d-flex  justify-content-center"><img [src]="ENV_ICON + 'logo.png'" ></a>
-    <!-- <a routerLink="/dvdstore">Dvdstore</a> -->
-  </h1>
-  <div class="container-fluid"> 
-    
-
-         
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ion-item>
-
-      
-        <ion-input class="form-control me-2 search" 
-              type="search" 
-              placeholder="Rechercher" 
-              name="searchText" 
-              [(ngModel)]="searchText" 
-              (ngModelChange)="handleSearchClick(searchText.toLowerCase())">
-        </ion-input>
-      </ion-item>
-        <div class="login d-flex">
+<div class="ion-page" id="main-content">
+<!-- <ion-header> -->
+  <!-- <ion-toolbar color="warning" class="toolbarTitle" >
+      <ion-button slot="start" fill="clear" size="small" class="" >
+        <a  href="/"
+            class="d-flex justify-content-center">
+            <img [src]="ENV_ICON + 'logo.png'" >
+        </a>
+      </ion-button >
+      <ion-buttons slot="end">
+        <ion-button>
+          <div class="initials">{{ initials | uppercase }}</div> 
           <a class="btn btn-outline-success"
-                  href="/login" >{{ conButton }}</a>
-          <div class="initials">{{ initials | uppercase }}</div>
-        </div>
-        <img src="/assets/pictures/loupe.png" alt="">
-    </div>
-  </div>
-</ion-item>  
-</nav>
-<nav class="navbar-secondary navbar-expand-lg bg-body-light">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Derniers Films</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Enfants</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Populaires</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Indépendants</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Courts-Métrages</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Prochainement</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Tous les films</a>
-        </li>
-      </ul>
-      
-    </div>
-  </div>
-</nav>
+            href="/login" >{{ conButton }}</a>    
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar> -->
+    
+     <!-- <div class="ion-page" id="main-content"> -->
+      <ion-header >
+        <ion-toolbar color="warning" class="toolbarTitle">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title >
+            <a href="/"
+                class="d-flex justify-content-center">
+                <img [src]="ENV_ICON + 'logo.png'" >
+            </a>
+          </ion-title>
+          <ion-buttons slot="end">
+            <ion-button>
+              <div class="initials">{{ initials | uppercase }}</div> 
+              <a class="btn btn-outline-success"
+                href="/login" >{{ conButton }}</a>    
+            </ion-button>
+          </ion-buttons>
+
+        </ion-toolbar>
+      </ion-header>
+      <!-- <ion-content class="ion-padding"> Tap the button in the toolbar to open the menu. </ion-content> -->
+
+<!-- 
+    <ion-toolbar slot="subheader" class="toolbarSearch" show-clear-button="never" value="Never Show" >
+      <ion-searchbar slot="start"></ion-searchbar>
+    </ion-toolbar> -->
+        
+
+
+          <!-- <img src="/assets/pictures/loupe.png" alt=""> -->
+    
+      <!-- </div> -->
+    <!-- </ion-header> -->
+<div >
+    
 

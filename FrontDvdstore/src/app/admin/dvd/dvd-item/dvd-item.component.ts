@@ -14,7 +14,14 @@ export class DvdItemComponent implements OnInit{
   ENV_DEV_IMG = `${environment.apiImg}/`;
   table: string='dvds';
   id!: number;
-  currentDvd!: Dvd;
+  currentDvd: Dvd={
+      id:0,
+      name:'',
+      genre:'',
+      quantite:0,
+      prix:0,
+      picture:''
+    };
 
   constructor(private route:ActivatedRoute, 
           private httpService: HttpService,

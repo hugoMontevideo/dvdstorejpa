@@ -1,3 +1,28 @@
-<ion-app>
+<ion-app *ngIf="platform.is('mobile')">
+   <ion-content>
+         android
+         <ion-router-outlet ></ion-router-outlet>
+   </ion-content>
+</ion-app>
+
+<ion-app *ngIf="platform.is('ios')">
+   ios
    <ion-router-outlet></ion-router-outlet>
 </ion-app>
+
+<ion-app *ngIf="platform.is('desktop')">
+   desktop
+   <ion-router-outlet></ion-router-outlet>
+</ion-app>
+
+
+
+
+
+
+
+
+
+
+
+

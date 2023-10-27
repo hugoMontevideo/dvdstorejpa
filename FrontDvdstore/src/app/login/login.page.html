@@ -1,0 +1,52 @@
+
+<div class="container-fluid wrapper">
+    <div class="row flex-nowrap col-12">
+     
+        <!-- <app-sidebar class="col-md-3 col-xl-2 px-0 "
+          ></app-sidebar>
+  
+        <div class="col-md-9 col-xl-10 px-0 content">
+          <app-header 
+              class="col-12 "
+            ></app-header> -->
+
+
+        <form>     
+            <h5 class="card-header">Login</h5>
+            <ion-item>               
+                <ion-input 
+                    [(ngModel)]="loginView.username"
+                    name="username"
+                    label="Pseudo"
+                    labelPlacement="floating"
+                    maxlength="40"
+                    [counter] = "true"
+                    [clearInput]="true">
+                    <ion-text color="danger"></ion-text>
+                </ion-input>
+            </ion-item>
+            <ion-item>        
+                <ion-input 
+                    [(ngModel)]="loginView.password"
+                    name="password"
+                    type="password"
+                    label="Mot de passe"
+                    labelPlacement="floating"
+                    maxlength="40"
+                    [counter] = "true"
+                    [clearInput]="true">
+                    <ion-text color="danger"></ion-text>
+                </ion-input>
+            </ion-item>
+            
+            
+            <a class="btn btn-primary" (click)="onLoginClick()">Connexion</a>
+            
+            <div class="card-footer text-right">
+                <span class="text-danger">{{ loginError }}</span>
+            </div>        
+        </form> 
+ 
+    </div>
+
+</div>

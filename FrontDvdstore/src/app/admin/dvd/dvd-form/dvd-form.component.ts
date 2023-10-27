@@ -82,10 +82,10 @@ export class DvdFormComponent implements OnInit{
       }
       formData.append('picture', this.currentDvd.picture);
       this.httpService.updateDvd(formData, this.currentDvd.id??0)
-      // .subscribe({
-      //   next:()=> this.router.navigateByUrl("/dvdstore"),
-      //   error: (err: Error)=>console.error(`Error putDvdById ${err.message}`)
-      // });
+      .subscribe({
+        next:()=> this.router.navigateByUrl("/"),
+        error: (err: Error)=>console.error(`Error putDvdById ${err.message}`)
+      });
       // this.jwtAxiosService.updateDvd(formData, this.id );
     }
   } // onSubmit

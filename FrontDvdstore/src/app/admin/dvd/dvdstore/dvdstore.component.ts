@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environments';
 import { User } from 'src/app/admin/utils/model/user.interface';
 import { HttpService } from '../../services/http.service';
 import { PanierCreateDTO } from '../../core/panier/panierCreateDTO.interface';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-dvdstore',
@@ -21,8 +22,13 @@ export class DvdstoreComponent implements OnInit {
   genreEnum = GenreEnum;
   genreEnumValues = Object.values(this.genreEnum);
   currentUser!: User;
+  currentHeight:any;
+  
 
-  constructor( private httpService: HttpService ){}
+  constructor( 
+      private httpService: HttpService,
+      public platform: Platform
+    ){}
 
   ngOnInit( ) {
     // get the token if any
@@ -31,6 +37,10 @@ export class DvdstoreComponent implements OnInit {
       this.currentUser = JSON.parse(anything);
     }
     this.getDvds(this.table);
+
+   this.currentHeight = this.platform.height();
+
+
 
   }
 

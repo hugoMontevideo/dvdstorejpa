@@ -1,19 +1,19 @@
 <ion-content fullscreen="true">
-
     <div class="container-fluid wrapper">
-        <div class="row flex-nowrap col-12">
+        <div class="row d-flex flex-column col-12">
+            <!-- <div class="row flex-nowrap col-12"> -->
 
-            <!-- <app-sidebar class="col-md-3 col-xl-2 px-0 "
-                ></app-sidebar>
+            <!-- <app-sidebar class="col-md-3 col-xl-2 px-0 "></app-sidebar>
     
             <div class="col-md-9 col-xl-10 px-0 content"> -->
                        
-                    <!-- <app-header 
-                        class="col-12 "
-                        ></app-header> -->
+                <app-header class="header"></app-header>
 
-
-                <div class=" dvd_item d-flex home">
+                <div class=" dvd_item d-flex flex-column home">
+                    <a class="btn btn-warning" 
+                        href="/panier">
+                        <img [src]="ENV_DEV_IMG + 'icons/icons8-cart.png'" alt="">
+                    </a>
                     <div class="dvd_picture">
                         <img [src]="ENV_DEV_IMG + currentDvd.picture" alt="">
                     </div>
@@ -25,8 +25,8 @@
                             <p>{{ currentDvd.quantite }} en stock</p>
                         </div>
                         <div class="action d-flex">
-                            <a class="btn btn-primary" routerLink="/login"  >Modifier</a>
-                            <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+                            <a [href]="'/panier/form/'" class="btn btn-warning">Ajouter au panier</a>
+                            <a class="btn btn-primary" [href]="['/form/'+id]">Modifier</a>
                             <button class="btn btn-delete" (click)="onDelete(id)">Effacer</button>
                         </div>
                     </div>

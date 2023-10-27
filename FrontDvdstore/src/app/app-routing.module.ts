@@ -26,18 +26,18 @@ const routes: Routes = [
   //   loadChildren: () => import('./dvd/dvd.module').then( m => m.LoginPageModule)
   // },
 
-  { path: 'dvdstore', component: DvdstoreComponent},
-  { path: 'dvdstore/dvds/:id', component: DvdItemComponent},
-  { path: 'dvdstore/form', component: DvdFormComponent},
-  { path: 'dvdstore/form/:id', component: DvdFormComponent},
-  { path: 'dvdstore/clients', component: ClientsComponent},
-  { path: 'dvdstore/clients/:id', component: ClientItemComponent},
-  { path: 'dvdstore/clients/form', component: ClientFormComponent},
-  { path: 'dvdstore/clients/form/:id', component: ClientFormComponent},
-  { path: 'dvdstore/ventes', component: VentesComponent},
-  { path: 'dvdstore/ventes/form', component: VentesFormComponent},
+  { path: '', component: DvdstoreComponent},
+  { path: 'dvds/:id', component: DvdItemComponent},
+  { path: 'form', component: DvdFormComponent},
+  { path: 'form/:id', component: DvdFormComponent},
+  // { path: 'dvdstore/clients', component: ClientsComponent},
+  // { path: 'dvdstore/clients/:id', component: ClientItemComponent},
+  // { path: 'dvdstore/clients/form', component: ClientFormComponent},
+  // { path: 'dvdstore/clients/form/:id', component: ClientFormComponent},
+  // { path: 'dvdstore/ventes', component: VentesComponent},
+  // { path: 'dvdstore/ventes/form', component: VentesFormComponent},
   { path: 'panier', component: PanierComponent},
-  { path: 'panier/form/:id', component: PanierFormComponent},
+  // { path: 'panier/form/:id', component: PanierFormComponent},
 
 ];
 

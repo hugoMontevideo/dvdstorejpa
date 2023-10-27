@@ -1,4 +1,53 @@
 
+.toolbarTitle{
+    // width: 60px;
+    padding: 5px;
+    img{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        padding: 3px;
+        font-weight:800;
+        font-size: 2.2rem;
+        color: black;
+    }
+
+}
+.toolbarSearch{
+    // width: 9rem;
+    // position: absolute;
+    // top: 3rem;
+    font-size: .8rem;
+    padding: 0;
+    margin: 0;
+}
+
+.login{
+    &-div{
+        display: flex;
+    }
+    a{
+        display: block;
+        width: 6rem;
+        padding: .5rem .5rem;
+        font-size: .5rem;
+    }
+}
+.initials{
+    width: 1.8rem;
+    height: 1.8rem;
+    background-color: rgb(245, 4, 169);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .9rem;
+    color: white;
+    margin-right: .2rem;
+}
+
+
+
 nav{
     div.collapse{
         position: relative;

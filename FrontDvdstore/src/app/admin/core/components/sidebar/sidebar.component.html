@@ -1,68 +1,82 @@
 
-<div class="sidebar">
-    <div class="logo">
-        <a routerLink="/dvdstore"
-            class="d-flex  justify-content-center"><img [src]="ENV_ICON + 'logo.png'" ></a>
-        <h1 class="text-primary text-center">Dvdstore</h1>
-    </div>
-    <div class="cinema">
-        <img [src]="ENV_ICON +'coupez.png'" alt="logo de cinema">
-    </div>
-    <div class="d-flex align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-            <li>
-                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle menu">
-                   <span class="ms-1 d-none d-sm-inline">Nos Dvds</span>
-                </a>
-                <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                    <li class="w-100">
-                        <a routerLink="/dvdstore" class="nav-link px-0"> <span class="d-none d-sm-inline">Tous</span></a>
-                    </li>
-                    <li class="w-100" *ngFor="let item of genreEnumValues">
-                        <button class="nav-link px-0" (click)="handleGenreClick(item.toString())">
-                            <span class="d-none d-sm-inline">{{ item }}</span>
-                        </button>
-                    </li>   
-                </ul>
-            </li>
-          
-            <li>
-                <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle menu">
-                    <span class="ms-1 d-none d-sm-inline">Clients</span>
-                </a>
-                <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                    <li class="w-100">
-                        <a routerLink="/dvdstore/clients" class="nav-link px-0"><span class="d-none d-sm-inline">Tous</span></a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle menu">
-                    <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Ventes</span> </a>
-                    <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                    <li class="w-100">
-                        <a routerLink="/dvdstore/ventes" class="nav-link px-0"><span class="d-none d-sm-inline">Toutes</span></a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
-                    </li>
-                </ul>
-            </li>
-            
-        </ul>
-     </div>  
-</div>
-        <!-- <div class="col py-3">
-            Content area...
-        </div> -->
+     
  
-
+        <ion-menu contentId="main-content">
+            <ion-header>
+              <ion-toolbar>
+                <ion-title><a href="/"
+                    class="d-flex justify-content-center">
+                    <img [src]="ENV_ICON + 'logo.png'" width="25">
+                </a></ion-title>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding">
+                <div class="sidebar">
+                
+                    <div class="d-flex align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                            <li>
+                                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle menu">
+                                <span class="ms-1 d-none d-sm-inline">Nos Dvds</span>
+                                </a>
+                                <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a routerLink="/dvdstore" class="nav-link px-0"> <span class="d-none d-sm-inline">Tous</span></a>
+                                    </li>
+                                    <li class="w-100" *ngFor="let item of genreEnumValues">
+                                        <button class="nav-link px-0" (click)="handleGenreClick(item.toString())">
+                                            <span class="d-none d-sm-inline">{{ item }}</span>
+                                        </button>
+                                    </li>   
+                                </ul>
+                            </li>
+                        
+                            <li>
+                                <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle menu">
+                                    <span class="ms-1 d-none d-sm-inline">Clients</span>
+                                </a>
+                                <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a routerLink="/dvdstore/clients" class="nav-link px-0"><span class="d-none d-sm-inline">Tous</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle menu">
+                                    <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Ventes</span> </a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a routerLink="/dvdstore/ventes" class="nav-link px-0"><span class="d-none d-sm-inline">Toutes</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                    </div>  
+                </div>
+            </ion-content>
+           
+          </ion-menu>
+        
+<!--       
+        
+          <div class="logo">
+            <a routerLink="/dvdstore"
+                class="d-flex  justify-content-center"><img [src]="ENV_ICON + 'logo.png'" ></a>
+            <h1 class="text-primary text-center">Dvdstore</h1>
+        </div>
+        <div class="cinema">
+            <img [src]="ENV_ICON +'coupez.png'" alt="logo de cinema">
+        </div> -->
