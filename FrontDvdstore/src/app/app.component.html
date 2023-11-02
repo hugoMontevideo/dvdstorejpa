@@ -6,8 +6,10 @@
 </ion-app>
 
 <ion-app *ngIf="platform.is('ios')">
-   ios
-   <ion-router-outlet></ion-router-outlet>
+   <ion-content>
+      ios
+      <ion-router-outlet></ion-router-outlet>
+   </ion-content>
 </ion-app>
 
 <ion-app *ngIf="platform.is('desktop')">

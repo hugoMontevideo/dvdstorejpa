@@ -18,6 +18,6 @@ public class PanierDvdServiceRequestModel {
 
     private Integer dvdQuantite;
 
-    private Float dvdPrix;
+//    private Float dvdPrix;
 
 }

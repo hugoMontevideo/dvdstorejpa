@@ -13,23 +13,40 @@ import org.springframework.web.server.ResponseStatusException;
 //@CrossOrigin(origins = "http://localhost:80")
 @CrossOrigin
 @RestController
-@RequestMapping("carts")
+@RequestMapping()
 public class PanierDvdController {
     @Autowired
     PanierDvdService panierDvdService;
 
     private final DvdStoreCartMapper dvdStoreCartMapper = DvdStoreCartMapper.INSTANCE;
 
-    @PostMapping("/panierdvd") //insère une ligne dans panier_dvd
+    @PostMapping("/clients/{id}/panier/panierdvd") //     insère une ligne dans panier_dvd   **  final version **
     public ResponseEntity<String> insertIntoPanierDvd(@RequestBody PanierDvdInsertDTO panierDvdInsertDTO){
 
         PanierDvdServiceRequestModel panierDvdServiceRequestModel = dvdStoreCartMapper.insertDtoToServiceRequest(panierDvdInsertDTO);
+
         panierDvdService.insertIntoPanierDvd(panierDvdServiceRequestModel);
 
-//        panierDvdService.savePanierDvd(new PanierDvdServiceRequestModel( panierDvdInsertDTO.getDvdId(), panierDvdInsertDTO.getPanierId(), panierDvdInsertDTO.getDvdQuantite(), panierDvdInsertDTO.getDvdPrix(), panierDvdInsertDTO.getClientId()));
 
-        return new ResponseEntity<>("Le dvd  " + panierDvdInsertDTO.getDvdId() +" a été ajoutée"  , HttpStatus.OK) ;
+//        PanierDvdResponseDTO panierDvdResponseDTO = dvdStoreCartMapper.panierDvdServiceToDto(panierDvdServiceResponseModel);
+//        // insertion de l'objet panier dans panierdvd
+//        panierDvdResponseDTO.setPanier(dvdStoreCartMapper.panierServiceToDTO(panierDvdServiceResponseModel.getPanier()));
+
+        return new ResponseEntity<>("panier dvd inséré", HttpStatus.OK) ;
     }
+
+
+    @DeleteMapping("/clients/{id}/panier/panierdvd/{id_panierdvd}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id,@PathVariable("id_panierdvd") Long idPanierdvd){
+        if(panierDvdService.findById(idPanierdvd) != null ){
+            panierDvdService.delete(idPanierdvd, id);
+            return new ResponseEntity<>("le dvd id : " + idPanierdvd + " a été supprimé", HttpStatus.OK);
+        }else{
+            //  throw new NotFoundException(id);
+            return new ResponseEntity<>("le dvd id : " + idPanierdvd + " n'a pas été trouvé", HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     @GetMapping("/panierdvd/{id}")   // findById table  panierDvd
     public ResponseEntity<PanierDvdResponseDTO> findById(@PathVariable Long id){
@@ -50,20 +67,6 @@ public class PanierDvdController {
         }
     }
 
-    @DeleteMapping("/panierdvd/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id){
-        if(panierDvdService.findById(id) != null ){
-            panierDvdService.delete(id);
-            return new ResponseEntity<>("le dvd id : " + id + " a été supprimé", HttpStatus.OK);
-        }else{
-            //  throw new NotFoundException(id);
-            return new ResponseEntity<>("le dvd id : " + id + " n'a pas été trouvé", HttpStatus.NOT_FOUND);
-        }
-    }
-
-
-
-
 
 
 }
@@ -73,3 +76,17 @@ public class PanierDvdController {
 //
 //            return new ResponseEntity<>(new PanierDvdResponseDTO(panierDvdServiceResponseModel.getDvdId(), panierResponseDTO, panierDvdServiceResponseModel.getId(), panierDvdServiceResponseModel.getDvdSubtotal(),panierDvdServiceResponseModel.getClientId()),
 //                    HttpStatus.OK) ;
+
+
+//    @PostMapping("/clients/{id}/panier/panierdvd") //insère une ligne dans panier_dvd   **  final version **
+//    public ResponseEntity<PanierDvdResponseDTO> insertIntoPanierDvd(@RequestBody PanierDvdInsertDTO panierDvdInsertDTO){
+//
+//        PanierDvdServiceRequestModel panierDvdServiceRequestModel = dvdStoreCartMapper.insertDtoToServiceRequest(panierDvdInsertDTO);
+//
+//        PanierDvdServiceResponseModel panierDvdServiceResponseModel = panierDvdService.insertIntoPanierDvd(panierDvdServiceRequestModel);
+//        PanierDvdResponseDTO panierDvdResponseDTO = dvdStoreCartMapper.panierDvdServiceToDto(panierDvdServiceResponseModel);
+//        // insertion de l'objet panier dans panierdvd
+//        panierDvdResponseDTO.setPanier(dvdStoreCartMapper.panierServiceToDTO(panierDvdServiceResponseModel.getPanier()));
+//
+//        return new ResponseEntity<>(panierDvdResponseDTO, HttpStatus.OK) ;
+//    }

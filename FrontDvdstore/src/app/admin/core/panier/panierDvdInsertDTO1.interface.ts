@@ -1,4 +1,4 @@
-export interface PanierDvdInsertDTO{
+export interface PanierDvdInsertDTO1{
 
     dvdId: number,
 
@@ -8,7 +8,6 @@ export interface PanierDvdInsertDTO{
 
     clientId: number,
 
-    dvdQuantite: number,
+    dvdQuantite: number
 
-    dvdPrix: number
 }

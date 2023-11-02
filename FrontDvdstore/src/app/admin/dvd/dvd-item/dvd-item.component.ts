@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { Dvd } from '../../utils/model/dvd.interface';
 import { environment } from 'src/environments/environments';
+import { User } from '../../utils/model/user.interface';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
+import { PanierDvdInsertDTO1 } from '../../core/panier/panierDvdInsertDTO1.interface';
+
 
 @Component({
   selector: 'app-dvd-item',
@@ -13,7 +18,7 @@ export class DvdItemComponent implements OnInit{
   
   ENV_DEV_IMG = `${environment.apiImg}/`;
   table: string='dvds';
-  id!: number;
+  dvdId!: number;
   currentDvd: Dvd={
       id:0,
       name:'',
@@ -23,23 +28,42 @@ export class DvdItemComponent implements OnInit{
       picture:''
     };
 
+  currentUser!:User;
+
+  panierDvd: PanierDvdInsertDTO1 = {
+    dvdId:0, 
+    panierId: 2,
+    dvdSubtotal: 0,
+    clientId: 0,
+    dvdQuantite: 0
+  }
+
+   //  ionic modal
+   @ViewChild(IonModal) modal!: IonModal;
+   quantity!: string;
+   message = '';
+
   constructor(private route:ActivatedRoute, 
           private httpService: HttpService,
           private router: Router){};
 
   ngOnInit(): void {
 
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.dvdId = Number(this.route.snapshot.paramMap.get('id'));
 
-    if(this.id != null){
-      this.getDvdById(this.table, this.id);
+    let stringUser: any = sessionStorage.getItem("currentUser");
+    this.currentUser = JSON.parse(stringUser);
+
+    if(this.dvdId != null){
+      this.getDvdById(this.table,  this.dvdId );
     }
   }
 
-  getDvdById = (table:string, id:number)=>{
-    this.httpService.getById(table, id)
+  addPanierDvd = (panierdvd: PanierDvdInsertDTO1) => {
+    this.httpService.addPanierDvd( panierdvd )
     .subscribe({
-      next:(response:Dvd)=> this.currentDvd = response,
+      next:(response)=>{console.log(response)},
+    
       error: (err: Error)=>{
           console.error(`Error getDvdById ${err}`);
           this.router.navigateByUrl("/dvdstore");
@@ -47,23 +71,67 @@ export class DvdItemComponent implements OnInit{
       complete: ()=>{
       }
     })
-  }
+  };
+
+  getDvdById = ( table:string,  id:number)=>{
+    this.httpService.getById(table, id)
+    .subscribe({
+      next:(response:Dvd)=> this.currentDvd = response,
+      error: (err: Error)=>{
+          console.error(`Error getDvdById ${err}`);
+          this.router.navigateByUrl("/dvdstore");
+        },
+      complete: ()=>{}
+    })
+  };
 
   onDelete = (id: number): void => {
-    this.httpService.deleteById( this.table, this.id)
+    this.httpService.deleteById( this.table, this.dvdId)
     .subscribe({
       next:(response)=> console.log(response),
       error: (err: Error)=>{  
-          console.error("error on deleting");   /// *** TODO **** Gérer cette erreur !
+          console.error("error on deleting"+ err);   /// *** TODO **** Gérer cette erreur !
           this.router.navigateByUrl("dvdstore");
         },
       complete:()=> this.router.navigateByUrl("dvdstore")
     });
-  }
+  };
+
   onModifyDvd = (id:number) =>{
     console.log("hello");
     
     this.router.navigateByUrl('/dvdstore');
+  }
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.modal.dismiss(this.quantity, 'confirm');
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      let itemQuantity = Number(ev.detail.data);
+
+      if( itemQuantity > this.currentDvd.quantite ){
+        this.message = `${this.currentDvd.quantite } en stock. Veuillez choisir moins de dvds`;
+      } else{
+        // panierdvd hydration
+        this.panierDvd.dvdId = this.dvdId;
+        this.panierDvd.panierId = this.currentUser.id;
+        this.panierDvd.clientId = this.currentUser.id;
+        this.panierDvd.dvdSubtotal = this.currentDvd.prix*itemQuantity;
+        this.panierDvd.dvdQuantite = itemQuantity;      
+
+        this.addPanierDvd(this.panierDvd);
+        this.currentDvd.quantite -= itemQuantity;  // updating stock
+        this.message = `${ev.detail.data} dvds ajouté(s) = ${this.panierDvd.dvdSubtotal} €`;
+      }
+
+    }
   }
 
 

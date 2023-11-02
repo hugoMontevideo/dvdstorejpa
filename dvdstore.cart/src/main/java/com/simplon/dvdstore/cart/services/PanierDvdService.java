@@ -24,7 +24,6 @@ public class PanierDvdService {
 
     @Transactional
     public PanierDvdServiceResponseModel findById(Long id) {
-
         Optional<PanierDvdRepositoryModel> panierDvdRepositoryModel = panierDvdRepository.findById(id);
         System.out.println(panierDvdRepositoryModel.get().getPanier().getDvds());
         if (panierDvdRepositoryModel.isEmpty()) {
@@ -37,13 +36,7 @@ public class PanierDvdService {
         }
     }
 
-    public void savePanierDvd(PanierDvdServiceRequestModel panierDvdServiceRequestModel){
-
-        panierDvdRepository.savePanierDvd(panierDvdServiceRequestModel.getDvdId().intValue(), panierDvdServiceRequestModel.getPanierId().intValue(), panierDvdServiceRequestModel.getDvdQuantite(), panierDvdServiceRequestModel.getDvdPrix(), panierDvdServiceRequestModel.getClientId().intValue() );
-    }
-
-
-    public void insertIntoPanierDvd(PanierDvdServiceRequestModel panierDvdServiceRequestModel) {
+    public void insertIntoPanierDvd(PanierDvdServiceRequestModel   panierDvdServiceRequestModel) {     //  final version   *******
         // get panier object
         Optional<PanierRepositoryModel> panierRepositoryModel = panierRepository.findById(panierDvdServiceRequestModel.getPanierId());
 
@@ -51,12 +44,19 @@ public class PanierDvdService {
 
         panierDvdRepositoryModel.setPanier(panierRepositoryModel.get());
 
-        panierDvdRepository.save(panierDvdRepositoryModel);
+       panierDvdRepository.savePanierDvd(
+               panierDvdRepositoryModel.getDvdId().intValue(),
+               panierDvdRepositoryModel.getPanier().getId().intValue(),
+               panierDvdRepositoryModel.getDvdQuantite(),
+               panierDvdRepositoryModel.getDvdSubtotal(),
+               panierDvdRepositoryModel.getClientId().intValue()
+               );
+
 
     }
 
-    public void delete(Long id) {
-        panierDvdRepository.deleteById(id);
+    public void delete(Long idPanierdvd, Long id) {
+        panierDvdRepository.deletePanierDvd(idPanierdvd.intValue(), id.intValue());
     }
 
 
@@ -71,10 +71,34 @@ public class PanierDvdService {
 ////                dvdStoreCartMapper::panierDvdRepositorytoService
 //           ).collect(Collectors.toList());
 
+//    public void savePanierDvd(PanierDvdServiceRequestModel panierDvdServiceRequestModel){
+//
+//        panierDvdRepository.savePanierDvd(panierDvdServiceRequestModel.getDvdId().intValue(), panierDvdServiceRequestModel.getPanierId().intValue(), panierDvdServiceRequestModel.getDvdQuantite(), panierDvdServiceRequestModel.getDvdPrix(), panierDvdServiceRequestModel.getClientId().intValue() );
+//    }
 
 
 
-
-
+//    public PanierDvdServiceResponseModel insertIntoPanierDvd(PanierDvdServiceRequestModel   panierDvdServiceRequestModel) {     //  final version   *******
+//        // get panier object
+//        Optional<PanierRepositoryModel> panierRepositoryModel = panierRepository.findById(panierDvdServiceRequestModel.getPanierId());
+//
+//        PanierDvdRepositoryModel panierDvdRepositoryModel = dvdStoreCartMapper.serviceToRepository(panierDvdServiceRequestModel);
+//
+//        panierDvdRepositoryModel.setPanier(panierRepositoryModel.get());
+//
+//        PanierDvdRepositoryModel panierDvd =  panierDvdRepository.save(panierDvdRepositoryModel);
+//
+//        if(panierDvd != null ){
+//            // update amount in panier  (stocked procedure)
+//        }
+//
+//        PanierDvdServiceResponseModel panierDvdServiceResponseModel = dvdStoreCartMapper.panierDvdRepositoryToService(panierDvd);
+//
+//        // insertion de l'objet panier dans panierdvd
+//        panierDvdServiceResponseModel.setPanier(dvdStoreCartMapper.panierRepositoryToService(panierDvd.getPanier()));
+//
+//        return panierDvdServiceResponseModel;
+//
+//    }
 
 

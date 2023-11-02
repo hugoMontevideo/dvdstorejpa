@@ -19,5 +19,5 @@ public class PanierDvdInsertDTO {
 
     private Integer dvdQuantite;
 
-    private Float dvdPrix;
+//    private Float dvdPrix;
 }

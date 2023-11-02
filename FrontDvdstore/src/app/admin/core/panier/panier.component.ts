@@ -8,10 +8,18 @@ import { PanierRequest } from './panierRequest.interface';
   templateUrl: './panier.component.html',
   styleUrls: ['./panier.component.scss']
 })
-export class PanierComponent {
+export class PanierComponent {    // todo  **** page à revoir
   table: string = "panier"
   indexDvd: number = 0;  // index du détail dvd 
   panierDTOs: PanierDTO[] | any = [];
+
+  currentPanier : PanierDTO = {
+    id: 0,
+    amount: 0,
+    clientId: 0,
+    createdAt: new Date,
+    dvds: []
+  };
 
   constructor( private httpService: HttpService ){}
 
@@ -48,7 +56,12 @@ export class PanierComponent {
   deleteDvdPanier = ( index:number ):void => {
     console.log(this.panierDTOs[this.indexDvd].dvds[index].id);
     // on passe l'id du panierDvd
-    this.httpService.deletePanierDvd("panierdvd", this.panierDTOs[this.indexDvd].dvds[index].id)
+    this.httpService.deletePanierDvd(
+      this.panierDTOs.clientId, 
+      this.panierDTOs[this.indexDvd].dvds[index].id,
+      this.currentPanier.dvds[index].dvdId,     
+      this.currentPanier.dvds[index].dvdQuantite     
+      )
     .subscribe({
         next:(response)=> { 
               // on efface l'element supprimé pour l'affichage

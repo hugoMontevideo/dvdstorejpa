@@ -1,0 +1,27 @@
+.layout{
+    margin: 5rem auto
+    width 80%;
+    .total-panier{
+        text-align: center;
+    }
+}
+
+th, td{
+    font-size: .8rem;
+    vertical-align:bottom;
+}
+.quantite{
+    text-align: right;
+}
+.total, .totalSum{
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: right;
+}
+
+.deleteBtn{ 
+    padding: 0;
+    img{
+        max-width: 4rem;
+    }
+}

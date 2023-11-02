@@ -13,7 +13,7 @@ import java.util.ArrayList;
 // @CrossOrigin(origins = "http://localhost:80")
 @CrossOrigin
 @RestController
-@RequestMapping("carts")
+@RequestMapping()
 public class PanierController {
     @Autowired
     PanierDvdService panierDvdService;
@@ -21,20 +21,11 @@ public class PanierController {
     PanierService panierService;
     private final DvdStoreCartMapper dvdStoreCartMapper = DvdStoreCartMapper.INSTANCE;
 
-    @PostMapping("/panier")  // insert a cart
-    ResponseEntity<PanierResponseDTO> insertPanier(@RequestBody PanierDTO panierDTO){
-        System.out.println("ok front");
-        PanierServiceModel isOk = panierService.save(new PanierServiceModel(0L, 0F, panierDTO.getClientId(), panierDTO.getCreatedAt(), new ArrayList<>()));
-
-        return new ResponseEntity<>( dvdStoreCartMapper.panierServiceToDTO(isOk) , HttpStatus.OK);
-    }
-
-    @GetMapping("/panier/{id}")   // findById  table panier
-    public ResponseEntity<PanierResponseDTO> findPanierById(@PathVariable Long id){
+    @GetMapping("/clients/{id}/panier/{panier_id}")   // findById  table panier  *****  final
+    public ResponseEntity<PanierResponseDTO> findPanierById(@PathVariable("id") Long id, @PathVariable("panier_id") Long panierId ){
         try{
-            PanierServiceModel panierServiceModel =  panierService.findById(id);
+            PanierServiceModel panierServiceModel =  panierService.findById(panierId);
 
-            System.out.println(panierServiceModel);
             return new ResponseEntity<>( dvdStoreCartMapper.panierServiceToDTO(panierServiceModel) ,HttpStatus.OK) ;
 
         }catch(Exception ex){
@@ -66,6 +57,13 @@ public class PanierController {
             //  throw new NotFoundException(id);
             return new ResponseEntity<>("le panier id : " + id + " n'a pas été trouvé", HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PostMapping("/panier")  // insert a cart
+    ResponseEntity<PanierResponseDTO> insertPanier(@RequestBody PanierDTO panierDTO){
+        PanierServiceModel isOk = panierService.save(new PanierServiceModel(0L, 0F, panierDTO.getClientId(), panierDTO.getCreatedAt(), new ArrayList<>()));
+
+        return new ResponseEntity<>( dvdStoreCartMapper.panierServiceToDTO(isOk) , HttpStatus.OK);
     }
 
 

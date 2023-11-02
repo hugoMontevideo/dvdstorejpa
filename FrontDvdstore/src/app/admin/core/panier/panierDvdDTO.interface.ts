@@ -11,6 +11,8 @@ export interface PanierDvdDTO{
 
     clientId: number,
 
-    dvdQuantite: number
+    dvdQuantite: number, 
+
+    nameDvd?: string
 
   }

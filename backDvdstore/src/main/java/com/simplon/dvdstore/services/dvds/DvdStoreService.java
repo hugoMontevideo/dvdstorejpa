@@ -53,8 +53,6 @@ public class DvdStoreService {
 
     public boolean update( DvdServiceModel dvdServiceModel ) {
 
-//        Optional<DvdRepositoryModel> dvdRepositoryModel = dvdStoreRepository.findById(id);
-
         if(!dvdStoreRepository.existsById(dvdServiceModel.getId().get()))
         {
             return false;

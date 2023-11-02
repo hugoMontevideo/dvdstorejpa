@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { GenreEnum } from 'src/app/admin/utils/enum/GenreEnum';
-// import { JwtAxiosService } from 'src/app/services/JwtAxios.service';
 import { environment } from 'src/environments/environments';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from 'src/app/admin/services/http.service';
@@ -99,6 +98,11 @@ export class DvdFormComponent implements OnInit{
   }
 }
 
+
+
+// trash
+
+// import { JwtAxiosService } from 'src/app/services/JwtAxios.service';
 
     // onSubmit = ()=>{
   //   console.log(this.selectedFile);

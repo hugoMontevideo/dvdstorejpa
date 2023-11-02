@@ -7,6 +7,7 @@ import { HttpService } from '../../services/http.service';
 import { PanierCreateDTO } from '../../core/panier/panierCreateDTO.interface';
 import { Platform } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-dvdstore',
   templateUrl: './dvdstore.component.html',
@@ -23,6 +24,7 @@ export class DvdstoreComponent implements OnInit {
   genreEnumValues = Object.values(this.genreEnum);
   currentUser!: User;
   currentHeight:any;
+
   
 
   constructor( 
@@ -36,14 +38,13 @@ export class DvdstoreComponent implements OnInit {
     if(anything != null){
       this.currentUser = JSON.parse(anything);
     }
+
     this.getDvds(this.table);
 
    this.currentHeight = this.platform.height();
-
-
-
   }
 
+  
   onGenreClicked(genreClicked : {genre:string}){
     this.dvdToShow = this.dvds.filter((value) =>{
       return value.genre === genreClicked.genre ;

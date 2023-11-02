@@ -1,1 +1,60 @@
-<p>panier-item works!</p>
+<div class="container-fluid wrapper col-12">
+  <div class="row d-flex flex-column col-9 layout mx-auto mt-5">
+
+
+    <app-sidebar class="col-md-3 col-xl-2 px-0 "></app-sidebar>
+    <app-header class="header"></app-header>
+
+    <div class="row dvdpanier mt-5">
+      <div class="panier d-flex justify-content-between">
+        <ion-item>
+            <ion-label>
+                <a class="btn btn-primary" routerLink="/">
+                    Accueil
+                </a>
+            </ion-label>
+        </ion-item>
+      </div>
+      <h2 class="text-center">Mon panier </h2>
+      <p class="total-panier">Total : {{ currentPanier.amount | number: '1.2-2'}} €</p>
+      <table class="table table-striped container mt-5">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Dvd</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Sous-total</th>
+            <th scope="col supr"> </th>   
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dvdPanier of currentPanier.dvds; let index = index" >  
+              <td class="">{{ dvdPanier.dvdId }}</td>
+              <td class="">{{ dvdPanier.nameDvd }}</td>
+              <td class="quantite">{{ dvdPanier.dvdQuantite }}</td>
+              <td class="">{{dvdPanier.dvdSubtotal | number: '1.2-2'}}</td>
+                <td class="">
+                  <!-- <button (click)="display(index)">Voir</button>  -->
+                  <ion-button 
+                    (click)="deleteDvdPanier(index)" 
+                      class="deleteBtn"
+                      fill="clear"
+                      size="small" 
+                      >
+                      <img [src]="ENV_ICON + 'icons8-x.svg'">
+                  </ion-button> 
+                </td>              
+            </tr>
+        </tbody>
+        <tfoot>
+          <td colspan="3" class="total">Total : </td>
+          <td class="totalSum" >{{ currentPanier.amount | number: '1.2-2'}}</td>
+          <td> €</td>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+

@@ -20,6 +20,7 @@ export class LoginService {
     table:string = "auth";
 
     currentUser: LoginResponse = {
+                id:0,
                 username: "",
                 token: ""
             };
@@ -34,11 +35,11 @@ export class LoginService {
 
     public login( loginView : LoginView ): Observable<any> {
         this.httpClient = new HttpClient(this.httpBackend);
-    
-                
+          
         return this.httpClient.post<any>(`${this.ENV_LOG}/${this.table}/authorize`, loginView, {responseType:"json"})
         .pipe(map(data=>{
-            // console.log(data);
+            // console.table(data);
+            this.currentUser.id = data.user.id;
             this.currentUser.username = data.user.login;
             this.currentUser.token = data.token;
             sessionStorage.setItem("currentUser", JSON.stringify(this.currentUser));

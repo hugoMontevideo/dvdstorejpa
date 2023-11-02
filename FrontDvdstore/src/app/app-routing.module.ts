@@ -10,6 +10,7 @@ import { VentesFormComponent } from './admin/vente/ventes-form/ventes-form.compo
 import { PanierComponent } from './admin/core/panier/panier.component';
 import { PanierFormComponent } from './admin/core/panier-form/panier-form.component';
 import { DvdstoreComponent } from './admin/dvd/dvdstore/dvdstore.component';
+import { PanierItemComponent } from './admin/core/panier-item/panier-item.component';
 
 
 const routes: Routes = [
@@ -21,12 +22,9 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
-  // {
-  //   path: '/:id',
-  //   loadChildren: () => import('./dvd/dvd.module').then( m => m.LoginPageModule)
-  // },
 
   { path: '', component: DvdstoreComponent},
+  // { path: 'login', component: DvdstoreComponent},
   { path: 'dvds/:id', component: DvdItemComponent},
   { path: 'form', component: DvdFormComponent},
   { path: 'form/:id', component: DvdFormComponent},
@@ -37,7 +35,8 @@ const routes: Routes = [
   // { path: 'dvdstore/ventes', component: VentesComponent},
   // { path: 'dvdstore/ventes/form', component: VentesFormComponent},
   { path: 'panier', component: PanierComponent},
-  // { path: 'panier/form/:id', component: PanierFormComponent},
+  { path: 'panier/:id', component: PanierItemComponent},
+  { path: 'panier/form/:id', component: PanierFormComponent},
 
 ];
 

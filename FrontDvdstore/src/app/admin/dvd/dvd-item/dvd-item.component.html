@@ -1,45 +1,95 @@
-<ion-content fullscreen="true">
-    <div class="container-fluid wrapper">
-        <div class="row d-flex flex-column col-12">
-            <!-- <div class="row flex-nowrap col-12"> -->
 
-            <!-- <app-sidebar class="col-md-3 col-xl-2 px-0 "></app-sidebar>
-    
-            <div class="col-md-9 col-xl-10 px-0 content"> -->
-                       
-                <app-header class="header"></app-header>
+<div class="container-fluid wrapper mt-4">
+    <div class="row d-flex flex-column col-12">
 
-                <div class=" dvd_item d-flex flex-column home">
-                    <a class="btn btn-warning" 
-                        href="/panier">
-                        <img [src]="ENV_DEV_IMG + 'icons/icons8-cart.png'" alt="">
-                    </a>
-                    <div class="dvd_picture">
-                        <img [src]="ENV_DEV_IMG + currentDvd.picture" alt="">
-                    </div>
-                    <div class="details d-flex flex-column justify-content-between">
-                        <div class="details-content">
-                            <h1>{{ currentDvd.name }}</h1>
-                            <h3>{{ currentDvd.genre }}</h3>
-                            <p class="price text-primary">{{ currentDvd.prix }} €</p>
-                            <p>{{ currentDvd.quantite }} en stock</p>
-                        </div>
-                        <div class="action d-flex">
-                            <a [href]="'/panier/form/'" class="btn btn-warning">Ajouter au panier</a>
-                            <a class="btn btn-primary" [href]="['/form/'+id]">Modifier</a>
-                            <button class="btn btn-delete" (click)="onDelete(id)">Effacer</button>
-                        </div>
-                    </div>
+
+        <app-sidebar class="col-md-3 col-xl-2 px-0 "></app-sidebar>
+
+            <!--<div class="col-md-9 col-xl-10 px-0 content"> -->
+                
+        <app-header class="header"></app-header>
+
+        <div class=" dvd_item d-flex flex-column home">
+            <div class="panier d-flex justify-content-between">
+                <ion-item>
+                    <ion-label>
+                        <a class="btn btn-primary" routerLink="/">
+                            Accueil
+                        </a>
+                    </ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label> 
+                        <a class="btn btn-warning" [href]="'/panier/' + currentUser.id">
+                            <img [src]="ENV_DEV_IMG + 'icons/icons8-cart.png'" alt="icon panier" width="25">
+                        </a>
+                    </ion-label>
+                </ion-item>
+            </div>
+            <div class="ion-padding">
+                <small class="text-center small" >{{this.message}}</small>
+                <ion-item>
+                    <ion-label> 
+                        <ion-button id="open-modal" expand="block" >Ajouter au panier</ion-button>
+                    </ion-label>
+                </ion-item>
+                <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+                    <ng-template>
+                        <ion-header>
+                            <ion-toolbar>
+                            <ion-buttons slot="start">
+                                <ion-button (click)="cancel()">Annuler</ion-button>
+                            </ion-buttons>
+                            <ion-title>Dvdstore</ion-title>
+                            <ion-buttons slot="end">
+                                <ion-button (click)="confirm()" [strong]="true">Confirmer</ion-button>
+                            </ion-buttons>
+                            </ion-toolbar>
+                        </ion-header>
+                        <ion-content class="ion-padding">
+                            <h2 class="text-success text-center">{{ currentDvd.name }}</h2>
+                            <ion-item>
+                                <ion-input
+                                    label="Combien de dvds voulez-vous ?"
+                                    labelPlacement="stacked"
+                                    type="number"
+                                    placeholder="Quantité"
+                                    [(ngModel)]="quantity"
+                                ></ion-input>
+                            </ion-item>
+                        </ion-content>
+                    </ng-template>
+                </ion-modal>
+            </div>
+                
+            <div class="dvd_picture">
+                <img [src]="ENV_DEV_IMG + currentDvd.picture" alt="">
+            </div>
+            <div class="details d-flex flex-column justify-content-between">
+                <div class="details-content">
+                    <h1>{{ currentDvd.name }}</h1>
+                    <h3>{{ currentDvd.genre }}</h3>
+                    <p class="price text-primary">{{ currentDvd.prix }} €</p>
+                    <p>{{ currentDvd.quantite }} en stock</p>
                 </div>
-                <div class="synopsis">
-                    <h2>Synopsis</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odio corrupti doloribus beatae quaerat? Adipisci nulla recusandae unde animi cumque inventore, officiis facilis ipsam veritatis impedit ratione, voluptatum voluptatem in.
-                    </p>
+                <div class="action d-flex">
+                    <a [href]="['/form',dvdId]" class="btn btn-primary">Modifier</a>
+                    <button class="btn btn-delete" (click)="onDelete(dvdId)">Effacer</button>
                 </div>
-            <!-- </div> -->
+            </div>
         </div>
-
+        
+        <div class="synopsis">
+            <h2>Synopsis</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odio corrupti doloribus beatae quaerat? Adipisci nulla recusandae unde animi cumque inventore, officiis facilis ipsam veritatis impedit ratione, voluptatum voluptatem in.
+            </p>
+        </div>
+        
     </div>
+</div>
 
-</ion-content>
+
+
+<!-- <a [href]="'/panier/form/'" class="btn btn-warning">Ajouter au panier</a> -->
+

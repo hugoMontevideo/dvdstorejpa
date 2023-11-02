@@ -25,7 +25,7 @@ import { ClientsComponent } from './admin/client/clients/clients.component';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { RouteReuseStrategy } from '@angular/router';
 import { DvdstoreComponent } from './admin/dvd/dvdstore/dvdstore.component';
-import { FatherComponent } from './father/father.component';
+
 
 
 @NgModule({
@@ -34,7 +34,8 @@ import { FatherComponent } from './father/father.component';
     RegisterComponent,  
     PanierFormComponent,
     PanierComponent,
-    PanierComponent,PanierItemComponent,
+    PanierComponent,
+    PanierItemComponent,
     DvdItemComponent,
     // LoginComponent,
     RegisterComponent,
@@ -50,7 +51,6 @@ import { FatherComponent } from './father/father.component';
     DvdstoreComponent,
     HeaderComponent,
     SidebarComponent,
-    FatherComponent
     // DvdstoreComponent,
   ],
   imports: [

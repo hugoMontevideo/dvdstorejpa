@@ -51,7 +51,7 @@ public interface DvdStoreCartMapper {
 
     @Mapping(target = "panier", ignore = true)
     PanierDvdServiceResponseModel panierDvdRepositoryToService(PanierDvdRepositoryModel panierDvdRepositoryModel );
-
+    @Mapping(target = "panier", ignore = true)
     PanierDvdResponseDTO panierDvdServiceToDto(PanierDvdServiceResponseModel panierDvdServiceResponseModel );
 
 

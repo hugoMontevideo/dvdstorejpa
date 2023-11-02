@@ -32,19 +32,22 @@ export class LoginPage implements OnInit{
 
   ngOnInit(): void {
 
-    // let anything: any = sessionStorage.getItem('currentUser');
-    // if(anything != null){
-    //   sessionStorage.clear();
-    //   this.router.navigateByUrl('/dvdstore');
-    // } else{
-    //   this.onCreatePanier();
-    // }   
+    let anything: any = sessionStorage.getItem('currentUser');
+    if(anything != null){     // logout
+      sessionStorage.clear();
+      this.router.navigateByUrl('/login');
+    } else{
+      //this.panierDTO = anything.id;  // todo create panier
+      // this.onCreatePanier();
+    }   
   }
 
   onLoginClick(){
     this.loginService.login(this.loginView)
     .subscribe({
-      next:(data)=> {       
+      next:(data)=> { 
+        console.log(data);
+              
             this.router.navigateByUrl("/");
           },
       error: (err:Error)=> {
