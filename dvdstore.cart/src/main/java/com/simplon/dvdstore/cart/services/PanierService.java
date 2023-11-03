@@ -1,5 +1,6 @@
 package com.simplon.dvdstore.cart.services;
 
+import com.simplon.dvdstore.cart.controllers.PanierDTO;
 import com.simplon.dvdstore.cart.controllers.PanierGetDTO;
 import com.simplon.dvdstore.cart.mappers.DvdStoreCartMapper;
 import com.simplon.dvdstore.cart.repositories.PanierDvdRepositoryModel;
@@ -66,6 +67,14 @@ public class PanierService {
     public void delete(Long id) {
         panierRepository.deleteById(id);
     }
+
+    public void updateAfterPurchase(Long id){
+        System.out.println("hello"+ id);
+        panierRepository.updateAfterPurchase(id.intValue());
+
+    }
+
+
 }
 
 

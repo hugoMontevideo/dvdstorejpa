@@ -1,5 +1,6 @@
 package com.simplon.dvdstore.cart.services;
 
+
 import com.simplon.dvdstore.cart.controllers.PanierDTO;
 import com.simplon.dvdstore.cart.mappers.DvdStoreCartMapper;
 import com.simplon.dvdstore.cart.repositories.PanierDvdRepository;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PanierDvdService {
@@ -43,7 +43,7 @@ public class PanierDvdService {
         PanierDvdRepositoryModel panierDvdRepositoryModel = dvdStoreCartMapper.serviceToRepository(panierDvdServiceRequestModel);
 
         panierDvdRepositoryModel.setPanier(panierRepositoryModel.get());
-
+        // utilisation de la procedure stockée
        panierDvdRepository.savePanierDvd(
                panierDvdRepositoryModel.getDvdId().intValue(),
                panierDvdRepositoryModel.getPanier().getId().intValue(),
@@ -51,13 +51,16 @@ public class PanierDvdService {
                panierDvdRepositoryModel.getDvdSubtotal(),
                panierDvdRepositoryModel.getClientId().intValue()
                );
-
-
     }
+
+
+
 
     public void delete(Long idPanierdvd, Long id) {
         panierDvdRepository.deletePanierDvd(idPanierdvd.intValue(), id.intValue());
     }
+
+
 
 
 

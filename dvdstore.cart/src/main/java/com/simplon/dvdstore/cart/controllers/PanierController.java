@@ -13,13 +13,22 @@ import java.util.ArrayList;
 // @CrossOrigin(origins = "http://localhost:80")
 @CrossOrigin
 @RestController
-@RequestMapping()
+@RequestMapping
 public class PanierController {
     @Autowired
-    PanierDvdService panierDvdService;
-    @Autowired
     PanierService panierService;
+    @Autowired
+    PanierDvdService panierDvdService;
     private final DvdStoreCartMapper dvdStoreCartMapper = DvdStoreCartMapper.INSTANCE;
+
+
+    @PutMapping("/clients/{id}/purchase")
+    void panierPurchased(@PathVariable("id") Long id ){
+
+        panierService.updateAfterPurchase( id );
+
+
+    }
 
     @GetMapping("/clients/{id}/panier/{panier_id}")   // findById  table panier  *****  final
     public ResponseEntity<PanierResponseDTO> findPanierById(@PathVariable("id") Long id, @PathVariable("panier_id") Long panierId ){
@@ -59,12 +68,6 @@ public class PanierController {
         }
     }
 
-    @PostMapping("/panier")  // insert a cart
-    ResponseEntity<PanierResponseDTO> insertPanier(@RequestBody PanierDTO panierDTO){
-        PanierServiceModel isOk = panierService.save(new PanierServiceModel(0L, 0F, panierDTO.getClientId(), panierDTO.getCreatedAt(), new ArrayList<>()));
-
-        return new ResponseEntity<>( dvdStoreCartMapper.panierServiceToDTO(isOk) , HttpStatus.OK);
-    }
 
 
 }

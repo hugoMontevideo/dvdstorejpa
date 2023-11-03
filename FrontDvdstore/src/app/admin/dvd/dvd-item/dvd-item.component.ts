@@ -60,6 +60,8 @@ export class DvdItemComponent implements OnInit{
   }
 
   addPanierDvd = (panierdvd: PanierDvdInsertDTO1) => {
+    console.log('hi');
+    
     this.httpService.addPanierDvd( panierdvd )
     .subscribe({
       next:(response)=>{console.log(response)},

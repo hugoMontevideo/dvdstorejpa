@@ -1,26 +1,60 @@
 package com.simplon.dvdstore.controllers.feignclient;
 
-import com.simplon.dvdstore.controllers.dvds.DvdStoreGetDTO;
+import com.simplon.dvdstore.controllers.vente.VenteAddDTO;
+import com.simplon.dvdstore.mappers.DvdStoreMapper;
 import com.simplon.dvdstore.proxies.MicroservicePanierProxy;
 import com.simplon.dvdstore.services.dvds.DvdServiceModel;
 import com.simplon.dvdstore.services.dvds.DvdStoreService;
+import com.simplon.dvdstore.services.vente.DetailVenteServiceRequestModel;
+import com.simplon.dvdstore.services.vente.VenteService;
+import com.simplon.dvdstore.services.vente.VenteServiceRequestModel;
+import com.simplon.dvdstore.services.vente.VenteServiceResponseModel;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping()public class FeignClientController {
+@RequestMapping
+public class FeignClientController {
 
     private final MicroservicePanierProxy panierProxy;
     @Autowired
     DvdStoreService dvdStoreService;
+    @Autowired
+    VenteService venteService;
+    private final DvdStoreMapper dvdStoreMapper = DvdStoreMapper.INSTANCE;
+
+    @PostMapping("/clients/{id}/purchase")
+    public void panierPurchased(@PathVariable Long id, @RequestBody VenteAddDTO venteAddDTO){
+        VenteServiceRequestModel venteServiceRequestModel = new VenteServiceRequestModel(
+            venteAddDTO.getAmount(), venteAddDTO.getClientId(), 0L
+        );
+        VenteServiceResponseModel venteServiceResponseModel = venteService.add(venteServiceRequestModel);
+
+        //mappage et ajout de l'objet vente aux Details vente
+        ArrayList<DetailVenteServiceRequestModel> detailVenteRequestModels = new ArrayList<>();
+        for ( PanierDvdInsertDTO item:  venteAddDTO.getDvds()) {
+            DetailVenteServiceRequestModel detailVenteRequestModel = new DetailVenteServiceRequestModel(
+                    item.getDvdId(),
+                    venteServiceResponseModel,
+                    item.getDvdSubtotal(),
+                    item.getClientId(),
+                    item.getDvdQuantite()
+            );
+            detailVenteRequestModels.add(detailVenteRequestModel);
+        }
+
+        venteService.addDetailVentes(detailVenteRequestModels);
+
+        panierProxy.panierPurchased(id);
+
+    };
 
     @GetMapping("/clients/{id}/panier/{panier_id}")  //  final version ***
     PanierFeignBean panierById(@PathVariable("id") Long id, @PathVariable("panier_id") Long panierId )
@@ -35,8 +69,6 @@ import java.util.Optional;
             item.setNameDvd(Optional.ofNullable(dvdServiceModel.getName()));
             panierDvdFeignBeans.add(item);
         };
-        System.out.println(panierDvdFeignBeans);
-
         return panierFeignBean;
     }
 

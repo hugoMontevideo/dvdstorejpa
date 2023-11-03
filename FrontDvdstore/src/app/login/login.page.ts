@@ -36,10 +36,7 @@ export class LoginPage implements OnInit{
     if(anything != null){     // logout
       sessionStorage.clear();
       this.router.navigateByUrl('/login');
-    } else{
-      //this.panierDTO = anything.id;  // todo create panier
-      // this.onCreatePanier();
-    }   
+    }  
   }
 
   onLoginClick(){

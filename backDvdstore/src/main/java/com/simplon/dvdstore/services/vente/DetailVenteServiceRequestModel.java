@@ -1,19 +1,18 @@
-package com.simplon.dvdstore.cart.controllers;
+package com.simplon.dvdstore.services.vente;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class PanierDvdInsertDTO {
-
+@NoArgsConstructor
+public class DetailVenteServiceRequestModel {
     private Long dvdId;
 
-    private Long panierId;
+    private VenteServiceResponseModel vente;
 
-    private Float dvdSubtotal = 0F;
+    private Float dvdSubtotal;
 
     private Long clientId;
 

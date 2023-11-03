@@ -1,16 +1,11 @@
 package com.simplon.dvdstore.repositories.vente;
 
-import com.simplon.dvdstore.repositories.client.ClientRepositoryModel;
-import com.simplon.dvdstore.repositories.dvds.DvdRepositoryModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,50 +15,21 @@ import java.util.Date;
 public class VenteRepositoryModel {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @CreationTimestamp
-    @Column(name="date_de_vente")
-    Long dateDeVente;
+    @Column(name = "amount")
+    private Float amount;
 
-    @ManyToOne
-    @JoinColumn(name = "dvdstore_id")
-    @OnDelete(action = OnDeleteAction.SET_NULL)
-    private DvdRepositoryModel dvdRepositoryModel;
+    @Column(name = "client_id")
+    private Long clientId;
 
-    @Column(name="quantite")
-    private int quantite;
+    @Column(name = "date_de_vente")
+    private Long dateDeVente;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private ClientRepositoryModel clientRepositoryModel;
-
-    @JoinColumn(name="montant")
-    Float montant;
-
-    public VenteRepositoryModel(int quantite) {
-        this.quantite = quantite;
-    }
-
-    public VenteRepositoryModel(Long date, DvdRepositoryModel dvdRepositoryModel, int quantite, ClientRepositoryModel clientRepositoryModel) {
-        this.dateDeVente = date;
-        this.dvdRepositoryModel = dvdRepositoryModel;
-        this.quantite = quantite;
-        this.clientRepositoryModel = clientRepositoryModel;
-    }
-
-    public VenteRepositoryModel(DvdRepositoryModel dvdRepositoryModel, int quantite, ClientRepositoryModel clientRepositoryModel) {
-        this.dvdRepositoryModel = dvdRepositoryModel;
-        this.quantite = quantite;
-        this.clientRepositoryModel = clientRepositoryModel;
-    }
-
-    public VenteRepositoryModel(Long dateDeVente, DvdRepositoryModel dvdRepositoryModel, int quantite, ClientRepositoryModel clientRepositoryModel, Float montant) {
-        this.dateDeVente = dateDeVente;
-        this.dvdRepositoryModel = dvdRepositoryModel;
-        this.quantite = quantite;
-        this.clientRepositoryModel = clientRepositoryModel;
-        this.montant = montant;
-    }
+    @OneToMany(mappedBy ="vente", orphanRemoval = true)
+    private List<DetailVenteRepositoryModel> dvds = new ArrayList<>();
 }
+
+
+

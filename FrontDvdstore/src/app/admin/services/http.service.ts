@@ -5,6 +5,7 @@ import { environment } from "src/environments/environments";
 import { Router } from "@angular/router";
 import { PanierCreateDTO } from "../core/panier/panierCreateDTO.interface";
 import { PanierDvdInsertDTO1 } from "../core/panier/panierDvdInsertDTO1.interface";
+import { VenteAddDTO } from "./interfaces/venteAddDTO.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +31,10 @@ export class HttpService{
         private httpClient: HttpClient,
         private router: Router
     ){};
+
+    addVente=(venteDTO: VenteAddDTO)=>{  // ***** faire appel feign client
+        return this.httpClient.post(`${this.ENV_DEV}/clients/${venteDTO.clientId}/purchase`, venteDTO, {responseType: "json"}) 
+    }
 
     getData( table: string ): Observable<any>
     {
@@ -87,6 +92,8 @@ export class HttpService{
          };
         return this.httpClient.delete(`${this.ENV_DEV}/clients/${id}/panier/panierdvd/${idPanierdvd}`, httpOptions);
     }
+
+    
 
 
     

@@ -10,7 +10,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class PanierResponseServiceModel {
     private Long id;
-//    Optional<Long> id;
 
     private Float amount;
 

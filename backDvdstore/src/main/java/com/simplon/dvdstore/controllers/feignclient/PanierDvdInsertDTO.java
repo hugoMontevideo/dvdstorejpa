@@ -1,7 +1,5 @@
 package com.simplon.dvdstore.controllers.feignclient;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,8 +18,6 @@ import lombok.NoArgsConstructor;
         private Long clientId;
 
         private Integer dvdQuantite;
-
-
 
 
 }

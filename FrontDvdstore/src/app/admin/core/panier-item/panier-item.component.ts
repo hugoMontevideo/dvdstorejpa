@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { PanierDTO } from '../panier/panierDTO.interface';
 import { environment } from 'src/environments/environments';
+import { VenteAddDTO } from '../../services/interfaces/venteAddDTO.interface';
+
 
 
 @Component({
@@ -14,7 +16,8 @@ export class PanierItemComponent implements OnInit {
   ENV_ICON = `${environment.apiImg}/icons/`;
   table: string = "panier"
   id!: number;
-
+  titlePage: string = "Mon panier";
+  bottomPage!: string;
   currentPanier : PanierDTO = {
     id: 0,
     amount: 0,
@@ -35,6 +38,27 @@ export class PanierItemComponent implements OnInit {
     }
   }
 
+  onPay = (): void => {
+    let venteDTO : VenteAddDTO = {
+      panierId: this.currentPanier.id,
+      amount: this.currentPanier.amount,
+      clientId: this.currentPanier.clientId,
+      dvds: this.currentPanier.dvds
+    }
+    this.httpService.addVente( venteDTO )
+    .subscribe({
+        next:(response)=> { 
+              this.titlePage = "Achat effectué";
+              this.bottomPage = "Merci pour votre achat. A bientôt !"
+            },
+        error:(err:Error)=>{
+              (console.log("page panier vente troubles "+ err));
+              this.titlePage = "Achat effectué";
+              this.bottomPage = "Merci pour votre achat. A bientôt !"
+           } 
+      });
+  }
+
   getPanierByClientId = ( id:number, panierId: number)=>{
     this.httpService.getPanierByClientId(id, panierId)
     .subscribe({
@@ -52,7 +76,6 @@ export class PanierItemComponent implements OnInit {
 
   deleteDvdPanier = ( index:number ):void => {    
     this.currentPanier.amount -= this.currentPanier.dvds[index].dvdSubtotal;
-
     // we pass client's id and panierDvd's id
     this.httpService.deletePanierDvd(
             this.currentPanier.clientId, 
@@ -72,8 +95,11 @@ export class PanierItemComponent implements OnInit {
            } ,
         complete: ()=>console.log("end traitement")
       });
-    
   }
+
+
+
+
 
 
 

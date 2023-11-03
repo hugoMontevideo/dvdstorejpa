@@ -15,8 +15,16 @@
             </ion-label>
         </ion-item>
       </div>
-      <h2 class="text-center">Mon panier </h2>
+      <h2 class="text-center">{{ titlePage }}</h2>
       <p class="total-panier">Total : {{ currentPanier.amount | number: '1.2-2'}} €</p>
+        <ion-button 
+        (click)="onPay()" 
+          class="deleteBtn"
+          color="success"
+          size="small" 
+          >
+          Payer
+      </ion-button> 
       <table class="table table-striped container mt-5">
         <thead>
           <tr>
@@ -48,10 +56,13 @@
         </tbody>
         <tfoot>
           <td colspan="3" class="total">Total : </td>
-          <td class="totalSum" >{{ currentPanier.amount | number: '1.2-2'}}</td>
+          <td class="totalSum" >{{ currentPanier.amount | number: '1.2-2' }}</td>
           <td> €</td>
         </tfoot>
       </table>
+      <div class="bottom-page mt-4" *ngIf="bottomPage">
+        <p>{{ bottomPage }}</p>
+      </div>
     </div>
   </div>
 
