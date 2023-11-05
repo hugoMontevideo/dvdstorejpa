@@ -1,11 +1,8 @@
 
-<div class="container-fluid wrapper mt-4">
+<div class="container-fluid wrapper mt-4" [ngClass]="{desktop: platform === 'desktop'}">
     <div class="row d-flex flex-column col-12">
 
-
         <app-sidebar class="col-md-3 col-xl-2 px-0 "></app-sidebar>
-
-            <!--<div class="col-md-9 col-xl-10 px-0 content"> -->
                 
         <app-header class="header"></app-header>
 
@@ -52,7 +49,7 @@
                                 <ion-input
                                     label="Combien de dvds voulez-vous ?"
                                     labelPlacement="stacked"
-                                    type="number"
+                                    type="number" min="0" [max]="currentDvd.quantite"
                                     placeholder="Quantité"
                                     [(ngModel)]="quantity"
                                 ></ion-input>
@@ -61,8 +58,8 @@
                     </ng-template>
                 </ion-modal>
             </div>
-                
-            <div class="dvd_picture">
+          <div class="layout-img">   
+            <div class="dvd_picture d-flex justify-content-center">
                 <img [src]="ENV_DEV_IMG + currentDvd.picture" alt="">
             </div>
             <div class="details d-flex flex-column justify-content-between">
@@ -73,10 +70,20 @@
                     <p>{{ currentDvd.quantite }} en stock</p>
                 </div>
                 <div class="action d-flex">
-                    <a [href]="['/form',dvdId]" class="btn btn-primary">Modifier</a>
-                    <button class="btn btn-delete" (click)="onDelete(dvdId)">Effacer</button>
+                    <ion-item>
+                        <ion-label> 
+                            <a class="btn btn-primary" [href]="'/form/' + currentUser.id">MODIFIER</a>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label> 
+                            <ion-button (click)="onDelete(dvdId)" color="danger" >Effacer</ion-button>
+                        </ion-label>
+                    </ion-item>
                 </div>
             </div>
+          </div>  
+
         </div>
         
         <div class="synopsis">
@@ -91,5 +98,4 @@
 
 
 
-<!-- <a [href]="'/panier/form/'" class="btn btn-warning">Ajouter au panier</a> -->
 

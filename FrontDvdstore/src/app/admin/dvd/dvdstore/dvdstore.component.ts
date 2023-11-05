@@ -6,6 +6,7 @@ import { User } from 'src/app/admin/utils/model/user.interface';
 import { HttpService } from '../../services/http.service';
 import { PanierCreateDTO } from '../../core/panier/panierCreateDTO.interface';
 import { Platform } from '@ionic/angular';
+import { SharedService } from 'src/app/services/shared.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { Platform } from '@ionic/angular';
 })
 
 export class DvdstoreComponent implements OnInit {
+  platform!: string;
   ENV_DEV_IMG = environment.apiImg + '/';
   table: string = "dvds";
   dvds: Dvd[]= [];
@@ -25,14 +27,13 @@ export class DvdstoreComponent implements OnInit {
   currentUser!: User;
   currentHeight:any;
 
-  
-
   constructor( 
       private httpService: HttpService,
-      public platform: Platform
+      public sharedService: SharedService
     ){}
 
   ngOnInit( ) {
+    this.platform = this.sharedService.platform;
     // get the token if any
     let anything: any = sessionStorage.getItem('currentUser');
     if(anything != null){
@@ -40,11 +41,8 @@ export class DvdstoreComponent implements OnInit {
     }
 
     this.getDvds(this.table);
-
-   this.currentHeight = this.platform.height();
   }
 
-  
   onGenreClicked(genreClicked : {genre:string}){
     this.dvdToShow = this.dvds.filter((value) =>{
       return value.genre === genreClicked.genre ;
@@ -58,26 +56,13 @@ export class DvdstoreComponent implements OnInit {
   }
 
   public getDvds(table:string){
-    this.httpService.getData(table)
+    this.httpService.getData1(table)
     .subscribe({
       next:(response: Dvd[])=> this.dvdToShow = response,
       error:(err:Error)=>(console.log("page home all dvds "+ err)),
       complete: ()=>console.table(this.dvdToShow)
     })
   }
-
-  // onCreatePanier = ()=> {        
-  //   this.httpService.createPanier("panier", this.panierDTO)
-  //   .subscribe({
-  //     next:(data)=>{ console.log(data);
-  //     },
-  //     error:(err : Error)=>{console.log("create error"+ err);
-  //     }
-  //   })
-  // }
-
-
-
 }
 
 

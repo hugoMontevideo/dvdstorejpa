@@ -1,13 +1,13 @@
 
-<div class="container-fluid wrapper mt-5">
+<div class="container-fluid wrapper mt-5"  [ngClass]="{desktop: platform === 'desktop'}">
   
-  <div class="row flex-nowrap col-12 d-flex flex-column">
+  <div class="row col-12 d-flex flex-column">
 
     <app-sidebar class="col-md-3 col-xl-2 px-0 " [genreEnumValues]="genreEnumValues">
     (genreClicked)="onGenreClicked($event)"  >
     </app-sidebar> 
 
-    <div class="col-md-9 col-xl-10  content">
+    <div class="content">
       <app-header 
           class="col-12"
           (searchClicked)="onSearchClicked($event)"
@@ -32,17 +32,17 @@
             </ion-item>
           </div>
           <h2>Nos Dvds</h2>
-          <ul class="d-flex mx-auto">
-              <li *ngFor="let dvd of dvdToShow; let index = index" class="mx-auto" >
-                  <div class="card" style="width: 18rem;">
+          <ul class="d-flex list">
+              <li *ngFor="let dvd of dvdToShow; let index = index" >
+                  <div class="card" >
                   
                       <img [src]="ENV_DEV_IMG + dvd.picture" class="card-img-top" [alt]="'Titre du dvd :' + dvd.name">
                     
                       <div class="card-body">
                         <h3 class="card-title">{{dvd.name | titlecase}}</h3>
                         <h5>{{dvd.genre | titlecase }}</h5>
-                        <p class="d-flex justify-content-around">
-                          <span>En stock {{ dvd.quantite }}</span>
+                        <p class="d-flex stock justify-content-around">
+                          <span>{{ dvd.quantite }} en stock </span>
                           <span class="text-primary">{{ dvd.prix }} €</span>
                         </p>
                         <div class="buttons d-flex">
@@ -54,7 +54,6 @@
               </li>
           </ul>
         </div>
-        <!-- <app-panier></app-panier> -->
       </div>    
     </div>
   </div>

@@ -1,0 +1,43 @@
+
+
+
+.wrapper{
+        height: 100vh;
+        width:100%;
+        background-color: beige; // only en dev
+}
+
+.row{
+    background-color: white;
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    box-shadow: rgba(99, 97, 97, 0.289) 0 0 15px;
+    margin: 6rem auto;
+    form{
+        width: 90%;
+        margin: 0 auto;
+        h5{
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        a{
+            display: block;
+            box-shadow: rgba(66, 65, 65, 0.289) 0 0 10px;
+
+        }
+        a:hover{
+            text-decoration: none;
+        }
+
+    }
+}
+
+.desktop{
+    .row{
+        width: 50%;
+        margin: 4rem auto;
+        padding: 2rem;
+
+    }
+}
+

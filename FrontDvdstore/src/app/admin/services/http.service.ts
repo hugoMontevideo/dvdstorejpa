@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable,map } from "rxjs";
+import { Observable,catchError,map, throwError } from "rxjs";
 import { environment } from "src/environments/environments";
 import { Router } from "@angular/router";
 import { PanierCreateDTO } from "../core/panier/panierCreateDTO.interface";
@@ -40,22 +40,45 @@ export class HttpService{
     {
         return this.httpClient.get(`${this.ENV_DEV}/dvdstore/${table}`, {responseType: "json"});
     }
+    getData1( table: string ): Observable<any>
+    {
+        return this.httpClient.get(`${this.ENV_DEV}/${table}`, {responseType: "json"});
+    }
 
     getById = (table:string, id:number): Observable<any> => {
         return this.httpClient.get(`${this.ENV_DEV}/dvdstore/${table}/${id}`, {responseType: "json"});
     }
 
+    getById1 = (table:string, id:number): Observable<any> => {
+        return this.httpClient.get(`${this.ENV_DEV}/${table}/${id}`, {responseType: "json"});
+    }
+
     deleteById = (table:string, id:number) => {
         return this.httpClient.delete(`${this.ENV_DEV}/dvdstore/${table}/${id}`, {responseType: "json"});
+    }
+    deleteById1 = (table:string, id:number) => {
+        return this.httpClient.delete(`${this.ENV_DEV}/${table}/${id}`, {responseType: "json"});
     }
 
     addDvd = (formData: FormData) => {
         return this.httpClient.post(`${this.ENV_DEV}/dvdstore/dvds`, formData, {responseType: "json"});
     }
+    addDvd1 = (formData: FormData) => {
+        return this.httpClient.post(`${this.ENV_DEV}/dvds`, formData, {responseType: "json"});
+    }
 
     updateDvd =  (formData: FormData, id: number) => {
 
         return this.httpClient.put(`${this.ENV_DEV}/dvdstore/dvds/${id}`, formData, {responseType: "json"})
+        .pipe(map(data=>{
+            this.router.navigateByUrl("/");
+            return data;    
+            
+        }));
+    }
+    updateDvd1 =  (formData: FormData, id: number) => {
+
+        return this.httpClient.put(`${this.ENV_DEV}/dvds/${id}`, formData, {responseType: "json"})
         .pipe(map(data=>{
             this.router.navigateByUrl("/");
             return data;    

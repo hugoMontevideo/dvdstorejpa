@@ -68,7 +68,7 @@ export class DvdFormComponent implements OnInit{
       }
 
       formData.append('file', this.selectedFile);
-      this.httpService.addDvd(formData)
+      this.httpService.addDvd1(formData)
       .subscribe({
         next:(response)=>console.log(response),
         error: (err: Error)=>console.error(`Error getDvdById ${err}`)
@@ -80,7 +80,7 @@ export class DvdFormComponent implements OnInit{
         formData.append('file', this.selectedFile);
       }
       formData.append('picture', this.currentDvd.picture);
-      this.httpService.updateDvd(formData, this.currentDvd.id??0)
+      this.httpService.updateDvd1(formData, this.currentDvd.id??0)
       .subscribe({
         next:()=> this.router.navigateByUrl("/"),
         error: (err: Error)=>console.error(`Error putDvdById ${err.message}`)

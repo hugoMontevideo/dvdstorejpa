@@ -32,8 +32,10 @@ public class FeignClientController {
 
     @PostMapping("/clients/{id}/purchase")
     public void panierPurchased(@PathVariable Long id, @RequestBody VenteAddDTO venteAddDTO){
+
+        Long dateVente = System.currentTimeMillis();
         VenteServiceRequestModel venteServiceRequestModel = new VenteServiceRequestModel(
-            venteAddDTO.getAmount(), venteAddDTO.getClientId(), 0L
+            venteAddDTO.getAmount(), venteAddDTO.getClientId(), dateVente
         );
         VenteServiceResponseModel venteServiceResponseModel = venteService.add(venteServiceRequestModel);
 

@@ -22,7 +22,7 @@
                       <ion-label>Nos Dvds</ion-label>
                     </ion-item>
                     <div class="ion-padding" slot="content">
-                      <a routerLink="/dvdstore" >Tous</a>
+                      <a routerLink="/" >Tous</a>
                     </div>
                     <div class="ion-padding" slot="content" *ngFor="let item of genreEnumValues">
                         <button class="nav-link px-0" (click)="handleGenreClick(item.toString())">
@@ -36,7 +36,7 @@
                         <ion-label>Clients</ion-label>
                     </ion-item>
                     <div class="ion-padding" slot="content">
-                        <a routerLink="/dvdstore/clients">Tous</a>
+                        <a routerLink="/clients">Tous</a>
                     </div>
                     <div class="ion-padding" slot="content">Client 1</div>
                     <div class="ion-padding" slot="content">Client 2</div>

@@ -7,6 +7,7 @@ import { User } from '../../utils/model/user.interface';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { PanierDvdInsertDTO1 } from '../../core/panier/panierDvdInsertDTO1.interface';
+import { SharedService } from 'src/app/services/shared.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { PanierDvdInsertDTO1 } from '../../core/panier/panierDvdInsertDTO1.inter
   styleUrls: ['./dvd-item.component.scss']
 })
 export class DvdItemComponent implements OnInit{
-  
+  platform!: string;
   ENV_DEV_IMG = `${environment.apiImg}/`;
   table: string='dvds';
   dvdId!: number;
@@ -45,10 +46,12 @@ export class DvdItemComponent implements OnInit{
 
   constructor(private route:ActivatedRoute, 
           private httpService: HttpService,
-          private router: Router){};
+          private router: Router,
+          public sharedService: SharedService
+          ){};
 
   ngOnInit(): void {
-
+    this.platform = this.sharedService.platform;
     this.dvdId = Number(this.route.snapshot.paramMap.get('id'));
 
     let stringUser: any = sessionStorage.getItem("currentUser");
@@ -60,7 +63,6 @@ export class DvdItemComponent implements OnInit{
   }
 
   addPanierDvd = (panierdvd: PanierDvdInsertDTO1) => {
-    console.log('hi');
     
     this.httpService.addPanierDvd( panierdvd )
     .subscribe({
@@ -68,7 +70,7 @@ export class DvdItemComponent implements OnInit{
     
       error: (err: Error)=>{
           console.error(`Error getDvdById ${err}`);
-          this.router.navigateByUrl("/dvdstore");
+          this.router.navigateByUrl("/");
         },
       complete: ()=>{
       }
@@ -76,34 +78,28 @@ export class DvdItemComponent implements OnInit{
   };
 
   getDvdById = ( table:string,  id:number)=>{
-    this.httpService.getById(table, id)
+    this.httpService.getById1(table, id)
     .subscribe({
       next:(response:Dvd)=> this.currentDvd = response,
       error: (err: Error)=>{
-          console.error(`Error getDvdById ${err}`);
-          this.router.navigateByUrl("/dvdstore");
+          console.error(`Error getDvdById ${ err.name }`);
+          // this.router.navigateByUrl("/");
         },
       complete: ()=>{}
     })
   };
 
   onDelete = (id: number): void => {
-    this.httpService.deleteById( this.table, this.dvdId)
+    this.httpService.deleteById1( this.table, this.dvdId)
     .subscribe({
       next:(response)=> console.log(response),
       error: (err: Error)=>{  
           console.error("error on deleting"+ err);   /// *** TODO **** Gérer cette erreur !
-          this.router.navigateByUrl("dvdstore");
+          this.router.navigateByUrl("/");
         },
-      complete:()=> this.router.navigateByUrl("dvdstore")
+      complete:()=> this.router.navigateByUrl("/")
     });
   };
-
-  onModifyDvd = (id:number) =>{
-    console.log("hello");
-    
-    this.router.navigateByUrl('/dvdstore');
-  }
 
   cancel() {
     this.modal.dismiss(null, 'cancel');

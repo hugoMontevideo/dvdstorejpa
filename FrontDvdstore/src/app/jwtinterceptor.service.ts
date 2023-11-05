@@ -13,7 +13,7 @@ export class JWTInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     var currentUserToken="HelloToken";
-
+    // if token is present in sessionStorage
     let anything: any = sessionStorage.getItem('currentUser');
     if(anything != null){
       currentUserToken = JSON.parse(anything).token;
@@ -28,13 +28,10 @@ export class JWTInterceptorService implements HttpInterceptor {
       .pipe(
         catchError((error:HttpErrorResponse)=>{
           const errorCode = error.status;
-
           console.log(errorCode);
-
           if(errorCode == 403){
             this.route.navigateByUrl("/login")
-          }
-          
+          }  
           return throwError(()=>error);
 
         })

@@ -21,12 +21,11 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController // donnees json ou xml
-@RequestMapping("dvdstore/dvds")
+@RequestMapping("dvds")
 public class DvdStoreController {
     @Autowired
     DvdStoreService dvdStoreService;
-
-    @PostMapping     // insert
+    @PostMapping    // insert
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> add(  @RequestParam("name") String name,
                       @RequestParam("genre") String genre,
@@ -42,37 +41,36 @@ public class DvdStoreController {
         return new ResponseEntity<>("Le dvd  " + name +" a été ajoutée", HttpStatus.OK) ;
     }
 
-    @GetMapping         // getAll
+    @GetMapping      // getAll
     public ArrayList<DvdStoreGetDTO> findAll(){
 
         ArrayList<DvdStoreGetDTO> dvdStoreDTOSs = new ArrayList<>();
 
         ArrayList<DvdServiceModel> dvdServiceModels = dvdStoreService.findAll() ;
 
-//        dvdServiceModels.forEach((item)->System.out.println(item.toString()));
-
         dvdServiceModels.forEach((item)->dvdStoreDTOSs.add(new DvdStoreGetDTO(item.getId().get(), item.getName(), item.getGenre(), item.getQuantite(), item.getPrix(), item.getPicture())) );
 
         return dvdStoreDTOSs;
     }
 
-    @GetMapping("/{id}")   // findById
-    public ResponseEntity<DvdStoreGetDTO> findById(@PathVariable Long id){
-        try{
-                DvdServiceModel dvdServiceModel =  dvdStoreService.findById(id);
-//                DvdStoreDTO dvdStoreDTO = new DvdStoreDTO(dvdServiceModel.getName(),dvdServiceModel.getGenre(),dvdServiceModel.getQuantite(),dvdServiceModel.getPrix(),dvdServiceModel.getPicture());
+    @GetMapping("{id}")  // findById
+    public ResponseEntity<DvdStoreGetDTO> findById(@PathVariable Long id) throws DvdNotFoundException{
+
+            DvdServiceModel dvdServiceModel =  dvdStoreService.findById(id);
+            if (dvdStoreService.findById(id ) != null ){
                 return new ResponseEntity<>(new DvdStoreGetDTO( dvdServiceModel.getId().get(), dvdServiceModel.getName(),dvdServiceModel.getGenre(),dvdServiceModel.getQuantite(),dvdServiceModel.getPrix(),dvdServiceModel.getPicture()), HttpStatus.OK) ;
 
-            }catch(DvdNotFoundException ex){
-
-            System.out.println(ex.getReason());
-                throw new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, ex.getReason() );
+            }else{
+            System.out.println("hello error");
+            throw new DvdNotFoundException(HttpStatus.NOT_FOUND, "La ressource n'a pas été trouvé");
+//            System.out.println(ex.getReason());
+//                throw new ResponseStatusException(
+//                        HttpStatus.NOT_FOUND, ex.getReason() );
 
             }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")    // update
     public void update(@PathVariable Long id, @RequestParam String name){
         System.out.println(id + " " + name);
     }
@@ -103,7 +101,7 @@ public class DvdStoreController {
 //        }
 //    }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
 
         if(dvdStoreService.findById(id) != null ){

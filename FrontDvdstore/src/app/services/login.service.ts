@@ -6,7 +6,6 @@ import { environment } from "src/environments/environments";
 import { LoginResponse } from "../register/model/login-response.interface";
 import { JWTTokenService } from "./JWTTokens.service";
 import { Router } from "@angular/router";
-import { PanierDTO } from "../admin/core/panier/panierDTO.interface";
 import { PanierCreateDTO } from "../admin/core/panier/panierCreateDTO.interface";
 
 @Injectable({
@@ -38,7 +37,7 @@ export class LoginService {
           
         return this.httpClient.post<any>(`${this.ENV_LOG}/${this.table}/authorize`, loginView, {responseType:"json"})
         .pipe(map(data=>{
-            // console.table(data);
+
             this.currentUser.id = data.user.id;
             this.currentUser.username = data.user.login;
             this.currentUser.token = data.token;
