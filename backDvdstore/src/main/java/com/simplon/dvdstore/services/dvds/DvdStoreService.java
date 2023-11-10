@@ -19,6 +19,16 @@ public class DvdStoreService {
     @Autowired
     DvdStoreRepository dvdStoreRepository;
 
+    public boolean add1(DvdServiceModel dvdServiceModel){
+        if(dvdServiceModel.getGenre() !=null &&
+            dvdServiceModel.getName() !=null){
+            DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel(dvdServiceModel.getName(), dvdServiceModel.getGenre());
+            DvdRepositoryModel dvdRepositoryModelReturn = dvdStoreRepository.save(dvdRepositoryModel);
+            return dvdRepositoryModelReturn != null;
+        }
+        return false;
+    }
+
     public boolean add(DvdServiceModel dvdServiceModel){
 
         DvdRepositoryModel dvdRepositoryModel = new DvdRepositoryModel( dvdServiceModel.getName(), dvdServiceModel.getGenre(),dvdServiceModel.getQuantite(), dvdServiceModel.getPrix(), dvdServiceModel.getPicture());
@@ -66,14 +76,23 @@ public class DvdStoreService {
         }
     }
 
-    public void delete(Long id) {
-        dvdStoreRepository.deleteById(id);
+    public boolean delete(Long id) {
+
+        if(dvdStoreRepository.existsById(id)){
+            dvdStoreRepository.deleteById(id);
+
+            return true;
+        }
+
+        return false;
     }
 
     public String deleteAll() {
         dvdStoreRepository.deleteAll();
         return "La bdd a été effacée.";
     }
+
+
 
     public String uploadImage( MultipartFile file){
         try {
@@ -119,6 +138,13 @@ public class DvdStoreService {
         }
 
     }
+
+    public int calcul(int a,int b){
+
+
+       return  a+b ;
+    }
+
 
 }
 

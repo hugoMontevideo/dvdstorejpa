@@ -97,11 +97,9 @@ export class PanierItemComponent implements OnInit {
       });
   }
 
-
-
-
-
-
+  testCalculate = (a:number,b:number){
+      return a+b;
+  }
 
 
 }
