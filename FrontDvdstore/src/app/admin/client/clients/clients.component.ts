@@ -28,7 +28,7 @@ export class ClientsComponent implements OnInit {
   }
 
   public getClients(table:string){
-    this.httpService.getData(table)
+    this.httpService.getData1(table)
     .subscribe({
       next:(response: Client[])=> this.clientToShow = response,
       error:(err:Error)=>(console.log("page home all dvds "+ err)),

@@ -3,59 +3,62 @@
   
   <div class="row col-12 d-flex flex-column">
 
-    <app-sidebar class="col-md-3 col-xl-2 px-0 " [genreEnumValues]="genreEnumValues">
-    (genreClicked)="onGenreClicked($event)"  >
+    <app-sidebar class="col-md-3 col-xl-2 px-0 " 
+        [genreEnumValues]="genreEnumValues"
+    ( genreClicked)="onGenreClicked($event)" 
+    *ngIf="skipIon"
+    >
     </app-sidebar> 
 
-    <div class="content">
-      <app-header 
-          class="col-12"
-          (searchClicked)="onSearchClicked($event)"
-        ></app-header>
-    
-      <div class="home d-flex mt-3">
-        <div class="panier-container">
-          <div class="panier mb-4 d-flex justify-content-between">
-            <ion-item>
-              <ion-label>
-                <a class="btn btn-primary" href="/form">
-                  Ajouter un dvd
-                </a>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <a class="btn btn-warning" [href]="'/panier/' + currentUser.id">
-                  <img [src]="ENV_DEV_IMG + 'icons/icons8-cart.png'" alt="">
-                </a>
-              </ion-label>
-            </ion-item>
-          </div>
-          <h2>Nos Dvds</h2>
-          <ul class="d-flex list">
-              <li *ngFor="let dvd of dvdToShow; let index = index" >
-                  <div class="card" >
-                  
-                      <img [src]="ENV_DEV_IMG + dvd.picture" class="card-img-top" [alt]="'Titre du dvd :' + dvd.name">
-                    
-                      <div class="card-body">
-                        <h3 class="card-title">{{dvd.name | titlecase}}</h3>
-                        <h5>{{dvd.genre | titlecase }}</h5>
-                        <p class="d-flex stock justify-content-around">
-                          <span>{{ dvd.quantite }} en stock </span>
-                          <span class="text-primary">{{ dvd.prix }} €</span>
-                        </p>
-                        <div class="buttons d-flex">
-                          <a [href]="'/dvds/'+ dvd.id" class="btn btn-primary">Voir détail</a>
-                          <a [href]="'/dvds/'+ dvd.id" class="btn btn-warning">Ajouter au panier</a>
-                        </div>
-                      </div>
-                  </div>     
-              </li>
-          </ul>
+    <app-header 
+      class="col-12"
+      (searchClicked)="onSearchClicked($event)"
+      *ngIf="skipIon"
+    ></app-header>
+  
+    <div class="home d-flex mt-3">
+      <div class="panier-container" >
+        <div class="panier mb-4 d-flex justify-content-between" *ngIf="skipIon">
+          <ion-item>
+            <ion-label>
+              <a class="btn btn-primary" href="/form">
+                Ajouter un dvd
+              </a>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <a class="btn btn-warning" [href]="'/panier/' + currentUser.id">
+                <img [src]="ENV_DEV_IMG + 'icons/icons8-cart.png'" alt="">
+              </a>
+            </ion-label>
+          </ion-item>
         </div>
-      </div>    
-    </div>
+        <h2>Nos Dvds</h2>
+        <ul class="d-flex list">
+            <li *ngFor="let dvd of dvdToShow; let index = index" >
+                <div class="card" >
+                
+                    <img [src]="ENV_DEV_IMG + dvd.picture" class="card-img-top" [alt]="'Titre du dvd :' + dvd.name">
+                  
+                    <div class="card-body">
+                      <h3 class="card-title">{{dvd.name | titlecase}}</h3>
+                      <h5>{{dvd.genre | titlecase }}</h5>
+                      <p class="d-flex stock justify-content-around">
+                        <span>{{ dvd.quantite }} en stock </span>
+                        <span class="text-primary">{{ dvd.prix }} €</span>
+                      </p>
+                      <div class="buttons d-flex">
+                        <a [href]="'/dvds/'+ dvd.id" class="btn btn-primary">Voir détail</a>
+                        <a [href]="'/dvds/'+ dvd.id" class="btn btn-warning">Ajouter au panier</a>
+                      </div>
+                    </div>
+                </div>     
+            </li>
+        </ul>
+      </div>
+    </div>    
+    
   </div>
 </div>
 

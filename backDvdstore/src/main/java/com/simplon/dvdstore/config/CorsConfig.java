@@ -16,6 +16,10 @@ public class CorsConfig {
                         .allowedOrigins("http://localhost:4200") //l'URL du frontend Angular
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:9876") //l'URL du frontend Angular
+                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowedHeaders("*");
             }
         };
     }

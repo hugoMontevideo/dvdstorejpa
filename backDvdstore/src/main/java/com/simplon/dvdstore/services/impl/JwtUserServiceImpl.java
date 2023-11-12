@@ -71,7 +71,7 @@ public class JwtUserServiceImpl implements JwtUserService {
     }
 
     private String getUsernameFromToken(String token) {
-        System.out.println(signingKey);
+//        System.out.println(signingKey);
         Claims claims =
                 Jwts.parser().setSigningKey(signingKey).parseClaimsJws(token).getBody();
         return claims.getSubject();

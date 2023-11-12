@@ -12,9 +12,13 @@ import java.util.Optional;
 public class DvdServiceModel {
 
         public Optional<Long> id;
+
         private String name;
+
         private String genre;
+
         private int quantite;
+
         private Float prix;
         private String picture;
 

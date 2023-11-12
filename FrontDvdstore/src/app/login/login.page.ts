@@ -29,7 +29,6 @@ export class LoginPage implements OnInit{
     private loginService: LoginService,
     private router: Router,
     private sharedService: SharedService
-
   ){};
 
   ngOnInit(): void {

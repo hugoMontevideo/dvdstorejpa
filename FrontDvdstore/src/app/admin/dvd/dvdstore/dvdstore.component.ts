@@ -4,9 +4,8 @@ import { GenreEnum } from '../../utils/enum/GenreEnum';
 import { environment } from 'src/environments/environments';
 import { User } from 'src/app/admin/utils/model/user.interface';
 import { HttpService } from '../../services/http.service';
-import { PanierCreateDTO } from '../../core/panier/panierCreateDTO.interface';
-import { Platform } from '@ionic/angular';
 import { SharedService } from 'src/app/services/shared.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -16,10 +15,11 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 
 export class DvdstoreComponent implements OnInit {
+  skipIon: boolean = true; // false during tests
   platform!: string;
   ENV_DEV_IMG = environment.apiImg + '/';
   table: string = "dvds";
-  dvds: Dvd[]= [];
+  dvds: Dvd[] | any = [];
   dvdToShow: Dvd[] | any = [];
   // @Input vers sidebar
   genreEnum = GenreEnum;
@@ -40,29 +40,54 @@ export class DvdstoreComponent implements OnInit {
       this.currentUser = JSON.parse(anything);
     }
 
-    this.getDvds(this.table);
+    this.getDvds();
   }
 
   onGenreClicked(genreClicked : {genre:string}){
-    this.dvdToShow = this.dvds.filter((value) =>{
+    this.dvdToShow = this.dvds.filter((value:any) =>{
       return value.genre === genreClicked.genre ;
     })
   }
 
   onSearchClicked(searchClicked : {search:string}){
-    this.dvdToShow = this.dvds.filter((value) =>{
+    this.dvdToShow = this.dvds.filter((value:any) =>{
       return value.name.toLowerCase() === searchClicked.search ;
     })
   }
 
-  public getDvds(table:string){
-    this.httpService.getData1(table)
+  public getDvds(){
+    this.httpService.getData1(this.table)
     .subscribe({
       next:(response: Dvd[])=> this.dvdToShow = response,
       error:(err:Error)=>(console.log("page home all dvds "+ err)),
       complete: ()=>console.table(this.dvdToShow)
     })
   }
+
+  generateTUToken = (user: string, secret : string) => {
+    this.httpService.generateTUToken(user, secret);
+  }
+
+  public getDvdsTest(): Dvd[] | any{
+    this.httpService.getDataTest(this.table)
+    .subscribe({
+      next:(response: Dvd[])=>{
+        console.log(response);        
+        this.dvdToShow = response;
+      } ,
+      error:(err:Error)=>(console.log("page home all dvds "+ err)),
+      complete: ()=>console.table()
+    })
+  }
+
+
+  public maFonction() {
+    return "Hello World!";
+  }
+
+
+
+
 }
 
 

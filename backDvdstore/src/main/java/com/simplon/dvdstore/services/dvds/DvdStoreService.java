@@ -142,7 +142,7 @@ public class DvdStoreService {
     public int calcul(int a,int b){
 
 
-       return  a+b ;
+       return  a + b ;
     }
 
 
