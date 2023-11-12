@@ -32,11 +32,11 @@ export class HttpService{
         return this.httpClient.get(`${this.ENV_DEV}/${table}`, {responseType: "json"});
     }
 
-    getById = (table:string, id:number): Observable<any> => {
+    getById = (table:string, id:number): Observable< Dvd | any > => {
         return this.httpClient.get(`${this.ENV_DEV}/dvdstore/${table}/${id}`, {responseType: "json"});
     }
 
-    getById1 = (table:string, id:number): Observable<any> => {
+    getById1 = (table:string, id:number): Observable<Dvd | any> => {
         return this.httpClient.get(`${this.ENV_DEV}/${table}/${id}`, {responseType: "json"});
     }
 
@@ -127,13 +127,26 @@ export class HttpService{
     {
         let token  = this.generateTUToken('eric', 'maCle');
         let httpOptions = {
-            // envoie des parametres dans le header
+            // ajout du token dans headers
             headers: new HttpHeaders({
                 'Authorization': `Bearer ${token}`
             })
          };
 
         return this.httpClient.get(`${this.ENV_DEV}/${table}`, httpOptions );
+    }
+
+    
+    getByIdTest = (table:string, id:number): Observable<Dvd | any> => {
+        let token  = this.generateTUToken('eric', 'maCle');
+        let httpOptions = {
+            // ajout du token dans headers
+            headers: new HttpHeaders({
+                'Authorization': `Bearer ${token}`
+            })
+         };
+        
+        return this.httpClient.get(`${this.ENV_DEV}/${table}/${id}`, httpOptions);
     }
 
     

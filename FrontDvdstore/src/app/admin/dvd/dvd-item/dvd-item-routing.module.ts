@@ -1,4 +1,0 @@
-// {
-//     path: 'ventes',
-//     component: VentesComponent
-//   },

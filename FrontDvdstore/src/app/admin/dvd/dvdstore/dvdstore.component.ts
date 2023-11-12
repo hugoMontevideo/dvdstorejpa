@@ -63,11 +63,7 @@ export class DvdstoreComponent implements OnInit {
       complete: ()=>console.table(this.dvdToShow)
     })
   }
-
-  generateTUToken = (user: string, secret : string) => {
-    this.httpService.generateTUToken(user, secret);
-  }
-
+  
   public getDvdsTest(): Dvd[] | any{
     this.httpService.getDataTest(this.table)
     .subscribe({

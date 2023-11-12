@@ -16,6 +16,7 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ['./dvd-item.component.scss']
 })
 export class DvdItemComponent implements OnInit{
+  skipIon: boolean = true; // false during tests
   platform!: string;
   ENV_DEV_IMG = `${environment.apiImg}/`;
   table: string='dvds';

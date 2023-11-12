@@ -2,12 +2,14 @@
 <div class="container-fluid wrapper mt-4" [ngClass]="{desktop: platform === 'desktop'}">
     <div class="row d-flex flex-column col-12">
 
-        <app-sidebar class="col-md-3 col-xl-2 px-0 "></app-sidebar>
+        <app-sidebar class="col-md-3 col-xl-2 px-0 "
+                    *ngIf="skipIon" >
+            </app-sidebar>
                 
-        <app-header class="header"></app-header>
+        <app-header class="header" *ngIf="skipIon"></app-header>
 
         <div class=" dvd_item d-flex flex-column home">
-            <div class="panier d-flex justify-content-between">
+            <div *ngIf="skipIon" class="panier d-flex justify-content-between">
                 <ion-item>
                     <ion-label>
                         <a class="btn btn-primary" routerLink="/">
@@ -23,7 +25,7 @@
                     </ion-label>
                 </ion-item>
             </div>
-            <div class="ion-padding">
+            <div class="ion-padding" *ngIf="skipIon">
                 <small class="text-center small" >{{this.message}}</small>
                 <ion-item>
                     <ion-label> 
@@ -69,7 +71,7 @@
                     <p class="price text-primary">{{ currentDvd.prix }} €</p>
                     <p>{{ currentDvd.quantite }} en stock</p>
                 </div>
-                <div class="action d-flex">
+                <div  *ngIf="skipIon" class="action d-flex">
                     <ion-item>
                         <ion-label> 
                             <a class="btn btn-primary" [href]="'/form/' + currentUser.id">MODIFIER</a>
