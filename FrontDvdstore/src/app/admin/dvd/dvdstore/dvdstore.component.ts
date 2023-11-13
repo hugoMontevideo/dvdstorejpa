@@ -5,7 +5,6 @@ import { environment } from 'src/environments/environments';
 import { User } from 'src/app/admin/utils/model/user.interface';
 import { HttpService } from '../../services/http.service';
 import { SharedService } from 'src/app/services/shared.service';
-import { Observable } from 'rxjs';
 
 
 @Component({
@@ -60,10 +59,10 @@ export class DvdstoreComponent implements OnInit {
     .subscribe({
       next:(response: Dvd[])=> this.dvdToShow = response,
       error:(err:Error)=>(console.log("page home all dvds "+ err)),
-      complete: ()=>console.table(this.dvdToShow)
+      complete: ()=>console.table("getDvds", this.dvdToShow)
     })
   }
-  
+
   public getDvdsTest(): Dvd[] | any{
     this.httpService.getDataTest(this.table)
     .subscribe({

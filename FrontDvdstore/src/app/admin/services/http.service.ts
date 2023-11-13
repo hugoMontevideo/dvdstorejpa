@@ -36,7 +36,7 @@ export class HttpService{
         return this.httpClient.get(`${this.ENV_DEV}/dvdstore/${table}/${id}`, {responseType: "json"});
     }
 
-    getById1 = (table:string, id:number): Observable<Dvd | any> => {
+    getById1 = (table:string, id:number): Observable<any> => {
         return this.httpClient.get(`${this.ENV_DEV}/${table}/${id}`, {responseType: "json"});
     }
 
@@ -118,7 +118,7 @@ export class HttpService{
         let dirtyToken = `${header}.${payload}.${signature}`;
         //nettoyage des caracteress non valides
         let token = dirtyToken.replace(/[^a-zA-Z0-9.]/g,'');
-        console.log(token);
+        // console.log(token);
         return token; 
     }
     

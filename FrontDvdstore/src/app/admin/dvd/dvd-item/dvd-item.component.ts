@@ -78,15 +78,16 @@ export class DvdItemComponent implements OnInit{
     })
   };
 
-  getDvdById = ( table:string,  id:number)=>{
-    this.httpService.getById1(table, id)
+  getDvdById = ( table:string,  id:number) =>{
+     this.httpService.getByIdTest(table, id)
     .subscribe({
       next:(response:Dvd)=> this.currentDvd = response,
       error: (err: Error)=>{
           console.error(`Error getDvdById ${ err.name }`);
           // this.router.navigateByUrl("/");
         },
-      complete: ()=>{}
+      complete: ()=>{console.log("*", this.currentDvd);
+      }
     })
   };
 
